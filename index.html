@@ -164,17 +164,18 @@
   .hero-img-placeholder {
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, #1a1410 0%, #2d1f15 40%, #1a1410 100%);
+    background: #0d0b09;
     position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    overflow: hidden;
   }
 
-  .hero-ink-graphic {
-    position: absolute;
+  .hero-photo {
     width: 100%;
     height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    filter: brightness(0.92) contrast(1.05);
   }
 
   /* Pride gradient line at bottom of hero */
@@ -1075,31 +1076,7 @@
   </div>
   <div class="hero-right">
     <div class="hero-img-placeholder">
-      <svg class="hero-ink-graphic" viewBox="0 0 600 800" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Abstract tattoo-inspired linework -->
-        <circle cx="300" cy="400" r="200" stroke="rgba(196,96,58,0.15)" stroke-width="1"/>
-        <circle cx="300" cy="400" r="160" stroke="rgba(196,96,58,0.1)" stroke-width="1"/>
-        <circle cx="300" cy="400" r="280" stroke="rgba(196,96,58,0.07)" stroke-width="1"/>
-        <!-- Abstract flowing lines -->
-        <path d="M 150 200 Q 300 100 450 200 Q 500 350 400 500 Q 300 600 200 500 Q 100 350 150 200" stroke="rgba(212,160,147,0.2)" stroke-width="1" fill="none"/>
-        <path d="M 180 230 Q 300 140 420 230 Q 465 360 370 480 Q 300 570 230 480 Q 135 360 180 230" stroke="rgba(212,160,147,0.1)" stroke-width="1" fill="none"/>
-        <!-- Needle/compass motif -->
-        <line x1="300" y1="200" x2="300" y2="600" stroke="rgba(196,96,58,0.1)" stroke-width="1"/>
-        <line x1="100" y1="400" x2="500" y2="400" stroke="rgba(196,96,58,0.1)" stroke-width="1"/>
-        <!-- Small diamond -->
-        <path d="M 300 340 L 330 370 L 300 400 L 270 370 Z" stroke="rgba(196,96,58,0.3)" stroke-width="1" fill="none"/>
-        <!-- Pride colors — small dots -->
-        <circle cx="220" cy="300" r="3" fill="rgba(255,107,107,0.4)"/>
-        <circle cx="240" cy="285" r="3" fill="rgba(255,159,67,0.4)"/>
-        <circle cx="260" cy="275" r="3" fill="rgba(255,217,61,0.4)"/>
-        <circle cx="280" cy="270" r="3" fill="rgba(107,203,119,0.4)"/>
-        <circle cx="300" cy="268" r="3" fill="rgba(77,150,255,0.4)"/>
-        <circle cx="320" cy="270" r="3" fill="rgba(155,89,182,0.4)"/>
-        <!-- Trans colors -->
-        <circle cx="340" cy="275" r="3" fill="rgba(85,205,252,0.4)"/>
-        <circle cx="360" cy="285" r="3" fill="rgba(247,168,184,0.4)"/>
-        <circle cx="380" cy="300" r="3" fill="rgba(245,240,232,0.2)"/>
-      </svg>
+      <img class="hero-photo" src="https://ataca-ink.netlify.app/natha_hero.jpeg" alt="Natha Cadenas — tatuadora" />
     </div>
   </div>
 </section>
@@ -1130,9 +1107,106 @@
 <section class="about" id="about">
   <div class="about-visual">
     <div class="about-visual-inner">
-      <div class="circle-graphic">
-        <div class="monogram">NC</div>
-      </div>
+      <svg width="380" height="380" viewBox="0 0 680 680" xmlns="http://www.w3.org/2000/svg">
+        <style>
+          .c { stroke: #7a3e1e; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+          .cf { fill: #7a3e1e; stroke: none; }
+          .cd { stroke: #7a3e1e; fill: none; stroke-linecap: round; stroke-dasharray: 3 6; opacity: 0.4; }
+          .ct { stroke: #7a3e1e; fill: none; opacity: 0.22; }
+          .cl { fill: #9a5030; font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-size: 30px; opacity: 0.8; }
+          .cls { fill: #7a3e1e; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 15px; opacity: 0.5; }
+        </style>
+        <circle cx="340" cy="340" r="295" class="ct" stroke-width="0.5"/>
+        <circle cx="340" cy="340" r="275" class="ct" stroke-width="1"/>
+        <circle cx="340" cy="340" r="258" class="ct" stroke-width="0.5"/>
+        <g stroke="#7a3e1e" fill="none" stroke-width="0.7" opacity="0.25">
+          <line x1="340" y1="82" x2="340" y2="94" transform="rotate(0 340 340)"/>
+          <line x1="340" y1="82" x2="340" y2="94" transform="rotate(10 340 340)"/>
+          <line x1="340" y1="82" x2="340" y2="94" transform="rotate(20 340 340)"/>
+          <line x1="340" y1="82" x2="340" y2="94" transform="rotate(30 340 340)"/>
+          <line x1="340" y1="82" x2="340" y2="94" transform="rotate(40 340 340)"/>
+          <line x1="340" y1="82" x2="340" y2="94" transform="rotate(50 340 340)"/>
+          <line x1="340" y1="82" x2="340" y2="94" transform="rotate(60 340 340)"/>
+          <line x1="340" y1="82" x2="340" y2="94" transform="rotate(70 340 340)"/>
+          <line x1="340" y1="82" x2="340" y2="94" transform="rotate(80 340 340)"/>
+          <line x1="340" y1="82" x2="340" y2="94" transform="rotate(90 340 340)"/>
+          <line x1="340" y1="82" x2="340" y2="94" transform="rotate(100 340 340)"/>
+          <line x1="340" y1="82" x2="340" y2="94" transform="rotate(110 340 340)"/>
+          <line x1="340" y1="82" x2="340" y2="94" transform="rotate(120 340 340)"/>
+          <line x1="340" y1="82" x2="340" y2="94" transform="rotate(130 340 340)"/>
+          <line x1="340" y1="82" x2="340" y2="94" transform="rotate(140 340 340)"/>
+          <line x1="340" y1="82" x2="340" y2="94" transform="rotate(150 340 340)"/>
+          <line x1="340" y1="82" x2="340" y2="94" transform="rotate(160 340 340)"/>
+          <line x1="340" y1="82" x2="340" y2="94" transform="rotate(170 340 340)"/>
+          <line x1="340" y1="82" x2="340" y2="94" transform="rotate(180 340 340)"/>
+          <line x1="340" y1="82" x2="340" y2="94" transform="rotate(190 340 340)"/>
+          <line x1="340" y1="82" x2="340" y2="94" transform="rotate(200 340 340)"/>
+          <line x1="340" y1="82" x2="340" y2="94" transform="rotate(210 340 340)"/>
+          <line x1="340" y1="82" x2="340" y2="94" transform="rotate(220 340 340)"/>
+          <line x1="340" y1="82" x2="340" y2="94" transform="rotate(230 340 340)"/>
+          <line x1="340" y1="82" x2="340" y2="94" transform="rotate(240 340 340)"/>
+          <line x1="340" y1="82" x2="340" y2="94" transform="rotate(250 340 340)"/>
+          <line x1="340" y1="82" x2="340" y2="94" transform="rotate(260 340 340)"/>
+          <line x1="340" y1="82" x2="340" y2="94" transform="rotate(270 340 340)"/>
+          <line x1="340" y1="82" x2="340" y2="94" transform="rotate(280 340 340)"/>
+          <line x1="340" y1="82" x2="340" y2="94" transform="rotate(290 340 340)"/>
+          <line x1="340" y1="82" x2="340" y2="94" transform="rotate(300 340 340)"/>
+          <line x1="340" y1="82" x2="340" y2="94" transform="rotate(310 340 340)"/>
+          <line x1="340" y1="82" x2="340" y2="94" transform="rotate(320 340 340)"/>
+          <line x1="340" y1="82" x2="340" y2="94" transform="rotate(330 340 340)"/>
+          <line x1="340" y1="82" x2="340" y2="94" transform="rotate(340 340 340)"/>
+          <line x1="340" y1="82" x2="340" y2="94" transform="rotate(350 340 340)"/>
+        </g>
+        <g stroke="#7a3e1e" fill="none" stroke-width="1" opacity="0.4">
+          <line x1="340" y1="82" x2="340" y2="102" transform="rotate(0 340 340)"/>
+          <line x1="340" y1="82" x2="340" y2="102" transform="rotate(45 340 340)"/>
+          <line x1="340" y1="82" x2="340" y2="102" transform="rotate(90 340 340)"/>
+          <line x1="340" y1="82" x2="340" y2="102" transform="rotate(135 340 340)"/>
+          <line x1="340" y1="82" x2="340" y2="102" transform="rotate(180 340 340)"/>
+          <line x1="340" y1="82" x2="340" y2="102" transform="rotate(225 340 340)"/>
+          <line x1="340" y1="82" x2="340" y2="102" transform="rotate(270 340 340)"/>
+          <line x1="340" y1="82" x2="340" y2="102" transform="rotate(315 340 340)"/>
+        </g>
+        <line x1="340" y1="108" x2="340" y2="572" class="cd" stroke-width="0.6"/>
+        <line x1="108" y1="340" x2="572" y2="340" class="cd" stroke-width="0.6"/>
+        <line x1="164" y1="164" x2="516" y2="516" class="cd" stroke-width="0.4"/>
+        <line x1="516" y1="164" x2="164" y2="516" class="cd" stroke-width="0.4"/>
+        <circle cx="340" cy="340" r="138" class="ct" stroke-width="1" opacity="0.3"/>
+        <circle cx="340" cy="340" r="118" class="ct" stroke-width="0.5" opacity="0.2"/>
+        <path d="M340,340 L352,285 L418,262 L356,326 Z" fill="#7a3e1e" opacity="0.55"/>
+        <path d="M340,340 L395,352 L418,418 L328,356 Z" fill="#7a3e1e" opacity="0.55"/>
+        <path d="M340,340 L328,395 L262,418 L324,328 Z" fill="#7a3e1e" opacity="0.55"/>
+        <path d="M340,340 L285,328 L262,262 L352,324 Z" fill="#7a3e1e" opacity="0.55"/>
+        <path d="M340,340 L325,228 L340,108 L355,228 Z" fill="#7a3e1e" opacity="0.88"/>
+        <path d="M340,340 L325,228 L340,108" class="c" stroke-width="0.9"/>
+        <path d="M340,340 L355,228 L340,108" class="c" stroke-width="0.9"/>
+        <line x1="337" y1="185" x2="340" y2="172" stroke="#7a3e1e" stroke-width="0.4" opacity="0.3"/>
+        <line x1="335" y1="200" x2="338" y2="188" stroke="#7a3e1e" stroke-width="0.4" opacity="0.25"/>
+        <path d="M340,340 L325,452 L340,572 L355,452 Z" fill="#7a3e1e" opacity="0.88"/>
+        <path d="M340,340 L325,452 L340,572" class="c" stroke-width="0.9"/>
+        <path d="M340,340 L355,452 L340,572" class="c" stroke-width="0.9"/>
+        <path d="M340,340 L452,325 L572,340 L452,355 Z" fill="#7a3e1e" opacity="0.88"/>
+        <path d="M340,340 L452,325 L572,340" class="c" stroke-width="0.9"/>
+        <path d="M340,340 L452,355 L572,340" class="c" stroke-width="0.9"/>
+        <path d="M340,340 L228,325 L108,340 L228,355 Z" fill="#7a3e1e" opacity="0.88"/>
+        <path d="M340,340 L228,325 L108,340" class="c" stroke-width="0.9"/>
+        <path d="M340,340 L228,355 L108,340" class="c" stroke-width="0.9"/>
+        <circle cx="340" cy="340" r="26" fill="none" stroke="#7a3e1e" stroke-width="0.9" opacity="0.4"/>
+        <ellipse cx="340" cy="322" rx="4" ry="9" fill="#7a3e1e" opacity="0.25"/>
+        <ellipse cx="340" cy="358" rx="4" ry="9" fill="#7a3e1e" opacity="0.25"/>
+        <ellipse cx="322" cy="340" rx="9" ry="4" fill="#7a3e1e" opacity="0.25"/>
+        <ellipse cx="358" cy="340" rx="9" ry="4" fill="#7a3e1e" opacity="0.25"/>
+        <circle cx="340" cy="340" r="7" fill="#7a3e1e" opacity="0.65"/>
+        <circle cx="340" cy="340" r="3.5" fill="#7a3e1e" opacity="0.9"/>
+        <text class="cl" x="340" y="64" text-anchor="middle">N</text>
+        <text class="cl" x="340" y="624" text-anchor="middle">S</text>
+        <text class="cl" x="622" y="348" text-anchor="middle">E</text>
+        <text class="cl" x="58" y="348" text-anchor="middle">W</text>
+        <text class="cls" x="520" y="146" text-anchor="middle">NE</text>
+        <text class="cls" x="520" y="546" text-anchor="middle">SE</text>
+        <text class="cls" x="160" y="546" text-anchor="middle">SW</text>
+        <text class="cls" x="160" y="146" text-anchor="middle">NW</text>
+      </svg>
     </div>
   </div>
   <div class="about-content">
