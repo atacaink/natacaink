@@ -1377,8 +1377,8 @@
           <input type="hidden" name="form-name" value="waitlist" />
           <p style="display:none"><input name="bot-field" /></p>
           <div class="form-group">
-            <label>Tu nombre</label>
-            <input type="text" id="wl-name" name="nombre" placeholder="Cómo te llamás" />
+            <label>Tu nombre o apodo</label>
+            <input type="text" id="wl-name" name="nombre" placeholder="Cómo te llamás o cómo querés que te llame" />
           </div>
           <div class="form-group">
             <label>Mail</label>
@@ -1389,12 +1389,30 @@
             <input type="text" id="wl-city" name="ciudad" placeholder="Ej: Madrid, España" />
           </div>
           <div class="form-group">
-            <label>¿Tenés alguna idea en mente? <span class="optional">(opcional)</span></label>
-            <textarea id="wl-idea" name="idea" placeholder="Describí qué tipo de tatuaje querés, estilo, zona del cuerpo..." rows="3"></textarea>
+            <label>Identidad de género <span class="optional">(opcional)</span></label>
+            <select id="wl-gender" name="identidad" style="width:100%; background:rgba(245,240,232,0.04); border:1px solid rgba(245,240,232,0.1); color:var(--bone); padding:0.75rem 1rem; font-family:'DM Sans',sans-serif; font-size:0.85rem; font-weight:300; outline:none; transition:border-color 0.3s; appearance:none; cursor:pointer;">
+              <option value="" disabled selected style="background:#1a1410;">Seleccioná tu identidad</option>
+              <option value="mujer-cis" style="background:#1a1410;">Mujer cisgénero</option>
+              <option value="hombre-cis" style="background:#1a1410;">Hombre cisgénero</option>
+              <option value="mujer-trans" style="background:#1a1410;">Mujer trans</option>
+              <option value="hombre-trans" style="background:#1a1410;">Hombre trans</option>
+              <option value="no-binarie" style="background:#1a1410;">No binarie</option>
+              <option value="genero-fluido" style="background:#1a1410;">Género fluido</option>
+              <option value="agender" style="background:#1a1410;">Agénero</option>
+              <option value="intersex" style="background:#1a1410;">Intersex</option>
+              <option value="queer" style="background:#1a1410;">Queer</option>
+              <option value="prefiero-no-decir" style="background:#1a1410;">Prefiero no decirlo</option>
+              <option value="otro" style="background:#1a1410;">Otro</option>
+            </select>
           </div>
-          <div class="form-check">
-            <input type="checkbox" id="wl-lgbtqi" name="lgbtqi" value="si" />
-            <label for="wl-lgbtqi">Soy parte o simpatizante de la comunidad LGBTQI+ 🏳️‍🌈</label>
+          <div class="form-group">
+            <label>Relación con la comunidad LGBTQI+ <span class="optional">(opcional)</span></label>
+            <select id="wl-lgbtqi" name="comunidad" style="width:100%; background:rgba(245,240,232,0.04); border:1px solid rgba(245,240,232,0.1); color:var(--bone); padding:0.75rem 1rem; font-family:'DM Sans',sans-serif; font-size:0.85rem; font-weight:300; outline:none; transition:border-color 0.3s; appearance:none; cursor:pointer;">
+              <option value="" disabled selected style="background:#1a1410;">Seleccioná una opción</option>
+              <option value="parte" style="background:#1a1410;">Soy parte de la comunidad 🏳️‍🌈</option>
+              <option value="friendly" style="background:#1a1410;">Soy aliada/e/o — friendly 🤍</option>
+              <option value="prefiero-no-decir" style="background:#1a1410;">Prefiero no decirlo</option>
+            </select>
           </div>
           <button type="submit" class="btn-waitlist">Anotarme a la lista</button>
           <p class="form-privacy">Tu información es privada y nunca será compartida.</p>
