@@ -1001,6 +1001,65 @@
     .waitlist-right { padding: 1.5rem; }
   }
 
+
+  /* === MODAL PRESUPUESTO === */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 10000;
+    overflow-y: auto;
+    padding: 2rem 1rem;
+  }
+  .modal-overlay.active { display: flex; align-items: flex-start; justify-content: center; }
+
+  .modal-box {
+    background: #161310;
+    max-width: 640px;
+    width: 100%;
+    padding: 3rem 2.5rem;
+    position: relative;
+    margin: auto;
+    border-top: 2px solid var(--rust);
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 1.2rem; right: 1.5rem;
+    font-size: 1.4rem;
+    color: var(--bone);
+    opacity: 0.4;
+    cursor: pointer;
+    background: none;
+    border: none;
+    line-height: 1;
+    transition: opacity 0.2s;
+  }
+  .modal-close:hover { opacity: 1; }
+
+  .modal-box h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 300;
+    margin-bottom: 0.5rem;
+  }
+  .modal-box h3 em { font-style: italic; color: var(--rust); }
+
+  .modal-box .modal-sub {
+    font-size: 0.8rem;
+    opacity: 0.5;
+    margin-bottom: 2rem;
+    letter-spacing: 0.05em;
+  }
+
+  .cover-fields { display: none; }
+  .cover-fields.visible { display: block; }
+
+  @media (max-width: 768px) {
+    .modal-box { padding: 2rem 1.5rem; }
+  }
+
   /* === ANIMATIONS === */
   .fade-up {
     opacity: 0;
@@ -1056,6 +1115,7 @@
     <li><a href="#booking">Reservar</a></li>
     <li><a href="#waitlist">Lista de espera</a></li>
     <li><a href="#contact">Contacto</a></li>
+    <li><a href="#" onclick="openPresupuesto(event)" style="color:var(--rust);opacity:1;">Presupuesto</a></li>
   </ul>
 </nav>
 
@@ -1323,6 +1383,7 @@
       <p>Las citas se abren con anticipación cuando confirmo mi llegada a cada lugar. La mejor manera de no perderte es estar en la lista de espera o seguirme en Instagram.</p>
       <p style="margin-top:1rem;">
         <a href="#contact" class="btn-primary">Anotarme en lista de espera</a>
+        <a href="#" onclick="openPresupuesto(event)" class="btn-primary" style="margin-top:1rem;display:inline-block;background:transparent;border:1px solid var(--rust);color:var(--rust);">Pedir presupuesto</a>
       </p>
     </div>
     <div class="booking-right fade-up">
@@ -1543,7 +1604,224 @@
     el.dataset.delay = idx * 80;
     observer.observe(el);
   });
+
+
+  const subzonas = {
+    cabeza_cuello: ['Cuero cabelludo','Frente','Sien','Oreja','Detrás de la oreja','Mejilla','Mandíbula','Mentón','Cuello frontal','Cuello lateral','Nuca'],
+    'hombros_clavícula': ['Clavícula','Hombro','Omóplato'],
+    brazo_superior: ['Bíceps externo','Bíceps interno','Tríceps'],
+    codo: ['Codo externo','Codo interno'],
+    antebrazo: ['Antebrazo externo','Antebrazo interno','Antebrazo completo'],
+    'muñeca_mano': ['Muñeca','Dorso de mano','Palma','Dedos','Nudillos'],
+    pecho_torso: ['Pecho izquierdo','Pecho derecho','Pecho completo','Esternón','Costillas','Abdomen superior','Abdomen inferior','Ombligo'],
+    espalda: ['Espalda alta','Espalda media','Espalda baja','Columna','Espalda completa','Lumbar'],
+    cadera_gluteos: ['Cadera','Ingle','Glúteo izquierdo','Glúteo derecho'],
+    muslo: ['Muslo frontal','Muslo lateral','Muslo interno','Muslo posterior'],
+    rodilla: ['Rodilla frontal','Detrás de rodilla'],
+    pantorrilla: ['Pantorrilla','Espinilla','Tobillo'],
+    pies: ['Empeine','Planta del pie','Talón','Dedos del pie']
+  };
+
+  function updateSubzona() {
+    const region = document.getElementById('regionSelect').value;
+    const subzonaGroup = document.getElementById('subzonaGroup');
+    const subzonaSelect = document.getElementById('subzonaSelect');
+    const opciones = subzonas[region];
+
+    subzonaSelect.innerHTML = '<option value="" disabled selected style="background:#1a1410;">Seleccioná la subzona</option>';
+
+    if (opciones) {
+      opciones.forEach(op => {
+        const opt = document.createElement('option');
+        opt.value = op.toLowerCase().replace(/ /g, '_');
+        opt.textContent = op;
+        opt.style.background = '#1a1410';
+        subzonaSelect.appendChild(opt);
+      });
+      subzonaGroup.style.display = 'block';
+    } else {
+      subzonaGroup.style.display = 'none';
+    }
+  }
+
+  function openPresupuesto(e) {
+    if (e) e.preventDefault();
+    document.getElementById('presupuestoModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closePresupuesto() {
+    document.getElementById('presupuestoModal').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function toggleCoverField() {
+    const tipo = document.getElementById('tipoTattoo').value;
+    const coverFields = document.getElementById('coverFields');
+    if (tipo === 'cobertura') {
+      coverFields.classList.add('visible');
+    } else {
+      coverFields.classList.remove('visible');
+    }
+  }
+
+  // Close modal clicking outside
+  document.getElementById('presupuestoModal').addEventListener('click', function(e) {
+    if (e.target === this) closePresupuesto();
+  });
+
+  function handlePresupuesto(e) {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+
+    fetch('/', {
+      method: 'POST',
+      body: formData
+    })
+    .then(() => {
+      document.getElementById('presupuestoForm').style.display = 'none';
+      document.getElementById('presupuestoSuccess').style.display = 'block';
+    })
+    .catch(() => {
+      document.getElementById('presupuestoForm').style.display = 'none';
+      document.getElementById('presupuestoSuccess').style.display = 'block';
+    });
+  }
+
 </script>
+
+
+<!-- MODAL PRESUPUESTO -->
+<div class="modal-overlay" id="presupuestoModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closePresupuesto()">✕</button>
+    <h3>Pedí tu <em>presupuesto</em></h3>
+    <p class="modal-sub">Completá los datos y te respondo a la brevedad.</p>
+
+    <div id="presupuestoForm">
+      <form name="presupuesto" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="handlePresupuesto(event)">
+        <input type="hidden" name="form-name" value="presupuesto" />
+        <p style="display:none"><input name="bot-field" /></p>
+
+        <div class="form-group">
+          <label>Nombre o apodo</label>
+          <input type="text" name="nombre" placeholder="Cómo te llamás" required />
+        </div>
+
+        <div class="form-group">
+          <label>Mail</label>
+          <input type="email" name="email" placeholder="tu@mail.com" required />
+        </div>
+
+        <div class="form-group">
+          <label>Instagram <span class="optional">(opcional)</span></label>
+          <input type="text" name="instagram" placeholder="@tuusuario" />
+        </div>
+
+        <div class="form-group">
+          <label>Edad</label>
+          <input type="number" name="edad" placeholder="Tu edad" min="18" max="99" required />
+        </div>
+
+        <div class="form-group">
+          <label>¿Tatuaje nuevo o cobertura?</label>
+          <select name="tipo" id="tipoTattoo" onchange="toggleCoverField()" style="width:100%;background:rgba(245,240,232,0.04);border:1px solid rgba(245,240,232,0.1);color:var(--bone);padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.85rem;outline:none;appearance:none;cursor:pointer;" required>
+            <option value="" disabled selected style="background:#1a1410;">Seleccioná una opción</option>
+            <option value="nuevo" style="background:#1a1410;">Tatuaje nuevo</option>
+            <option value="cobertura" style="background:#1a1410;">Cobertura de tatuaje existente</option>
+          </select>
+        </div>
+
+        <div class="form-group cover-fields" id="coverFields">
+          <label>Imagen del tatuaje a cubrir</label>
+          <input type="file" name="foto_cover" accept="image/*" style="width:100%;background:rgba(245,240,232,0.04);border:1px solid rgba(245,240,232,0.1);color:var(--bone);padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.85rem;outline:none;cursor:pointer;" />
+        </div>
+
+        <div class="form-group">
+          <label>Región del cuerpo</label>
+          <select name="region" id="regionSelect" onchange="updateSubzona()" style="width:100%;background:rgba(245,240,232,0.04);border:1px solid rgba(245,240,232,0.1);color:var(--bone);padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.85rem;outline:none;appearance:none;cursor:pointer;" required>
+            <option value="" disabled selected style="background:#1a1410;">Seleccioná la región</option>
+            <option value="cabeza_cuello" style="background:#1a1410;">Cabeza y cuello</option>
+            <option value="hombros_clavícula" style="background:#1a1410;">Hombros y clavícula</option>
+            <option value="brazo_superior" style="background:#1a1410;">Brazo superior</option>
+            <option value="codo" style="background:#1a1410;">Codo</option>
+            <option value="antebrazo" style="background:#1a1410;">Antebrazo</option>
+            <option value="muñeca_mano" style="background:#1a1410;">Muñeca y mano</option>
+            <option value="pecho_torso" style="background:#1a1410;">Pecho y torso</option>
+            <option value="espalda" style="background:#1a1410;">Espalda</option>
+            <option value="cadera_gluteos" style="background:#1a1410;">Cadera y glúteos</option>
+            <option value="muslo" style="background:#1a1410;">Muslo</option>
+            <option value="rodilla" style="background:#1a1410;">Rodilla</option>
+            <option value="pantorrilla" style="background:#1a1410;">Pantorrilla / pierna baja</option>
+            <option value="pies" style="background:#1a1410;">Pies</option>
+          </select>
+        </div>
+
+        <div class="form-group" id="subzonaGroup" style="display:none;">
+          <label>Subzona</label>
+          <select name="subzona" id="subzonaSelect" style="width:100%;background:rgba(245,240,232,0.04);border:1px solid rgba(245,240,232,0.1);color:var(--bone);padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.85rem;outline:none;appearance:none;cursor:pointer;">
+            <option value="" disabled selected style="background:#1a1410;">Seleccioná la subzona</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Lado</label>
+          <select name="lado" style="width:100%;background:rgba(245,240,232,0.04);border:1px solid rgba(245,240,232,0.1);color:var(--bone);padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.85rem;outline:none;appearance:none;cursor:pointer;">
+            <option value="" disabled selected style="background:#1a1410;">Seleccioná el lado</option>
+            <option value="izquierdo" style="background:#1a1410;">Izquierdo</option>
+            <option value="derecho" style="background:#1a1410;">Derecho</option>
+            <option value="centro" style="background:#1a1410;">Centro</option>
+            <option value="ambos" style="background:#1a1410;">Ambos</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Tamaño aproximado</label>
+          <select name="tamaño" style="width:100%;background:rgba(245,240,232,0.04);border:1px solid rgba(245,240,232,0.1);color:var(--bone);padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.85rem;outline:none;appearance:none;cursor:pointer;" required>
+            <option value="" disabled selected style="background:#1a1410;">Seleccioná el tamaño</option>
+            <option value="xs" style="background:#1a1410;">XS — menos de 5 cm</option>
+            <option value="s" style="background:#1a1410;">S — 5 a 10 cm</option>
+            <option value="m" style="background:#1a1410;">M — 10 a 20 cm</option>
+            <option value="l" style="background:#1a1410;">L — 20 a 30 cm</option>
+            <option value="xl" style="background:#1a1410;">XL — más de 30 cm</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Nivel de detalle</label>
+          <select name="detalle" style="width:100%;background:rgba(245,240,232,0.04);border:1px solid rgba(245,240,232,0.1);color:var(--bone);padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.85rem;outline:none;appearance:none;cursor:pointer;" required>
+            <option value="" disabled selected style="background:#1a1410;">Seleccioná el nivel</option>
+            <option value="simple" style="background:#1a1410;">Simple — líneas limpias, minimalista</option>
+            <option value="medio" style="background:#1a1410;">Medio — algo de detalle y textura</option>
+            <option value="alto" style="background:#1a1410;">Alto — mucho detalle, sombreado</option>
+            <option value="realismo" style="background:#1a1410;">Realismo — máximo detalle fotográfico</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Descripción de la idea</label>
+          <textarea name="idea" placeholder="Contame qué querés tatuar, estilo, referencias, colores o blanco y negro..." rows="4" style="width:100%;background:rgba(245,240,232,0.04);border:1px solid rgba(245,240,232,0.1);color:var(--bone);padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.85rem;outline:none;resize:none;" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Imágenes de referencia <span class="optional">(opcional)</span></label>
+          <input type="file" name="referencias" accept="image/*" multiple style="width:100%;background:rgba(245,240,232,0.04);border:1px solid rgba(245,240,232,0.1);color:var(--bone);padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.85rem;outline:none;cursor:pointer;" />
+        </div>
+
+        <button type="submit" class="btn-waitlist" style="margin-top:0.5rem;">Enviar consulta</button>
+        <p class="form-privacy">Tu información es privada y nunca será compartida.</p>
+      </form>
+    </div>
+
+    <div id="presupuestoSuccess" style="display:none;text-align:center;padding:3rem 1rem;">
+      <div class="success-icon">✦</div>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;margin-bottom:1rem;">¡Consulta recibida!</h3>
+      <p style="font-size:0.85rem;opacity:0.6;line-height:1.8;">Te respondo a la brevedad. Seguime en Instagram para ver mi trabajo y novedades.</p>
+      <a href="https://instagram.com/ataca.ink" target="_blank" class="btn-primary" style="margin-top:1.5rem;display:inline-block;">@ataca.ink</a>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>
