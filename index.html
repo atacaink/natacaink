@@ -1005,6 +1005,152 @@
   }
 
 
+
+  /* === MODAL BITÁCORA === */
+  .bitacora-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.92);
+    z-index: 10001;
+    overflow-y: auto;
+  }
+  .bitacora-overlay.active { display: block; }
+
+  .bitacora-box {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 5rem 3rem 6rem;
+    position: relative;
+    min-height: 100vh;
+  }
+
+  .bitacora-close {
+    position: fixed;
+    top: 2rem; right: 2rem;
+    font-size: 1.4rem;
+    color: var(--bone);
+    opacity: 0.5;
+    cursor: pointer;
+    background: none;
+    border: none;
+    transition: opacity 0.2s;
+    z-index: 10002;
+  }
+  .bitacora-close:hover { opacity: 1; }
+
+  .bitacora-eyebrow {
+    font-size: 0.6rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 1rem;
+  }
+
+  .bitacora-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 6vw, 6rem);
+    font-weight: 300;
+    line-height: 0.9;
+    margin-bottom: 0.5rem;
+  }
+
+  .bitacora-title em {
+    font-style: italic;
+    color: var(--blush);
+  }
+
+  .bitacora-cities {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.4;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(245,240,232,0.08);
+  }
+
+  .bitacora-entry {
+    margin-bottom: 4rem;
+  }
+
+  .bitacora-entry-city {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 300;
+    margin-bottom: 0.3rem;
+  }
+
+  .bitacora-entry-date {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.35;
+    margin-bottom: 1.2rem;
+  }
+
+  .bitacora-entry-text {
+    font-size: 0.95rem;
+    line-height: 2;
+    opacity: 0.75;
+    max-width: 640px;
+  }
+
+  .bitacora-photos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
+
+  .bitacora-photo {
+    aspect-ratio: 1;
+    background: #1a1410;
+    border: 1px solid rgba(245,240,232,0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.3;
+    overflow: hidden;
+  }
+
+  .bitacora-photo img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    opacity: 1;
+  }
+
+  .bitacora-yt {
+    margin-top: 2rem;
+    aspect-ratio: 16/9;
+    background: #1a1410;
+    border: 1px solid rgba(245,240,232,0.06);
+    overflow: hidden;
+  }
+
+  .bitacora-yt iframe {
+    width: 100%; height: 100%;
+    border: none;
+  }
+
+  .bitacora-coming {
+    text-align: center;
+    padding: 5rem 2rem;
+    opacity: 0.3;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 300;
+    font-style: italic;
+  }
+
+  @media (max-width: 768px) {
+    .bitacora-box { padding: 4rem 1.5rem 5rem; }
+    .bitacora-photos { grid-template-columns: repeat(2, 1fr); }
+  }
+
   /* === MODAL PRESUPUESTO === */
   .modal-overlay {
     display: none;
@@ -1244,7 +1390,7 @@
 
   <p class="section-label fade-up" style="max-width:1200px;margin:0 auto 1.5rem;">En curso</p>
   <div class="destinations-grid fade-up">
-    <div class="dest-card">
+    <div class="dest-card" onclick="openBitacora('argentina')" style="cursor:pointer;">
       <div class="dest-bg" style="background:linear-gradient(160deg,#1a1008,#5a3010,#1a1008);"></div>
       <div class="dest-overlay">
         <span class="dest-status status-soon">● En curso</span>
@@ -1252,11 +1398,11 @@
         <div class="dest-cities">Mar del Plata · Río Negro Patagonia</div>
       </div>
     </div>
-    <div class="dest-card">
+    <div class="dest-card" onclick="openBitacora('brasil')" style="cursor:pointer;">
       <div class="dest-bg dest-bg-rio"></div>
       <div class="dest-overlay">
         <span class="dest-status status-soon">→ Próximamente</span>
-        <div class="dest-name">Brasil</div>
+        <div class="dest-name">Brasil ↗</div>
         <div class="dest-cities">Río de Janeiro · São Paulo · Ubatuba · Paraty</div>
       </div>
     </div>
@@ -1763,6 +1909,110 @@
     </div>
   </div>
 </div>
+
+
+<!-- MODAL BITÁCORA -->
+<div class="bitacora-overlay" id="bitacoraModal">
+  <button class="bitacora-close" onclick="closeBitacora()">✕</button>
+  <div class="bitacora-box" id="bitacoraContent"></div>
+</div>
+
+<script>
+  const bitacoraData = {
+    argentina: {
+      eyebrow: 'En curso · 2025 — 2026',
+      title: 'Argen<em>tina</em>',
+      cities: 'Mar del Plata · Río Negro Patagonia',
+      entries: [
+        {
+          city: 'Mar del Plata',
+          date: '2025',
+          text: 'Mi ciudad de origen. Donde todo empezó. El lugar desde donde decidí que el mundo era el estudio.',
+          photos: [],
+          youtube: ''
+        },
+        {
+          city: 'Río Negro, Patagonia',
+          date: '2026 — En curso',
+          text: 'La Patagonia como base temporal. El frío, el viento y la claridad de saber hacia dónde va el viaje.',
+          photos: [],
+          youtube: ''
+        }
+      ]
+    },
+    brasil: {
+      eyebrow: 'Completado 2025 · Próximamente 2026',
+      title: 'Bra<em>sil</em>',
+      cities: 'Río de Janeiro · São Paulo · Ubatuba · Paraty',
+      entries: [
+        {
+          city: 'Río de Janeiro',
+          date: '2025',
+          text: 'La primera parada internacional. Calor, color, piel y tinta. Río fue el primer sí del mundo.',
+          photos: [],
+          youtube: ''
+        },
+        {
+          city: 'São Paulo · Ubatuba · Paraty',
+          date: '2026 — Próximamente',
+          text: 'La vuelta. Esta vez más ciudades, más historias, más piel.',
+          photos: [],
+          youtube: ''
+        }
+      ]
+    }
+  };
+
+  function openBitacora(country) {
+    const data = bitacoraData[country];
+    if (!data) return;
+
+    let entriesHTML = data.entries.map(entry => {
+      let photosHTML = '';
+      if (entry.photos && entry.photos.length > 0) {
+        photosHTML = '<div class="bitacora-photos">' +
+          entry.photos.map(src => `<div class="bitacora-photo"><img src="${src}" /></div>`).join('') +
+          '</div>';
+      } else {
+        photosHTML = '<div class="bitacora-photos">' +
+          Array(3).fill('<div class="bitacora-photo">Fotos próximamente</div>').join('') +
+          '</div>';
+      }
+
+      let ytHTML = entry.youtube
+        ? `<div class="bitacora-yt"><iframe src="${entry.youtube}" allowfullscreen></iframe></div>`
+        : '';
+
+      return `
+        <div class="bitacora-entry">
+          <div class="bitacora-entry-city">${entry.city}</div>
+          <div class="bitacora-entry-date">${entry.date}</div>
+          <p class="bitacora-entry-text">${entry.text}</p>
+          ${photosHTML}
+          ${ytHTML}
+        </div>`;
+    }).join('');
+
+    document.getElementById('bitacoraContent').innerHTML = `
+      <p class="bitacora-eyebrow">${data.eyebrow}</p>
+      <h2 class="bitacora-title">${data.title}</h2>
+      <p class="bitacora-cities">${data.cities}</p>
+      ${entriesHTML}
+    `;
+
+    document.getElementById('bitacoraModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeBitacora() {
+    document.getElementById('bitacoraModal').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('bitacoraModal').addEventListener('click', function(e) {
+    if (e.target === this) closeBitacora();
+  });
+</script>
 
 </body>
 </html>
