@@ -2700,11 +2700,30 @@
     const val = input ? input.value.trim() : '';
     if (!val) { input.style.borderColor='var(--rust)'; setTimeout(()=>input.style.borderColor='',1000); return; }
 
-    btn.textContent = '✓';
+    btn.textContent = '…';
     btn.disabled = true;
     input.disabled = true;
 
-    // save joined
+    // --- Envío a Netlify Forms ---
+    try {
+      const fecha = new Date().toLocaleString('es-AR', { timeZone: 'America/Argentina/Buenos_Aires' });
+      const body = new URLSearchParams({
+        'form-name': 'wishlist-votos',
+        'ciudad': city,
+        'contacto': val,
+        'fecha': fecha
+      }).toString();
+
+      await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: body
+      });
+    } catch(e) {
+      console.warn('Netlify form error:', e);
+    }
+
+    // save joined locally
     const joined = await loadJoinedCities();
     if (!joined.includes(city)) { joined.push(city); await saveJoinedCities(joined); }
 
@@ -2931,6 +2950,15 @@
   </div>
 </div>
 
+
+<!-- NETLIFY FORM OCULTO — necesario para que Netlify detecte el formulario en el build -->
+<form name="wishlist-votos" data-netlify="true" netlify-honeypot="bot-campo" hidden>
+  <input type="hidden" name="form-name" value="wishlist-votos" />
+  <input name="bot-campo" />
+  <input type="text" name="ciudad" />
+  <input type="text" name="contacto" />
+  <input type="text" name="fecha" />
+</form>
 
 <!-- MODAL BITÁCORA -->
 <div class="bitacora-overlay" id="bitacoraModal">
