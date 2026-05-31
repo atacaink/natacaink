@@ -46,7 +46,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 1.5rem 3rem;
-    mix-blend-mode: difference;
+    background: linear-gradient(to bottom, rgba(13,11,9,0.85) 0%, transparent 100%);
   }
 
   .nav-logo {
@@ -74,6 +74,20 @@
     transition: opacity 0.3s;
   }
   .nav-links a:hover { opacity: 1; }
+
+  .nav-cta {
+    background: var(--rust);
+    color: var(--bone);
+    padding: 0.55rem 1.3rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.3s;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .nav-cta:hover { background: var(--blush); }
 
   /* === HERO === */
   .hero {
@@ -396,190 +410,463 @@
   .pill-5 { border-color: var(--pride-4); color: var(--pride-4); }
   .pill-6 { border-color: var(--pride-6); color: var(--pride-6); }
 
-  /* === SERVICES === */
-  .services {
+  /* === PORTFOLIO === */
+  .portfolio {
     padding: 7rem 3rem;
     background: var(--ink);
   }
 
-  .services-header {
-    text-align: center;
-    margin-bottom: 5rem;
-  }
-
-  .services-header h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.5rem, 4vw, 4rem);
-    font-weight: 300;
-    margin-top: 1rem;
-  }
-
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: rgba(245,240,232,0.08);
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .service-card {
-    background: var(--ink);
-    padding: 3.5rem 2.5rem;
-    transition: background 0.4s;
-    position: relative;
-    overflow: hidden;
-  }
-  .service-card:hover { background: #141210; }
-
-  .service-card::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 2px;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.4s ease;
-  }
-  .service-card:nth-child(1)::after { background: var(--rust); }
-  .service-card:nth-child(2)::after { background: var(--sage); }
-  .service-card:nth-child(3)::after { background: var(--blush); }
-  .service-card:hover::after { transform: scaleX(1); }
-
-  .service-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 3rem;
-    font-weight: 300;
-    color: var(--rust);
-    opacity: 0.3;
-    margin-bottom: 1.5rem;
-    line-height: 1;
-  }
-
-  .service-card h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.6rem;
-    font-weight: 400;
-    margin-bottom: 1rem;
-    line-height: 1.2;
-  }
-
-  .service-card p {
-    font-size: 0.85rem;
-    line-height: 1.8;
-    opacity: 0.6;
-  }
-
-  /* === TRAVEL === */
-  .travel {
-    padding: 7rem 3rem;
-    background: #0a0907;
-  }
-
-  .travel-header {
+  .portfolio-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    margin-bottom: 4rem;
+    margin-bottom: 3rem;
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
   }
 
-  .travel-header h2 {
+  .portfolio-header h2 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    font-size: clamp(2.5rem, 4vw, 4rem);
     font-weight: 300;
+    margin-top: 1rem;
     line-height: 1.1;
   }
 
-  .travel-header h2 em { font-style: italic; color: var(--sage); }
+  .portfolio-header h2 em { font-style: italic; color: var(--blush); }
 
-  .travel-note {
+  .portfolio-note {
     font-size: 0.75rem;
     opacity: 0.5;
-    text-align: right;
     max-width: 200px;
+    text-align: right;
     line-height: 1.6;
   }
 
-  .destinations-grid {
+  .portfolio-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    max-width: 1200px;
+    margin: 0 auto 2.5rem;
+  }
+
+  .filter-btn {
+    background: transparent;
+    border: 1px solid rgba(245,240,232,0.15);
+    color: var(--bone);
+    padding: 0.45rem 1.2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.25s;
+    opacity: 0.5;
+    border-radius: 999px;
+  }
+  .filter-btn:hover, .filter-btn.active {
+    background: var(--rust);
+    border-color: var(--rust);
+    color: var(--bone);
+    opacity: 1;
+  }
+
+  .portfolio-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
     max-width: 1200px;
     margin: 0 auto;
   }
 
-  .dest-card {
+  .portfolio-item {
     position: relative;
-    aspect-ratio: 3/4;
+    aspect-ratio: 1;
     overflow: hidden;
     cursor: pointer;
+    transition: opacity 0.4s, transform 0.4s;
+  }
+  .portfolio-item.hidden {
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    width: 0; height: 0;
+    overflow: hidden;
   }
 
-  .dest-bg {
-    position: absolute;
-    inset: 0;
-    transition: transform 0.6s ease;
+  .portfolio-img-wrap {
+    width: 100%; height: 100%;
+    position: relative;
+    overflow: hidden;
   }
-  .dest-card:hover .dest-bg { transform: scale(1.05); }
 
-  .dest-bg-rio { background: linear-gradient(160deg, #2d1a0e, #8c4a1c, #2d1a0e); }
-  .dest-bg-spain { background: linear-gradient(160deg, #1a1a2e, #c9302c, #1a1a2e); }
-  .dest-bg-france { background: linear-gradient(160deg, #0d1b2a, #2563a8, #0d1b2a); }
-  .dest-bg-italy { background: linear-gradient(160deg, #1a2e1a, #1a7a3c, #1a2e1a); }
-
-  .dest-overlay {
+  .portfolio-placeholder {
+    width: 100%; height: 100%;
+    background: #1a1612;
+    position: relative;
+  }
+  .portfolio-placeholder::after {
+    content: '+';
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.85) 40%, transparent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    color: rgba(245,240,232,0.08);
+  }
+
+  .portfolio-hover {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(13,11,9,0.9) 0%, transparent 50%);
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    padding: 1.5rem;
+    padding: 1.2rem;
+    opacity: 0;
+    transition: opacity 0.35s;
   }
+  .portfolio-item:hover .portfolio-hover { opacity: 1; }
 
-  .dest-status {
+  .portfolio-tag {
     font-size: 0.55rem;
-    letter-spacing: 0.3em;
+    letter-spacing: 0.25em;
     text-transform: uppercase;
-    margin-bottom: 0.5rem;
+    color: var(--rust);
+    margin-bottom: 0.3rem;
   }
-  .status-active { color: var(--pride-4); }
-  .status-soon { color: var(--pride-3); }
-  .status-coming { color: rgba(245,240,232,0.4); }
 
-  .dest-name {
+  .portfolio-loc {
+    font-size: 0.8rem;
+    opacity: 0.7;
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.5rem;
-    font-weight: 400;
+    font-style: italic;
   }
 
-  .dest-cities {
-    font-size: 0.7rem;
-    opacity: 0.5;
-    margin-top: 0.3rem;
+  .portfolio-cta {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3rem;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
-  .travel-more {
+  /* === TRAVEL EDITORIAL === */
+  .travel {
+    padding: 7rem 3rem;
+    background: #0a0907;
+  }
+
+  .travel-editorial {
+    max-width: 1200px;
+    margin: 0 auto 5rem;
+  }
+
+  .travel-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    font-weight: 300;
+    line-height: 1.1;
+    margin: 1rem 0 1.5rem;
+  }
+  .travel-title em { font-style: italic; color: var(--sage); }
+
+  .travel-narrative {
+    font-size: 0.95rem;
+    line-height: 2;
+    opacity: 0.65;
+    max-width: 680px;
+  }
+
+  /* Timeline */
+  .travel-timeline {
+    max-width: 1200px;
+    margin: 0 auto 5rem;
+  }
+
+  .timeline-track {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0;
+  }
+
+  .timeline-stop {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    min-width: 130px;
+  }
+
+  .timeline-dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: rgba(245,240,232,0.2);
+    border: 1px solid rgba(245,240,232,0.3);
+    transition: transform 0.3s;
+  }
+  .timeline-stop.visited .timeline-dot { background: var(--rust); border-color: var(--rust); }
+  .timeline-stop.active .timeline-dot { background: var(--pride-4); border-color: var(--pride-4); }
+  .timeline-stop.upcoming .timeline-dot { background: transparent; border-color: var(--pride-3); border-style: dashed; }
+  .timeline-stop:hover .timeline-dot { transform: scale(1.4); }
+
+  .pulse-dot {
+    animation: pulseDot 2s infinite;
+    box-shadow: 0 0 0 0 rgba(107, 203, 119, 0.4);
+  }
+  @keyframes pulseDot {
+    0% { box-shadow: 0 0 0 0 rgba(107,203,119,0.4); }
+    70% { box-shadow: 0 0 0 8px rgba(107,203,119,0); }
+    100% { box-shadow: 0 0 0 0 rgba(107,203,119,0); }
+  }
+
+  .timeline-line {
+    flex: 1;
+    height: 1px;
+    background: rgba(245,240,232,0.15);
+    min-width: 30px;
+    margin-bottom: 2.5rem;
+  }
+  .timeline-line.dashed {
+    background: repeating-linear-gradient(90deg, rgba(245,240,232,0.15) 0, rgba(245,240,232,0.15) 4px, transparent 4px, transparent 10px);
+  }
+
+  .timeline-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+    text-align: center;
+  }
+  .timeline-info strong { font-size: 0.85rem; font-weight: 400; }
+  .timeline-info span { font-size: 0.6rem; opacity: 0.4; letter-spacing: 0.1em; }
+
+  .timeline-status {
+    font-size: 0.5rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+  }
+  .visited-tag { color: var(--rust); background: rgba(196,96,58,0.1); }
+  .active-tag { color: var(--pride-4); background: rgba(107,203,119,0.1); }
+  .upcoming-tag { color: var(--pride-3); background: rgba(255,217,61,0.1); }
+
+  /* Next destinations grid */
+  .travel-next {
+    max-width: 1200px;
+    margin: 0 auto 5rem;
+  }
+
+  .next-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
-    max-width: 1200px;
-    margin: 1rem auto 0;
+    gap: 1px;
+    background: rgba(245,240,232,0.07);
   }
 
-  .dest-mini {
-    padding: 1rem 1.2rem;
-    border: 1px solid rgba(245,240,232,0.1);
-    font-size: 0.75rem;
+  .next-card {
+    background: #0d0b09;
+    padding: 2.5rem 2rem;
+    position: relative;
+    transition: background 0.3s;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    opacity: 0.5;
+    flex-direction: column;
+    gap: 0.4rem;
   }
-  .dest-mini span { font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; }
+  .next-card:hover { background: #141210; }
+
+  .next-status-badge {
+    font-size: 0.5rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.7rem;
+    border-radius: 999px;
+    display: inline-block;
+    width: fit-content;
+    margin-bottom: 0.5rem;
+    background: rgba(107,203,119,0.15);
+    color: var(--pride-4);
+  }
+  .waitlist-badge { background: rgba(255,217,61,0.1); color: var(--pride-3); }
+  .tbd-badge { background: rgba(245,240,232,0.06); color: rgba(245,240,232,0.4); }
+
+  .next-city {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 300;
+    line-height: 1;
+  }
+  .next-country { font-size: 0.65rem; opacity: 0.4; letter-spacing: 0.2em; text-transform: uppercase; margin-top: 0.2rem; }
+  .next-dates { font-size: 0.8rem; opacity: 0.55; margin-top: 0.8rem; }
+  .next-spots { font-size: 0.65rem; opacity: 0.35; letter-spacing: 0.05em; }
+
+  .next-cta {
+    display: inline-block;
+    margin-top: auto;
+    padding-top: 1.2rem;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--rust);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(196,96,58,0.3);
+    padding-bottom: 2px;
+    width: fit-content;
+    transition: border-color 0.3s;
+  }
+  .next-cta:hover { border-color: var(--rust); }
+
+  /* Wishlist / Votación */
+  .travel-wishlist {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 4rem;
+    border-top: 1px solid rgba(245,240,232,0.06);
+  }
+
+  .wishlist-header {
+    margin-bottom: 2.5rem;
+  }
+  .wishlist-header h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 300;
+    line-height: 1.1;
+    margin: 1rem 0 0.8rem;
+  }
+  .wishlist-header h3 em { font-style: italic; color: var(--sage); }
+  .wishlist-sub { font-size: 0.8rem; opacity: 0.5; line-height: 1.7; }
+
+  /* ── WISHLIST HORIZONTAL ── */
+  .wishlist-scroll-hint {
+    text-align: right;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.22;
+    margin-bottom: 0.75rem;
+    user-select: none;
+  }
+  .wishlist-scroll-wrapper {
+    overflow-x: auto;
+    overflow-y: visible;
+    padding-bottom: 1rem;
+    cursor: grab;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(245,240,232,0.1) transparent;
+    margin-bottom: 0;
+  }
+  .wishlist-scroll-wrapper:active { cursor: grabbing; }
+  .wishlist-scroll-wrapper::-webkit-scrollbar { height: 3px; }
+  .wishlist-scroll-wrapper::-webkit-scrollbar-track { background: transparent; }
+  .wishlist-scroll-wrapper::-webkit-scrollbar-thumb { background: rgba(245,240,232,0.1); border-radius: 2px; }
+  .wishlist-grid {
+    display: flex;
+    flex-direction: row;
+    gap: 1px;
+    background: rgba(245,240,232,0.07);
+    min-width: max-content;
+    margin-bottom: 0;
+  }
+  .wish-item {
+    background: #0d0b09;
+    padding: 1.5rem 1.25rem;
+    cursor: pointer;
+    transition: background 0.25s, transform 0.2s;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    width: 160px;
+    flex-shrink: 0;
+    position: relative;
+  }
+  .wish-item:hover { background: #141210; }
+  .wish-item.voted { background: rgba(196,96,58,0.06); }
+  .wish-item.just-voted { animation: wishPulse 0.35s ease; }
+  @keyframes wishPulse { 0%{transform:scale(1)} 50%{transform:scale(1.03)} 100%{transform:scale(1)} }
+
+  .wish-country { font-size: 1.4rem; line-height: 1; margin-bottom: 0.2rem; }
+  .wish-city { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 300; line-height: 1.2; }
+  .wish-votes { font-size: 0.55rem; opacity: 0.35; letter-spacing: 0.1em; margin-bottom: 0.4rem; }
+  .wish-bar { height: 2px; background: rgba(245,240,232,0.08); border-radius: 1px; overflow: hidden; margin-bottom: 0.6rem; }
+  .wish-fill { height: 100%; background: var(--rust); border-radius: 1px; transition: width 0.6s ease; }
+
+  /* inline waitlist reveal */
+  .wish-waitlist-reveal {
+    display: none;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-top: 0.5rem;
+    border-top: 1px solid rgba(245,240,232,0.07);
+    padding-top: 0.6rem;
+    animation: fadeIn 0.3s ease;
+  }
+  .wish-waitlist-reveal.open { display: flex; }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:translateY(0)} }
+  .wish-waitlist-input {
+    background: rgba(245,240,232,0.04);
+    border: 1px solid rgba(245,240,232,0.1);
+    color: var(--bone);
+    padding: 0.4rem 0.6rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.65rem;
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .wish-waitlist-input::placeholder { opacity: 0.35; }
+  .wish-waitlist-submit {
+    background: var(--rust);
+    border: none;
+    color: var(--bone);
+    padding: 0.4rem 0.6rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.58rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+    width: 100%;
+  }
+  .wish-waitlist-submit:hover { background: var(--blush); }
+  .wish-joined-label {
+    font-size: 0.58rem;
+    color: var(--rust);
+    opacity: 0.8;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .wish-vote-cta {
+    font-size: 0.58rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.3);
+    margin-top: auto;
+    transition: color 0.2s;
+  }
+  .wish-item:hover .wish-vote-cta { color: rgba(245,240,232,0.6); }
+  .wish-item.voted .wish-vote-cta { color: var(--rust); opacity: 0.7; }
+
+  .wishlist-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    padding-top: 1.5rem;
+  }
+  .wishlist-note { font-size: 0.75rem; opacity: 0.4; }
 
   /* === BOOKING === */
   .booking {
@@ -937,18 +1224,19 @@
 
   .btn-waitlist {
     width: 100%;
-    background: var(--rust);
+    background: transparent;
     color: var(--bone);
-    border: none;
+    border: 1px solid rgba(245,240,232,0.2);
     padding: 1rem;
     font-family: 'DM Sans', sans-serif;
     font-size: 0.7rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: border-color 0.3s, opacity 0.3s;
+    opacity: 0.65;
   }
-  .btn-waitlist:hover { background: var(--blush); }
+  .btn-waitlist:hover { border-color: rgba(245,240,232,0.45); opacity: 1; }
 
   .form-privacy {
     font-size: 0.65rem;
@@ -1209,6 +1497,478 @@
     .modal-box { padding: 2rem 1.5rem; }
   }
 
+  /* ═══════════════════════════════════════════════
+     UNIFIED JOURNEY — ESTILOS NUEVOS
+     ═══════════════════════════════════════════════ */
+
+  /* Intro bloque */
+  .journey-intro {
+    max-width: 1200px;
+    margin: 0 auto 6rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+  .journey-intro-text .travel-title { margin-bottom: 1.2rem; }
+
+  .journey-steps-strip {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding-top: 0.5rem;
+  }
+  .jstep {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.1rem 1.5rem;
+    border-left: 2px solid rgba(245,240,232,0.07);
+    position: relative;
+    transition: border-color 0.3s, background 0.3s;
+    cursor: default;
+  }
+  .jstep:hover {
+    border-left-color: var(--rust);
+    background: rgba(196,96,58,0.04);
+  }
+  .jstep-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    color: var(--rust);
+    opacity: 0.5;
+    min-width: 2rem;
+    line-height: 1;
+  }
+  .jstep-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.6;
+    flex: 1;
+  }
+  .jstep-arrow {
+    font-size: 0.9rem;
+    opacity: 0.25;
+  }
+
+  /* Capítulos */
+  .journey-chapter {
+    max-width: 1200px;
+    margin: 0 auto 6rem;
+  }
+
+  .chapter-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    margin-bottom: 3rem;
+  }
+  .chapter-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    color: var(--rust);
+    opacity: 0.35;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .chapter-rule {
+    flex: 1;
+    height: 1px;
+    background: rgba(245,240,232,0.08);
+    max-width: 60px;
+  }
+  .chapter-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    opacity: 0.4;
+  }
+  .chapter-body { /* contenedor de contenido */ }
+
+  /* ── MAPA TEMPORAL (bloque 2) ── */
+  /* ── HORIZONTAL TIMELINE ── */
+  .map-timeline {
+    position: relative;
+    padding: 1rem 0 0;
+  }
+  .mt-scroll-hint {
+    text-align: right;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.22;
+    padding-right: 2rem;
+    margin-bottom: 0.75rem;
+    user-select: none;
+  }
+  .mt-scroll-wrapper {
+    overflow-x: auto;
+    overflow-y: visible;
+    padding: 0 2rem 1.5rem;
+    cursor: grab;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(245,240,232,0.1) transparent;
+  }
+  .mt-scroll-wrapper:active { cursor: grabbing; }
+  .mt-scroll-wrapper::-webkit-scrollbar { height: 3px; }
+  .mt-scroll-wrapper::-webkit-scrollbar-track { background: transparent; }
+  .mt-scroll-wrapper::-webkit-scrollbar-thumb { background: rgba(245,240,232,0.1); border-radius: 2px; }
+  .mt-track {
+    display: flex;
+    align-items: flex-start;
+    position: relative;
+    min-width: max-content;
+    padding-top: 2.5rem;
+  }
+  .mt-track::before {
+    content: '';
+    position: absolute;
+    top: 2.56rem;
+    left: 0; right: 0;
+    height: 1px;
+    background: rgba(245,240,232,0.09);
+    z-index: 0;
+  }
+  .mt-stop {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    width: 190px;
+    flex-shrink: 0;
+    cursor: pointer;
+    padding: 0 1rem;
+    transition: opacity 0.2s;
+  }
+  .mt-stop:hover { opacity: 0.9; }
+  .mt-dot-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 1.25rem;
+  }
+  .mt-dot {
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    z-index: 2;
+    position: relative;
+    transition: transform 0.2s;
+  }
+  .mt-stop:hover .mt-dot { transform: scale(1.4); }
+  .mt-visited .mt-dot  { background: var(--rust); border: 2px solid var(--rust); box-shadow: 0 0 0 4px rgba(196,96,58,0.12); }
+  .mt-active .mt-dot   { background: var(--pride-4); border: 2px solid var(--pride-4); }
+  .mt-upcoming .mt-dot { background: transparent; border: 2px dashed var(--pride-3); }
+  .mt-connector { display: none; }
+  .mt-pulse { animation: pulseDot 2s infinite; box-shadow: 0 0 0 0 rgba(107,203,119,0.5); }
+  .mt-content { text-align: center; width: 100%; }
+  .mt-badge {
+    display: inline-block;
+    font-size: 0.48rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 0.18rem 0.55rem;
+    border-radius: 999px;
+    margin-bottom: 0.5rem;
+  }
+  .mt-badge-visited  { color: var(--rust); background: rgba(196,96,58,0.1); }
+  .mt-badge-active   { color: var(--pride-4); background: rgba(107,203,119,0.1); }
+  .mt-badge-upcoming { color: var(--pride-3); background: rgba(255,217,61,0.1); }
+  .mt-city {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 300;
+    line-height: 1.1;
+    margin-bottom: 0.25rem;
+    color: var(--bone);
+  }
+  .mt-meta {
+    display: block;
+    font-size: 0.52rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.3;
+    margin-bottom: 0.6rem;
+  }
+  .mt-note {
+    font-size: 0.72rem;
+    opacity: 0.5;
+    line-height: 1.55;
+    margin-bottom: 0.75rem;
+  }
+  .mt-bitacora-btn {
+    background: none; border: none;
+    color: var(--rust);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.58rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    padding: 0;
+    opacity: 0.65;
+    transition: opacity 0.2s;
+  }
+  .mt-bitacora-btn:hover { opacity: 1; }
+  .mt-cta-link {
+    display: inline-block;
+    font-size: 0.58rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--rust);
+    text-decoration: none;
+    opacity: 0.75;
+    transition: opacity 0.2s;
+  }
+  .mt-cta-link:hover { opacity: 1; }
+
+  /* ── PRÓXIMOS DESTINOS (bloque 3) ── */
+  .confirmed-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: rgba(245,240,232,0.07);
+  }
+
+  .conf-card {
+    background: #0d0b09;
+    padding: 2.2rem 1.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    transition: background 0.3s;
+    position: relative;
+  }
+  .conf-card:hover { background: #141210; }
+  .conf-hot { border-top: 2px solid var(--rust); }
+  .conf-tbd { opacity: 0.65; }
+
+  .conf-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.5rem;
+  }
+  .conf-flag { font-size: 1.4rem; line-height: 1; }
+
+  .conf-badge {
+    font-size: 0.48rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    display: inline-block;
+  }
+  .conf-badge-confirmed { background: rgba(196,96,58,0.15); color: var(--rust); }
+  .conf-badge-waitlist  { background: rgba(255,217,61,0.1);  color: var(--pride-3); }
+  .conf-badge-tbd       { background: rgba(245,240,232,0.06); color: rgba(245,240,232,0.35); }
+
+  .conf-city    { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300; line-height: 1; }
+  .conf-country { font-size: 0.6rem; opacity: 0.4; letter-spacing: 0.15em; text-transform: uppercase; margin-top: 0.2rem; }
+  .conf-date    { font-size: 0.8rem; opacity: 0.55; margin-top: 0.8rem; }
+
+  .conf-meter {
+    height: 2px;
+    background: rgba(245,240,232,0.07);
+    border-radius: 1px;
+    overflow: hidden;
+    margin-top: 0.8rem;
+  }
+  .conf-meter-fill { height: 100%; background: var(--rust); border-radius: 1px; }
+  .conf-meter-vote { background: var(--pride-3); }
+
+  .conf-spots { font-size: 0.6rem; opacity: 0.3; letter-spacing: 0.05em; }
+  .conf-cta {
+    display: inline-block;
+    margin-top: auto;
+    padding-top: 1.2rem;
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--rust);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(196,96,58,0.3);
+    padding-bottom: 2px;
+    width: fit-content;
+    transition: border-color 0.3s, color 0.3s;
+  }
+  .conf-cta:hover { border-color: var(--rust); color: var(--blush); }
+
+  /* ── VOTACIÓN (bloque 4) ── */
+  .vote-intro {
+    margin-bottom: 2.5rem;
+  }
+  .vote-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 300;
+    line-height: 1.1;
+    margin-bottom: 0.8rem;
+  }
+  .vote-title em { font-style: italic; color: var(--sage); }
+  .vote-sub { font-size: 0.82rem; opacity: 0.5; line-height: 1.7; max-width: 520px; }
+
+  /* Puente hacia el form */
+  .vote-bridge {
+    text-align: center;
+    padding: 3rem 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .vote-bridge-text {
+    font-size: 0.75rem;
+    opacity: 0.4;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .vote-bridge-arrow {
+    font-size: 1.5rem;
+    color: var(--rust);
+    opacity: 0.4;
+    animation: bounceDown 2s ease-in-out infinite;
+  }
+  @keyframes bounceDown {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(6px); }
+  }
+
+  /* ── WAITLIST UNIFICADO (bloque 5) ── */
+  .journey-chapter-waitlist {
+    background: #0f0d0b;
+    margin: 0;
+    max-width: 100%;
+    padding: 6rem 3rem;
+    border-top: 1px solid rgba(245,240,232,0.06);
+  }
+  .journey-chapter-waitlist .chapter-eyebrow,
+  .journey-chapter-waitlist .chapter-body {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .wl-unified {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: start;
+  }
+
+  .wl-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 3.5vw, 3.5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+  .wl-title em { font-style: italic; color: var(--blush); }
+  .wl-desc { font-size: 0.9rem; line-height: 1.9; opacity: 0.65; margin-bottom: 2rem; }
+
+  .wl-promises { display: flex; flex-direction: column; gap: 0.7rem; margin-bottom: 2rem; }
+  .wl-promise-item { display: flex; align-items: flex-start; gap: 0.7rem; font-size: 0.78rem; opacity: 0.5; }
+  .wl-promise-icon { color: var(--rust); flex-shrink: 0; margin-top: 0.05em; }
+
+  .wl-destinations-summary { margin-top: 2rem; }
+  .wl-dest-label { font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; opacity: 0.3; margin-bottom: 0.8rem; }
+  .wl-dest-chips { display: flex; flex-direction: column; gap: 0.4rem; }
+  .wl-chip {
+    font-size: 0.72rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 3px;
+    width: fit-content;
+  }
+  .wl-chip-active { background: rgba(107,203,119,0.08); color: var(--pride-4); }
+  .wl-chip-soon   { background: rgba(245,240,232,0.04); color: rgba(245,240,232,0.45); }
+
+  .wl-right {
+    background: #161310;
+    padding: 2.5rem;
+  }
+
+  .wl-success {
+    text-align: center;
+    padding: 3rem 1rem;
+  }
+  .wl-success h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 300;
+    margin-bottom: 1rem;
+  }
+  .wl-success p { font-size: 0.85rem; opacity: 0.6; line-height: 1.8; }
+
+  /* Responsive nuevo */
+  @media (max-width: 1024px) {
+    .confirmed-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 768px) {
+    .journey-intro { grid-template-columns: 1fr; gap: 3rem; }
+    .journey-steps-strip { flex-direction: row; flex-wrap: wrap; gap: 0.5rem; padding-top: 0; border-left: none; }
+    .jstep { border-left: none; border-bottom: 1px solid rgba(245,240,232,0.07); padding: 0.8rem 0.5rem; flex: 1; min-width: 120px; }
+    .jstep-arrow { display: none; }
+    .journey-chapter { margin-bottom: 4rem; }
+    .map-timeline { padding-left: 1.2rem; }
+    .mt-stop { gap: 1.2rem; }
+    .mt-city { font-size: 1.5rem; }
+    .confirmed-grid { grid-template-columns: 1fr 1fr; }
+    .wl-unified { grid-template-columns: 1fr; gap: 3rem; }
+    .journey-chapter-waitlist { padding: 5rem 1.5rem; }
+  }
+
+  /* ── REVIEWS STRIP ── */
+  .reviews-strip { padding: 5rem 2rem; border-top: 1px solid rgba(245,240,232,0.06); }
+  .reviews-inner { max-width: 960px; margin: 0 auto; }
+  .reviews-header { display: flex; align-items: center; gap: 2.5rem; margin-bottom: 3rem; flex-wrap: wrap; }
+  .reviews-score { display: flex; flex-direction: column; align-items: center; gap: 0.25rem; }
+  .score-num { font-family: 'Playfair Display', serif; font-size: 3rem; color: var(--bone); line-height: 1; }
+  .score-stars { color: #f4b942; font-size: 1.1rem; letter-spacing: 0.1em; }
+  .score-label { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.45; }
+  .reviews-divider { width: 1px; height: 60px; background: rgba(245,240,232,0.1); }
+  .reviews-count-wrap { display: flex; flex-direction: column; gap: 0.5rem; }
+  .reviews-count { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--bone); }
+  .reviews-link { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rust); text-decoration: none; opacity: 0.8; transition: opacity 0.2s; }
+  .reviews-link:hover { opacity: 1; }
+  .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 2.5rem; }
+  .testimonial-card { background: rgba(245,240,232,0.03); border: 1px solid rgba(245,240,232,0.07); padding: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; }
+  .t-stars { color: #f4b942; font-size: 0.85rem; letter-spacing: 0.12em; }
+  .t-text { font-size: 0.82rem; line-height: 1.7; color: rgba(245,240,232,0.7); font-style: italic; flex: 1; }
+  .t-author { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--rust); opacity: 0.8; }
+  .reviews-social { display: flex; gap: 1rem; flex-wrap: wrap; }
+  @media (max-width: 768px) {
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .reviews-header { gap: 1.5rem; }
+  }
+  /* ── CÓMO FUNCIONA ── */
+  .how-it-works { padding: 6rem 2rem; border-top: 1px solid rgba(245,240,232,0.06); }
+  .hiw-inner { max-width: 760px; margin: 0 auto; }
+  .hiw-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3rem); color: var(--bone); margin-bottom: 3rem; }
+  .hiw-steps { display: flex; flex-direction: column; }
+  .hiw-step { display: flex; align-items: flex-start; gap: 1.5rem; padding: 1.5rem 0; }
+  .hiw-num { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--rust); opacity: 0.6; min-width: 2.5rem; line-height: 1; }
+  .hiw-step-body h4 { font-size: 0.85rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--bone); margin-bottom: 0.4rem; font-weight: 400; }
+  .hiw-step-body p { font-size: 0.85rem; line-height: 1.7; color: rgba(245,240,232,0.55); }
+  .hiw-connector { width: 1px; height: 2rem; background: rgba(245,240,232,0.08); margin-left: 1.25rem; }
+  .hiw-cta { margin-top: 3rem; }
+
+
+  .footer-contact-icons { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 0.25rem; }
+  .footer-icon-link { display: flex; align-items: center; gap: 0.6rem; color: rgba(245,240,232,0.45); text-decoration: none; font-size: 0.72rem; letter-spacing: 0.04em; transition: color 0.2s; }
+  .footer-icon-link:hover { color: rgba(245,240,232,0.85); }
+  .footer-icon-link svg { flex-shrink: 0; opacity: 0.7; }
+  .footer-icon-link:hover svg { opacity: 1; }
+
+  @media (max-width: 480px) {
+    .confirmed-grid { grid-template-columns: 1fr; }
+  }
+
   /* === ANIMATIONS === */
   .fade-up {
     opacity: 0;
@@ -1233,18 +1993,23 @@
     .about-visual { min-height: 300px; }
     .about-content { padding: 3rem 1.5rem; }
 
-    .services { padding: 5rem 1.5rem; }
-    .services-grid { grid-template-columns: 1fr; }
+    .portfolio { padding: 5rem 1.5rem; }
+    .portfolio-header { flex-direction: column; gap: 1rem; }
+    .portfolio-header .portfolio-note { text-align: left; max-width: 100%; }
+    .portfolio-grid { grid-template-columns: 1fr 1fr; }
 
     .travel { padding: 5rem 1.5rem; }
-    .travel-header { flex-direction: column; gap: 1rem; }
-    .destinations-grid { grid-template-columns: 1fr 1fr; }
-    .travel-more { grid-template-columns: 1fr 1fr; }
+    .timeline-track { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+    .timeline-line { width: 1px; height: 20px; min-width: 0; }
+    .next-grid { grid-template-columns: 1fr 1fr; }
+    .wishlist-grid { grid-template-columns: 1fr 1fr; }
+    .wishlist-footer { flex-direction: column; }
 
     .booking { grid-template-columns: 1fr; gap: 3rem; padding: 5rem 1.5rem; }
 
     .contact { padding: 5rem 1.5rem; }
     .contact::before { font-size: 8rem; }
+    .contact-btns { flex-direction: column; align-items: center; }
 
     footer { padding: 3rem 1.5rem 2rem; }
     .footer-top { flex-direction: column; gap: 2.5rem; }
@@ -1258,28 +2023,27 @@
 <nav>
   <a href="#" class="nav-logo">ATACA INK</a>
   <ul class="nav-links">
+    <li><a href="#portfolio">Portfolio</a></li>
     <li><a href="#about">Sobre mí</a></li>
-    <li><a href="#services">Servicios</a></li>
+    <li><a href="#como-funciona">Cómo funciona</a></li>
     <li><a href="#travels">Viajes</a></li>
-    <li><a href="#booking">Reservar</a></li>
-    <li><a href="#waitlist">Lista de espera</a></li>
     <li><a href="#contact">Contacto</a></li>
-    <li><a href="#" onclick="openPresupuesto(event)" style="color:var(--rust);opacity:1;">Presupuesto</a></li>
+    <li><a href="https://www.redbubble.com" target="_blank" style="color:var(--rust);opacity:1;font-weight:400;">Shop ↗</a></li>
   </ul>
+  <a href="#" onclick="openPresupuesto(event)" class="nav-cta">Empezá tu proyecto</a>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-left">
-    <p class="hero-eyebrow fade-up">Tatuajes con historia · Espacios seguros</p>
+    
     <h1 class="hero-title fade-up">
       ATACA
       <span>.INK</span>
     </h1>
-    <p class="hero-sub fade-up">Natha Cadenas · Tatuadora itinerante</p>
+    <p class="hero-sub fade-up">Blackwork botánico y proyectos personalizados para personas que habitan el mundo distinto.</p>
     <div class="hero-cta fade-up">
-      <a href="#booking" class="btn-primary">Reservar cita</a>
-      <a href="#about" class="btn-ghost">Conocer más</a>
+      <a href="#" onclick="openPresupuesto(event)" class="btn-primary">Empezá tu proyecto</a>
     </div>
     <div class="pride-bar"></div>
   </div>
@@ -1319,6 +2083,159 @@
   </div>
 </div>
 
+<!-- PORTFOLIO -->
+<section class="portfolio" id="portfolio">
+  <div class="portfolio-header fade-up">
+    <div>
+      <p class="section-label">Portfolio</p>
+      <h2>Cada piel,<br>una <em>historia</em></h2>
+    </div>
+    <p class="portfolio-note">Trabajos realizados en Argentina, Brasil y en cada ciudad del recorrido.</p>
+  </div>
+
+  <!-- FILTERS -->
+  <div class="portfolio-filters fade-up">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="botanica">Botánica</button>
+    <button class="filter-btn" data-filter="custom">Custom</button>
+    <button class="filter-btn" data-filter="mini">Mini Tattoos</button>
+    <button class="filter-btn" data-filter="flash">Flashes</button>
+    <button class="filter-btn" data-filter="healed">Healed Tattoos</button>
+  </div>
+
+  <!-- GRID 3x3 -->
+  <div class="portfolio-grid fade-up">
+    <!-- Row 1 -->
+    <div class="portfolio-item" data-cat="botanica">
+      <div class="portfolio-img-wrap">
+        <div class="portfolio-placeholder"></div>
+        <div class="portfolio-hover">
+          <span class="portfolio-tag">Botánica</span>
+          <p class="portfolio-loc">Mar del Plata</p>
+        </div>
+      </div>
+    </div>
+    <div class="portfolio-item" data-cat="custom">
+      <div class="portfolio-img-wrap">
+        <div class="portfolio-placeholder"></div>
+        <div class="portfolio-hover">
+          <span class="portfolio-tag">Custom</span>
+          <p class="portfolio-loc">Río de Janeiro</p>
+        </div>
+      </div>
+    </div>
+    <div class="portfolio-item" data-cat="mini">
+      <div class="portfolio-img-wrap">
+        <div class="portfolio-placeholder"></div>
+        <div class="portfolio-hover">
+          <span class="portfolio-tag">Mini Tattoo</span>
+          <p class="portfolio-loc">Copacabana</p>
+        </div>
+      </div>
+    </div>
+    <!-- Row 2 -->
+    <div class="portfolio-item" data-cat="flash">
+      <div class="portfolio-img-wrap">
+        <div class="portfolio-placeholder"></div>
+        <div class="portfolio-hover">
+          <span class="portfolio-tag">Flash</span>
+          <p class="portfolio-loc">Santa Teresa</p>
+        </div>
+      </div>
+    </div>
+    <div class="portfolio-item portfolio-featured" data-cat="botanica">
+      <div class="portfolio-img-wrap">
+        <div class="portfolio-placeholder"></div>
+        <div class="portfolio-hover">
+          <span class="portfolio-tag">Botánica</span>
+          <p class="portfolio-loc">Patagonia</p>
+        </div>
+      </div>
+    </div>
+    <div class="portfolio-item" data-cat="healed">
+      <div class="portfolio-img-wrap">
+        <div class="portfolio-placeholder"></div>
+        <div class="portfolio-hover">
+          <span class="portfolio-tag">Healed</span>
+          <p class="portfolio-loc">Mar del Plata</p>
+        </div>
+      </div>
+    </div>
+    <!-- Row 3 -->
+    <div class="portfolio-item" data-cat="custom">
+      <div class="portfolio-img-wrap">
+        <div class="portfolio-placeholder"></div>
+        <div class="portfolio-hover">
+          <span class="portfolio-tag">Custom</span>
+          <p class="portfolio-loc">Río Negro</p>
+        </div>
+      </div>
+    </div>
+    <div class="portfolio-item" data-cat="mini">
+      <div class="portfolio-img-wrap">
+        <div class="portfolio-placeholder"></div>
+        <div class="portfolio-hover">
+          <span class="portfolio-tag">Mini Tattoo</span>
+          <p class="portfolio-loc">Copacabana</p>
+        </div>
+      </div>
+    </div>
+    <div class="portfolio-item" data-cat="flash">
+      <div class="portfolio-img-wrap">
+        <div class="portfolio-placeholder"></div>
+        <div class="portfolio-hover">
+          <span class="portfolio-tag">Flash</span>
+          <p class="portfolio-loc">Mar del Plata</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="portfolio-cta fade-up">
+    <a href="#" onclick="openPresupuesto(event)" class="btn-primary">Empezá tu proyecto</a>
+  </div>
+</section>
+
+
+<!-- REVIEWS -->
+<section class="reviews-strip" id="reviews">
+  <div class="reviews-inner">
+    <div class="reviews-header fade-up">
+      <div class="reviews-score">
+        <span class="score-num">5.0</span>
+        <div class="score-stars">★★★★★</div>
+        <span class="score-label">en Google</span>
+      </div>
+      <div class="reviews-divider"></div>
+      <div class="reviews-count-wrap">
+        <span class="reviews-count">+40 reseñas</span>
+        <a href="https://maps.app.goo.gl/e8oEhJbgJcxxuYpAA" target="_blank" class="reviews-link">Ver todas en Google ↗</a>
+      </div>
+    </div>
+    <div class="testimonials-grid fade-up">
+      <div class="testimonial-card">
+        <div class="t-stars">★★★★★</div>
+        <p class="t-text">"Natha es increíble. Me hizo un tatuaje botánico en el antebrazo que superó todas mis expectativas. El proceso fue súper cómodo y el resultado es exactamente lo que soñaba."</p>
+        <span class="t-author">— Valentina G.</span>
+      </div>
+      <div class="testimonial-card">
+        <div class="t-stars">★★★★★</div>
+        <p class="t-text">"Me encantó la experiencia de principio a fin. El espacio es seguro, acogedor y Natha entiende exactamente lo que querés antes de que termines de explicarlo."</p>
+        <span class="t-author">— Sofía M.</span>
+      </div>
+      <div class="testimonial-card">
+        <div class="t-stars">★★★★★</div>
+        <p class="t-text">"Un trabajo detallado, limpio y con una energía única. Ya tengo turno para el próximo. 100% recomendable para quien busca algo personal y con alma."</p>
+        <span class="t-author">— Camila R.</span>
+      </div>
+    </div>
+    <div class="reviews-social fade-up">
+      <a href="https://maps.app.goo.gl/e8oEhJbgJcxxuYpAA" target="_blank" class="btn-outline" style="border-color:rgba(245,240,232,0.2);">⭐ Dejá tu reseña en Google</a>
+      <a href="https://instagram.com/atacaink" target="_blank" class="btn-outline" style="border-color:rgba(245,240,232,0.2);">📷 Seguinos en Instagram</a>
+    </div>
+  </div>
+</section>
+
 <!-- ABOUT -->
 <section class="about" id="about">
   <div class="about-visual">
@@ -1328,13 +2245,11 @@
   </div>
     <div class="about-content">
     <p class="section-label fade-up">Sobre mí</p>
-    <h2 class="fade-up">Arte que <em>nace</em> de vivir diferente</h2>
-    <p class="fade-up">Soy Natha Cadenas — artista, tatuadora y nómada digital. Hace un año cerré mi local físico para hacer lo que siempre quise: tatuar mientras recorro el mundo.</p>
-    <p class="fade-up">Mi marca, ATACA INK, nació desde una búsqueda profunda: construir una vida con libertad geográfica, propósito y coherencia entre quién soy, lo que creo y cómo genero ingresos.</p>
-    <p class="fade-up">Cada tatuaje es una historia. El tuyo también lo será.</p>
-    <div class="fade-up" style="margin-top:2.5rem;">
-      <a href="#contact" class="btn-primary">Trabajemos juntos</a>
-    </div>
+    <h2 class="fade-up">Arte en movimiento. <em>Historias</em> que viajan en la piel.</h2>
+    <p class="fade-up">Soy Natha Cadenas, artista y tatuadora itinerante. Hace un año cerré mi estudio físico para hacer lo que siempre quise: tatuar mientras recorro el mundo.</p>
+    <p class="fade-up">Así nació ATACA INK, un proyecto que une libertad, comunidad y expresión personal mientras recorre distintas ciudades y culturas.</p>
+    <p class="fade-up">Cada tatuaje cuenta una historia. Algunas se llevan en la memoria. Otras se llevan en la piel.</p>
+    <p class="fade-up">La próxima puede ser la tuya.</p>
   </div>
 </section>
 
@@ -1342,252 +2257,220 @@
 <section class="queer-banner">
   <p class="queer-label fade-up">Espacio seguro · Safe space</p>
   <h2 class="queer-title fade-up">Un estudio para <span class="rainbow">todas las identidades</span></h2>
-  <p class="queer-desc fade-up">ATACA INK es un espacio de bienvenida para la comunidad LGBTQI+. Personas queer, lesbianas, gays, trans, no binarias y aliadas — aquí tu identidad es celebrada, no tolerada.</p>
+  <p class="queer-desc fade-up">ATACA INK es un espacio queer-friendly creado para que cada persona pueda expresarse con libertad. Personas LGBTQIA+, aliadas y cualquier persona que valore el respeto y la diversidad son bienvenidas. Acá la diversidad es parte de la cultura que construimos día a día entre todxs.</p>
   <div class="identity-pills fade-up">
     <span class="pill pill-1">Lesbianas</span>
     <span class="pill pill-2">Gays</span>
-    <span class="pill pill-3">Trans</span>
-    <span class="pill pill-4">No Binaries</span>
     <span class="pill pill-5">Bisexuales</span>
+    <span class="pill pill-3">Transexuales</span>
     <span class="pill pill-6">Queer</span>
+    <span class="pill pill-4">Intersexual</span>
+    <span class="pill pill-2">Asexual</span>
+    <span class="pill pill-1">+</span>
   </div>
 </section>
 
-<!-- SERVICES -->
-<section class="services" id="services">
-  <div class="services-header">
-    <p class="section-label fade-up">Lo que ofrezco</p>
-    <h2 class="fade-up">Arte hecho a medida,<br>en cualquier ciudad</h2>
-  </div>
-  <div class="services-grid fade-up">
-    <div class="service-card">
-      <div class="service-num">01</div>
-      <h3>Diseño personalizado</h3>
-      <p>Cada pieza es única. Trabajamos juntos desde la idea hasta el boceto final. Mi estilo combina líneas finas, elementos orgánicos y narrativa personal.</p>
+<!-- CÓMO FUNCIONA -->
+<section class="how-it-works" id="como-funciona">
+  <div class="hiw-inner">
+    <p class="section-label fade-up">Proceso</p>
+    <h2 class="hiw-title fade-up">¿Cómo <em>funciona</em>?</h2>
+    <div class="hiw-steps">
+      <div class="hiw-step fade-up">
+        <span class="hiw-num">01</span>
+        <div class="hiw-step-body">
+          <h4>Pedís tu presupuesto</h4>
+          <p>Completás el formulario con tu idea, zona y referencias. Sin compromiso.</p>
+        </div>
+      </div>
+      <div class="hiw-connector"></div>
+      <div class="hiw-step fade-up">
+        <span class="hiw-num">02</span>
+        <div class="hiw-step-body">
+          <h4>Coordinamos por mail o Instagram</h4>
+          <p>Te respondo con el presupuesto y ajustamos los detalles del diseño juntes.</p>
+        </div>
+      </div>
+      <div class="hiw-connector"></div>
+      <div class="hiw-step fade-up">
+        <span class="hiw-num">03</span>
+        <div class="hiw-step-body">
+          <h4>Reservás tu turno</h4>
+          <p>Con una seña acordamos fecha, hora y lugar. El diseño final lo ves el día de la sesión.</p>
+        </div>
+      </div>
+      <div class="hiw-connector"></div>
+      <div class="hiw-step fade-up">
+        <span class="hiw-num">04</span>
+        <div class="hiw-step-body">
+          <h4>Nos encontramos y tatuamos</h4>
+          <p>En un espacio cómodo, seguro y queer-friendly. Llevate tu historia en la piel.</p>
+        </div>
+      </div>
     </div>
-    <div class="service-card">
-      <div class="service-num">02</div>
-      <h3>Flash days</h3>
-      <p>Cuando llego a una ciudad nueva, organizo días de diseños predefinidos. Perfectos para quienes quieren algo especial pero no saben por dónde empezar.</p>
-    </div>
-    <div class="service-card">
-      <div class="service-num">03</div>
-      <h3>Cobertura & retoques</h3>
-      <p>¿Tienes un tatuaje que ya no te representa? Diseñamos juntos una nueva historia sobre él. También ofrezco retoques de trabajos previos.</p>
+    <div class="hiw-cta fade-up">
+      <a href="#" onclick="openPresupuesto(event)" class="btn-primary">Empezá tu proyecto</a>
     </div>
   </div>
 </section>
 
-<!-- TRAVEL MAP -->
+<!-- ═══════════════════════════════════════════════════════
+     UNIFIED JOURNEY SECTION — El Recorrido de la Comunidad
+     ═══════════════════════════════════════════════════════ -->
 <section class="travel" id="travels">
-  <div class="travel-header fade-up">
-    <div>
-      <p class="section-label">Dónde estoy</p>
-      <h2>Tattooing<br><em>en el mundo</em></h2>
-    </div>
-    <p class="travel-note">Las fechas y ciudades se confirman según demanda. Seguime en Instagram para novedades.</p>
-  </div>
 
-  <p class="section-label fade-up" style="max-width:1200px;margin:0 auto 1.5rem;">En curso</p>
-  <div class="destinations-grid fade-up">
-    <div class="dest-card" onclick="openBitacora('argentina')" style="cursor:pointer;">
-      <div class="dest-bg" style="background:linear-gradient(160deg,#1a1008,#5a3010,#1a1008);"></div>
-      <div class="dest-overlay">
-        <span class="dest-status status-soon">● En curso</span>
-        <div class="dest-name">Argentina</div>
-        <div class="dest-cities">Mar del Plata · Río Negro Patagonia</div>
-      </div>
+  <!-- ── BLOQUE 1: INTRO NARRATIVO ── -->
+  <div class="journey-intro fade-up">
+    <div class="journey-intro-text">
+      <p class="section-label">Viajes · Comunidad · Lista de espera</p>
+      <h2 class="travel-title">Un estudio que<br><em>se mueve contigo</em></h2>
+      <p class="travel-narrative">ATACA INK no tiene paredes fijas. Cada ciudad es un capítulo. Seguí el recorrido, votá los próximos destinos y sumate a la lista para que te avisemos cuando lleguemos cerca tuyo.</p>
     </div>
-    <div class="dest-card" onclick="openBitacora('brasil')" style="cursor:pointer;">
-      <div class="dest-bg dest-bg-rio"></div>
-      <div class="dest-overlay">
-        <span class="dest-status status-soon">→ Próximamente</span>
-        <div class="dest-name">Brasil ↗</div>
-        <div class="dest-cities">Río de Janeiro · São Paulo · Ubatuba · Paraty</div>
+    <div class="journey-steps-strip">
+      <div class="jstep" data-n="1">
+        <span class="jstep-num">01</span>
+        <span class="jstep-label">Conocé el recorrido</span>
+        <span class="jstep-arrow">↓</span>
       </div>
-    </div>
-    <div class="dest-card">
-      <div class="dest-bg" style="background:linear-gradient(160deg,#0d1525,#1a2a5e,#0d1525);"></div>
-      <div class="dest-overlay">
-        <span class="dest-status status-soon">→ Próximamente</span>
-        <div class="dest-name">Portugal</div>
-        <div class="dest-cities">Por confirmar</div>
+      <div class="jstep" data-n="2">
+        <span class="jstep-num">02</span>
+        <span class="jstep-label">Próximas paradas</span>
+        <span class="jstep-arrow">↓</span>
       </div>
-    </div>
-    <div class="dest-card">
-      <div class="dest-bg dest-bg-spain"></div>
-      <div class="dest-overlay">
-        <span class="dest-status status-soon">→ Próximamente</span>
-        <div class="dest-name">España</div>
-        <div class="dest-cities">Madrid · Barcelona</div>
+      <div class="jstep" data-n="3">
+        <span class="jstep-num">03</span>
+        <span class="jstep-label">Votá tu ciudad</span>
+        <span class="jstep-arrow">↓</span>
+      </div>
+      <div class="jstep" data-n="4">
+        <span class="jstep-num">04</span>
+        <span class="jstep-label">Sumate a la lista</span>
+        <span class="jstep-arrow">—</span>
       </div>
     </div>
   </div>
 
-  <p class="section-label fade-up" style="max-width:1200px;margin:2.5rem auto 1.5rem;">Por confirmar</p>
-  <div class="destinations-grid fade-up">
-    <div class="dest-card">
-      <div class="dest-bg dest-bg-france"></div>
-      <div class="dest-overlay">
-        <span class="dest-status status-coming">Por confirmar</span>
-        <div class="dest-name">Francia</div>
-        <div class="dest-cities">París</div>
-      </div>
+  <!-- ── BLOQUE 2: MAPA TEMPORAL ── -->
+  <div class="journey-chapter fade-up">
+    <div class="chapter-eyebrow">
+      <span class="chapter-num">01</span>
+      <span class="chapter-rule"></span>
+      <span class="chapter-label">El recorrido hasta hoy</span>
     </div>
-    <div class="dest-card">
-      <div class="dest-bg dest-bg-italy"></div>
-      <div class="dest-overlay">
-        <span class="dest-status status-coming">Por confirmar</span>
-        <div class="dest-name">Italia</div>
-        <div class="dest-cities">Roma</div>
-      </div>
-    </div>
-    <div class="dest-card">
-      <div class="dest-bg" style="background:linear-gradient(160deg,#0d1a2e,#1a3a6e,#0d1a2e);"></div>
-      <div class="dest-overlay">
-        <span class="dest-status status-coming">Por confirmar</span>
-        <div class="dest-name">Grecia</div>
-        <div class="dest-cities">Por confirmar</div>
-      </div>
-    </div>
-    <div class="dest-card" style="opacity:0.4;">
-      <div class="dest-bg" style="background:linear-gradient(160deg,#0a0a0a,#1a1a1a,#0a0a0a);"></div>
-      <div class="dest-overlay">
-        <span class="dest-status status-coming">El sueño</span>
-        <div class="dest-name">+</div>
-        <div class="dest-cities">Suecia · Irlanda · Inglaterra · Finlandia · Australia · Nueva Zelanda</div>
+    <div class="chapter-body">
+      <div class="map-timeline">
+        <p class="mt-scroll-hint">deslizá →</p>
+        <div class="mt-scroll-wrapper" id="mtScroll">
+          <div class="mt-track">
+
+            <div class="mt-stop mt-visited" onclick="openBitacora('argentina')">
+              <div class="mt-dot-wrap"><div class="mt-dot"></div></div>
+              <div class="mt-content">
+                <span class="mt-badge mt-badge-visited">✦ Visitado</span>
+                <strong class="mt-city">Mar del Plata</strong>
+                <span class="mt-meta">Argentina · Origen · 2025</span>
+                <p class="mt-note">Donde todo empezó. El mundo como estudio.</p>
+                <button class="mt-bitacora-btn">Ver bitácora →</button>
+              </div>
+            </div>
+
+            <div class="mt-stop mt-visited" onclick="openBitacora('brasil')">
+              <div class="mt-dot-wrap"><div class="mt-dot"></div></div>
+              <div class="mt-content">
+                <span class="mt-badge mt-badge-visited">✦ Visitado</span>
+                <strong class="mt-city">Río de Janeiro</strong>
+                <span class="mt-meta">Brasil · 2025</span>
+                <p class="mt-note">El primer sí del mundo. Calor, color y tinta.</p>
+                <button class="mt-bitacora-btn">Ver bitácora →</button>
+              </div>
+            </div>
+
+            <div class="mt-stop mt-visited" onclick="openBitacora('argentina')">
+              <div class="mt-dot-wrap"><div class="mt-dot"></div></div>
+              <div class="mt-content">
+                <span class="mt-badge mt-badge-visited">✦ Visitado</span>
+                <strong class="mt-city">Patagonia</strong>
+                <span class="mt-meta">Argentina · 2026</span>
+                <p class="mt-note">El frío y la claridad de saber a dónde va el viaje.</p>
+                <button class="mt-bitacora-btn">Ver bitácora →</button>
+              </div>
+            </div>
+
+            <div class="mt-stop mt-active">
+              <div class="mt-dot-wrap"><div class="mt-dot mt-pulse"></div></div>
+              <div class="mt-content">
+                <span class="mt-badge mt-badge-active">● Ahora</span>
+                <strong class="mt-city">Mar del Plata</strong>
+                <span class="mt-meta">Argentina · 2026</span>
+                <p class="mt-note">De regreso al origen antes del salto a Brasil.</p>
+                <a href="#" onclick="openPresupuesto(event);return false;" class="mt-cta-link">Empezá tu proyecto →</a>
+              </div>
+            </div>
+
+            <div class="mt-stop mt-upcoming">
+              <div class="mt-dot-wrap"><div class="mt-dot mt-dot-upcoming"></div></div>
+              <div class="mt-content">
+                <span class="mt-badge mt-badge-upcoming">→ Próximo</span>
+                <strong class="mt-city">São Paulo</strong>
+                <span class="mt-meta">Brasil · Jul 2026</span>
+                <p class="mt-note">La siguiente etapa. Cupos limitados.</p>
+              </div>
+            </div>
+
+            <div class="mt-stop mt-upcoming" style="opacity:0.22;">
+              <div class="mt-dot-wrap"><div class="mt-dot" style="border:1px dashed rgba(245,240,232,0.18);background:transparent;"></div></div>
+              <div class="mt-content">
+                <span class="mt-badge" style="color:rgba(245,240,232,0.25);background:rgba(245,240,232,0.03);">+ Por confirmar</span>
+                <strong class="mt-city" style="font-size:1rem;">¿Tu ciudad?</strong>
+                <span class="mt-meta">Votá en la wishlist</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
       </div>
     </div>
   </div>
+
+  <!-- ── BLOQUE 4: WISHLIST / VOTACIÓN ── -->
+  <div class="journey-chapter fade-up" id="wishlist">
+    <div class="chapter-eyebrow">
+      <span class="chapter-num">03</span>
+      <span class="chapter-rule"></span>
+      <span class="chapter-label">Votá el próximo destino</span>
+    </div>
+    <div class="chapter-body">
+      <div class="vote-intro">
+        <h3 class="vote-title">La comunidad decide<br><em>a dónde viaja ATACA</em></h3>
+        <p class="vote-sub">Cada voto cuenta. Los destinos más votados se priorizan en la agenda. Votá ahora y después sumate a la lista para que te avisemos.</p>
+      </div>
+      <p class="wishlist-scroll-hint">deslizá →</p>
+      <div class="wishlist-scroll-wrapper" id="wishlistScroll">
+        <div class="wishlist-grid" id="wishlistGrid">
+          <!-- items rendered by JS -->
+        </div>
+      </div>
+      <!-- Transición hacia el formulario -->
+      <div class="vote-bridge">
+        <p class="vote-bridge-text">¿Votaste tu ciudad? El siguiente paso es asegurarte el cupo.</p>
+        <div class="vote-bridge-arrow">↓</div>
+      </div>
+    </div>
+  </div>
+
+
 </section>
 
-<!-- BOOKING -->
-<section id="booking" style="background:#0d0b09; padding:0 3rem;">
-  <div class="booking">
-    <div class="booking-left fade-up">
-      <p class="section-label">Reservas</p>
-      <h2>¿Querés tatuarte cuando esté en tu <em>ciudad?</em></h2>
-      <p>Las citas se abren con anticipación cuando confirmo mi llegada a cada lugar. La mejor manera de no perderte es estar en la lista de espera o seguirme en Instagram.</p>
-      <p style="margin-top:1rem;">
-        <a href="#contact" class="btn-primary">Anotarme en lista de espera</a>
-        <a href="#" onclick="openPresupuesto(event)" class="btn-primary" style="margin-top:1rem;display:inline-block;background:transparent;border:1px solid var(--rust);color:var(--rust);">Pedir presupuesto</a>
-      </p>
-    </div>
-    <div class="booking-right fade-up">
-      <div class="booking-step">
-        <span class="step-num">01</span>
-        <div class="step-content">
-          <h4>Seguime en Instagram</h4>
-          <p>Anuncio cada ciudad con anticipación. Primera fuente de novedades.</p>
-        </div>
-      </div>
-      <div class="booking-step">
-        <span class="step-num">02</span>
-        <div class="step-content">
-          <h4>Entrar en lista de espera</h4>
-          <p>Dejá tu mail y ciudad. Te aviso cuando confirme fechas cerca tuyo.</p>
-        </div>
-      </div>
-      <div class="booking-step">
-        <span class="step-num">03</span>
-        <div class="step-content">
-          <h4>Consulta de diseño</h4>
-          <p>Hablamos por DM o mail sobre tu idea, estilo y referencias.</p>
-        </div>
-      </div>
-      <div class="booking-step">
-        <span class="step-num">04</span>
-        <div class="step-content">
-          <h4>Nos tatuamos</h4>
-          <p>Sesión en un espacio seguro, cuidado y con toda mi atención.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- WAITLIST -->
-<section class="waitlist" id="waitlist">
-  <div class="waitlist-inner">
-    <div class="waitlist-left">
-      <p class="section-label fade-up">Lista de espera</p>
-      <h2 class="fade-up">¿Quiero tatuarme<br>cuando llegues<br>a mi <em>ciudad</em></h2>
-      <p class="fade-up">Dejá tu mail y ciudad. Cuando confirme fechas cerca tuyo, sos la primera en saberlo.</p>
-      <div class="waitlist-promise fade-up">
-        <span>✦ Sin spam</span>
-        <span>✦ Solo te escribo cuando tengo fechas reales</span>
-        <span>✦ Podés darte de baja cuando quieras</span>
-      </div>
-    </div>
-    <div class="waitlist-right fade-up">
-      <div class="waitlist-form" id="waitlistForm">
-        <form name="waitlist" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="handleWaitlist(event)">
-          <input type="hidden" name="form-name" value="waitlist" />
-          <p style="display:none"><input name="bot-field" /></p>
-          <div class="form-group">
-            <label>Tu nombre o apodo</label>
-            <input type="text" id="wl-name" name="nombre" placeholder="Cómo te llamás o cómo querés que te llame" />
-          </div>
-          <div class="form-group">
-            <label>Mail</label>
-            <input type="email" id="wl-email" name="email" placeholder="tu@mail.com" />
-          </div>
-          <div class="form-group">
-            <label>Ciudad / País</label>
-            <input type="text" id="wl-city" name="ciudad" placeholder="Ej: Madrid, España" />
-          </div>
-          <div class="form-group">
-            <label>Identidad de género <span class="optional">(opcional)</span></label>
-            <select id="wl-gender" name="identidad" style="width:100%; background:rgba(245,240,232,0.04); border:1px solid rgba(245,240,232,0.1); color:var(--bone); padding:0.75rem 1rem; font-family:'DM Sans',sans-serif; font-size:0.85rem; font-weight:300; outline:none; transition:border-color 0.3s; appearance:none; cursor:pointer;">
-              <option value="" disabled selected style="background:#1a1410;">Seleccioná tu identidad</option>
-              <option value="mujer-cis" style="background:#1a1410;">Mujer cisgénero</option>
-              <option value="hombre-cis" style="background:#1a1410;">Hombre cisgénero</option>
-              <option value="mujer-trans" style="background:#1a1410;">Mujer trans</option>
-              <option value="hombre-trans" style="background:#1a1410;">Hombre trans</option>
-              <option value="no-binarie" style="background:#1a1410;">No binarie</option>
-              <option value="genero-fluido" style="background:#1a1410;">Género fluido</option>
-              <option value="agender" style="background:#1a1410;">Agénero</option>
-              <option value="intersex" style="background:#1a1410;">Intersex</option>
-              <option value="queer" style="background:#1a1410;">Queer</option>
-              <option value="prefiero-no-decir" style="background:#1a1410;">Prefiero no decirlo</option>
-              <option value="otro" style="background:#1a1410;">Otro</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Relación con la comunidad LGBTQI+ <span class="optional">(opcional)</span></label>
-            <select id="wl-lgbtqi" name="comunidad" style="width:100%; background:rgba(245,240,232,0.04); border:1px solid rgba(245,240,232,0.1); color:var(--bone); padding:0.75rem 1rem; font-family:'DM Sans',sans-serif; font-size:0.85rem; font-weight:300; outline:none; transition:border-color 0.3s; appearance:none; cursor:pointer;">
-              <option value="" disabled selected style="background:#1a1410;">Seleccioná una opción</option>
-              <option value="parte" style="background:#1a1410;">Soy parte de la comunidad 🏳️‍🌈</option>
-              <option value="friendly" style="background:#1a1410;">Soy aliada/e/o — friendly 🤍</option>
-              <option value="prefiero-no-decir" style="background:#1a1410;">Prefiero no decirlo</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Instagram <span class="optional">(opcional)</span></label>
-            <input type="text" id="wl-instagram" name="instagram" placeholder="@tuusuario" />
-          </div>
-          <button type="submit" class="btn-waitlist">Anotarme a la lista</button>
-          <p class="form-privacy">Tu información es privada y nunca será compartida.</p>
-        </form>
-      </div>
-      <div class="waitlist-success" id="waitlistSuccess" style="display:none;">
-        <div class="success-icon">✦</div>
-        <h3>¡Ya estás en la lista!</h3>
-        <p>Te escribo en cuanto confirme fechas cerca de vos. Seguime en Instagram para novedades antes.</p>
-        <a href="https://instagram.com/ataca.ink" target="_blank" class="btn-primary" style="margin-top:1.5rem;display:inline-block;">@ataca.ink</a>
-      </div>
-    </div>
-  </div>
-</section>
+<!-- UNIFIED COMMUNITY SECTION — ID anchor for waitlist links -->
+<div id="waitlist"></div>
+<div id="booking"></div>
 
 <!-- CONTACT -->
 <section class="contact" id="contact">
-  <p class="section-label fade-up">Contacto</p>
-  <h2 class="fade-up">Hagamos algo <em>bello</em><br>juntos.</h2>
-  <p class="fade-up">¿Querés un tatuaje, colaborar, o simplemente saber cuándo llego a tu ciudad? Escribime.</p>
-  <div class="contact-btns fade-up">
-    <a href="mailto:ataca.studio.ar@gmail.com" class="btn-dark">ataca.studio.ar@gmail.com</a>
-    <a href="https://instagram.com/ataca.ink" target="_blank" class="btn-outline">@ataca.ink en Instagram</a>
+  <h2 class="fade-up" style="font-size:clamp(1.8rem,4vw,3rem);max-width:620px;margin:0 auto 1.25rem;">¿Tenés una idea <em>dando vueltas</em>?<br>Es el momento de darle forma.</h2>
+  <p class="fade-up" style="opacity:0.5;font-size:0.85rem;max-width:400px;margin:0 auto 2.5rem;line-height:1.7;">Completá el formulario y te respondo con el presupuesto en 24–48hs.</p>
+  <div class="fade-up">
+    <a href="#" onclick="openPresupuesto(event)" class="btn-primary" style="font-size:0.8rem;padding:1.1rem 3rem;letter-spacing:0.22em;">Empezá tu proyecto</a>
   </div>
 </section>
 
@@ -1602,18 +2485,39 @@
       <h5>Navegación</h5>
       <ul>
         <li><a href="#about">Sobre mí</a></li>
-        <li><a href="#services">Servicios</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
         <li><a href="#travels">Viajes</a></li>
-        <li><a href="#booking">Reservas</a></li>
+        <li><a href="#contact">Contacto</a></li>
       </ul>
     </div>
-    <div>
-      <div class="footer-links">
-        <h5>Redes</h5>
-        <div class="footer-social">
-          <a href="#" class="social-link">Instagram</a>
-          <a href="#" class="social-link">TikTok</a>
-        </div>
+    <div class="footer-links">
+      <h5>Contacto</h5>
+      <div class="footer-contact-icons">
+        <!-- Mail -->
+        <a href="mailto:ataca.studio.ar@gmail.com" class="footer-icon-link" title="ataca.studio.ar@gmail.com">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="4" width="20" height="16" rx="2"/>
+            <polyline points="2,4 12,13 22,4"/>
+          </svg>
+          <span>ataca.studio.ar@gmail.com</span>
+        </a>
+        <!-- Instagram -->
+        <a href="https://instagram.com/ataca.ink" target="_blank" class="footer-icon-link" title="@ataca.ink">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5"/>
+            <circle cx="12" cy="12" r="4"/>
+            <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
+          </svg>
+          <span>@ataca.ink</span>
+        </a>
+        <!-- Maps -->
+        <a href="https://maps.app.goo.gl/e8oEhJbgJcxxuYpAA" target="_blank" class="footer-icon-link" title="Ver en Maps">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+            <circle cx="12" cy="9" r="2.5"/>
+          </svg>
+          <span>Mar del Plata</span>
+        </a>
       </div>
     </div>
   </div>
@@ -1644,45 +2548,175 @@
 
   function submitWaitlist() {
     const name = document.getElementById('wl-name');
-    const email = document.getElementById('wl-email');
-    const city = document.getElementById('wl-city');
+    const contact = document.getElementById('wl-instagram');
     let valid = true;
 
-    // Clear previous errors
     document.querySelectorAll('.error-msg').forEach(e => e.remove());
-    [name, email, city].forEach(f => f.classList.remove('form-error'));
+    [name, contact].forEach(f => f.classList.remove('form-error'));
 
     if (!name.value.trim()) {
       name.classList.add('form-error');
       name.insertAdjacentHTML('afterend', '<span class="error-msg">Por favor ingresá tu nombre</span>');
       valid = false;
     }
-    if (!email.value.trim() || !email.value.includes('@')) {
-      email.classList.add('form-error');
-      email.insertAdjacentHTML('afterend', '<span class="error-msg">Ingresá un mail válido</span>');
-      valid = false;
-    }
-    if (!city.value.trim()) {
-      city.classList.add('form-error');
-      city.insertAdjacentHTML('afterend', '<span class="error-msg">Indicá tu ciudad</span>');
+    if (!contact.value.trim()) {
+      contact.classList.add('form-error');
+      contact.insertAdjacentHTML('afterend', '<span class="error-msg">Ingresá tu Instagram o mail</span>');
       valid = false;
     }
 
     if (!valid) return;
 
-    // Show success
     document.getElementById('waitlistForm').style.display = 'none';
     document.getElementById('waitlistSuccess').style.display = 'block';
-
-    // Here you'd normally send to a backend / Mailchimp / etc.
-    console.log('Waitlist entry:', {
-      name: name.value,
-      email: email.value,
-      city: city.value,
-      idea: document.getElementById('wl-idea').value,
-      lgbtqi: document.getElementById('wl-lgbtqi').checked
-    });
   }
+
+  // handleWaitlist is called from the form's onsubmit
+  function handleWaitlist(e) {
+    e.preventDefault();
+    submitWaitlist();
+  }
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      const filter = this.dataset.filter;
+      document.querySelectorAll('.portfolio-item').forEach(item => {
+        if (filter === 'all' || item.dataset.cat === filter) {
+          item.style.display = '';
+          item.style.opacity = '1';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // Wishlist — destinos base con votos iniciales y porcentaje de barra
+  const destinosBase = [
+    { flag: '🇪🇸', city: 'Madrid',          votes: 42, bar: 84 },
+    { flag: '🇪🇸', city: 'Barcelona',        votes: 38, bar: 76 },
+    { flag: '🇲🇽', city: 'Ciudad de México', votes: 35, bar: 70 },
+    { flag: '🇩🇪', city: 'Berlín',           votes: 29, bar: 58 },
+    { flag: '🇫🇷', city: 'París',            votes: 27, bar: 54 },
+    { flag: '🇬🇧', city: 'Londres',          votes: 24, bar: 48 },
+    { flag: '🇮🇹', city: 'Roma',             votes: 21, bar: 42 },
+    { flag: '🇬🇷', city: 'Atenas',           votes: 18, bar: 36 },
+    { flag: '🇦🇺', city: 'Melbourne',        votes: 15, bar: 30 },
+    { flag: '🇸🇪', city: 'Estocolmo',        votes: 12, bar: 24 },
+    { flag: '🇯🇵', city: 'Tokio',            votes: 11, bar: 22 },
+    { flag: '🇺🇸', city: 'Nueva York',        votes:  9, bar: 18 },
+  ];
+
+  // Storage keys
+  const STORAGE_KEY = 'ataca-waitlist-counts';
+  const JOINED_KEY  = 'ataca-waitlist-joined';
+
+  async function loadWaitlistData() {
+    try {
+      const res = await window.storage.get(STORAGE_KEY, true);
+      return res ? JSON.parse(res.value) : {};
+    } catch(e) { return {}; }
+  }
+
+  async function saveWaitlistData(data) {
+    try { await window.storage.set(STORAGE_KEY, JSON.stringify(data), true); } catch(e) {}
+  }
+
+  async function loadJoinedCities() {
+    try {
+      const res = await window.storage.get(JOINED_KEY, false);
+      return res ? JSON.parse(res.value) : [];
+    } catch(e) { return []; }
+  }
+
+  async function saveJoinedCities(arr) {
+    try { await window.storage.set(JOINED_KEY, JSON.stringify(arr), false); } catch(e) {}
+  }
+
+  async function renderWishlist() {
+    const [counts, joined] = await Promise.all([loadWaitlistData(), loadJoinedCities()]);
+    const grid = document.getElementById('wishlistGrid');
+    if (!grid) return;
+    grid.innerHTML = destinosBase.map(d => {
+      const extra    = counts[d.city] || 0;
+      const total    = d.votes + extra;
+      const isJoined = joined.includes(d.city);
+      const voteCta  = isJoined ? '✓ En lista' : 'Votar →';
+      const revealOpen = isJoined ? 'open' : '';
+      const joinedLabel = isJoined
+        ? `<span class="wish-joined-label">✓ En lista de espera</span>`
+        : `<input class="wish-waitlist-input" placeholder="mail o @instagram" />
+           <button class="wish-waitlist-submit" onclick="submitWishlistContact(this, '${d.city}')">Avisame →</button>`;
+      return `<div class="wish-item${isJoined ? ' voted' : ''}" onclick="voteAndReveal(this, '${d.city}')" data-city="${d.city}">
+          <span class="wish-country">${d.flag}</span>
+          <span class="wish-city">${d.city}</span>
+          <span class="wish-votes" data-city="${d.city}">${total} en lista</span>
+          <div class="wish-bar"><div class="wish-fill" style="width:${d.bar}%"></div></div>
+          <span class="wish-vote-cta">${voteCta}</span>
+          <div class="wish-waitlist-reveal ${revealOpen}">${joinedLabel}</div>
+        </div>`;
+    }).join('');
+
+    // drag-to-scroll wishlist
+    const ws = document.getElementById('wishlistScroll');
+    if (ws && !ws._dragBound) {
+      ws._dragBound = true;
+      let isDown = false, startX, scrollLeft;
+      ws.addEventListener('mousedown', e => { if(e.target.closest('.wish-waitlist-input,.wish-waitlist-submit')) return; isDown=true; ws.style.cursor='grabbing'; startX=e.pageX-ws.offsetLeft; scrollLeft=ws.scrollLeft; });
+      document.addEventListener('mouseup', () => { isDown=false; if(ws) ws.style.cursor='grab'; });
+      ws.addEventListener('mousemove', e => { if(!isDown) return; e.preventDefault(); ws.scrollLeft = scrollLeft - (e.pageX - ws.offsetLeft - startX); });
+    }
+  }
+
+  async function voteAndReveal(el, city) {
+    // don't trigger on input/button clicks inside card
+    if (event && event.target.closest('.wish-waitlist-input,.wish-waitlist-submit')) return;
+    const reveal = el.querySelector('.wish-waitlist-reveal');
+    const voteCta = el.querySelector('.wish-vote-cta');
+    const isJoined = el.classList.contains('voted');
+    if (isJoined) {
+      reveal.classList.toggle('open');
+      return;
+    }
+    // First vote: update count + reveal form
+    el.classList.add('voted', 'just-voted');
+    setTimeout(() => el.classList.remove('just-voted'), 400);
+    if (voteCta) voteCta.textContent = '✓ Votado';
+
+    const counts = await loadWaitlistData();
+    counts[city] = (counts[city] || 0) + 1;
+    await saveWaitlistData(counts);
+
+    const votesEl = el.querySelector('.wish-votes');
+    if (votesEl) { const cur = parseInt(votesEl.textContent); votesEl.textContent = (cur+1)+' en lista'; }
+
+    // open the waitlist form
+    reveal.classList.add('open');
+  }
+
+  async function submitWishlistContact(btn, city) {
+    const input = btn.previousElementSibling;
+    const val = input ? input.value.trim() : '';
+    if (!val) { input.style.borderColor='var(--rust)'; setTimeout(()=>input.style.borderColor='',1000); return; }
+
+    btn.textContent = '✓';
+    btn.disabled = true;
+    input.disabled = true;
+
+    // save joined
+    const joined = await loadJoinedCities();
+    if (!joined.includes(city)) { joined.push(city); await saveJoinedCities(joined); }
+
+    // replace form with label
+    const reveal = btn.closest('.wish-waitlist-reveal');
+    reveal.innerHTML = '<span class="wish-joined-label">✓ En lista de espera</span>';
+    const voteCta = btn.closest('.wish-item').querySelector('.wish-vote-cta');
+    if (voteCta) voteCta.textContent = '✓ En lista';
+  }
+
+  // Init wishlist on load
+  renderWishlist();
 
   document.querySelectorAll('.fade-up').forEach((el, i) => {
     // Stagger siblings
@@ -1752,6 +2786,25 @@
     }
   }
 
+  function toggleContactoField() {
+    const canal = document.getElementById('canalContacto').value;
+    const mailGroup = document.getElementById('contactoMailGroup');
+    const igGroup   = document.getElementById('contactoIgGroup');
+    const mailInput = document.getElementById('contactoMail');
+    const igInput   = document.getElementById('contactoIg');
+    if (canal === 'mail') {
+      mailGroup.style.display = 'block';
+      igGroup.style.display   = 'none';
+      mailInput.required = true;
+      igInput.required   = false;
+    } else if (canal === 'instagram') {
+      igGroup.style.display   = 'block';
+      mailGroup.style.display = 'none';
+      igInput.required   = true;
+      mailInput.required = false;
+    }
+  }
+
   // Close modal clicking outside
   document.getElementById('presupuestoModal').addEventListener('click', function(e) {
     if (e.target === this) closePresupuesto();
@@ -1797,16 +2850,6 @@
         </div>
 
         <div class="form-group">
-          <label>Mail</label>
-          <input type="email" name="email" placeholder="tu@mail.com" required />
-        </div>
-
-        <div class="form-group">
-          <label>Instagram <span class="optional">(opcional)</span></label>
-          <input type="text" name="instagram" placeholder="@tuusuario" />
-        </div>
-
-        <div class="form-group">
           <label>Edad</label>
           <input type="number" name="edad" placeholder="Tu edad" min="18" max="99" required />
         </div>
@@ -1826,35 +2869,13 @@
         </div>
 
         <div class="form-group">
-          <label>Región del cuerpo</label>
-          <select name="region" id="regionSelect" onchange="updateSubzona()" style="width:100%;background:rgba(245,240,232,0.04);border:1px solid rgba(245,240,232,0.1);color:var(--bone);padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.85rem;outline:none;appearance:none;cursor:pointer;" required>
-            <option value="" disabled selected style="background:#1a1410;">Seleccioná la región</option>
-            <option value="cabeza_cuello" style="background:#1a1410;">Cabeza y cuello</option>
-            <option value="hombros_clavícula" style="background:#1a1410;">Hombros y clavícula</option>
-            <option value="brazo_superior" style="background:#1a1410;">Brazo superior</option>
-            <option value="codo" style="background:#1a1410;">Codo</option>
-            <option value="antebrazo" style="background:#1a1410;">Antebrazo</option>
-            <option value="muñeca_mano" style="background:#1a1410;">Muñeca y mano</option>
-            <option value="pecho_torso" style="background:#1a1410;">Pecho y torso</option>
-            <option value="espalda" style="background:#1a1410;">Espalda</option>
-            <option value="cadera_gluteos" style="background:#1a1410;">Cadera y glúteos</option>
-            <option value="muslo" style="background:#1a1410;">Muslo</option>
-            <option value="rodilla" style="background:#1a1410;">Rodilla</option>
-            <option value="pantorrilla" style="background:#1a1410;">Pantorrilla / pierna baja</option>
-            <option value="pies" style="background:#1a1410;">Pies</option>
-          </select>
-        </div>
-
-        <div class="form-group" id="subzonaGroup" style="display:none;">
-          <label>Subzona</label>
-          <select name="subzona" id="subzonaSelect" style="width:100%;background:rgba(245,240,232,0.04);border:1px solid rgba(245,240,232,0.1);color:var(--bone);padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.85rem;outline:none;appearance:none;cursor:pointer;">
-            <option value="" disabled selected style="background:#1a1410;">Seleccioná la subzona</option>
-          </select>
+          <label>Zona a tatuar</label>
+          <input type="text" name="zona" placeholder="" required />
         </div>
 
         <div class="form-group">
           <label>Lado</label>
-          <select name="lado" style="width:100%;background:rgba(245,240,232,0.04);border:1px solid rgba(245,240,232,0.1);color:var(--bone);padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.85rem;outline:none;appearance:none;cursor:pointer;">
+          <select name="lado" style="width:100%;background:rgba(245,240,232,0.04);border:1px solid rgba(245,240,232,0.1);color:var(--bone);padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.85rem;outline:none;appearance:none;cursor:pointer;" required>
             <option value="" disabled selected style="background:#1a1410;">Seleccioná el lado</option>
             <option value="izquierdo" style="background:#1a1410;">Izquierdo</option>
             <option value="derecho" style="background:#1a1410;">Derecho</option>
@@ -1864,36 +2885,37 @@
         </div>
 
         <div class="form-group">
-          <label>Tamaño aproximado</label>
-          <select name="tamaño" style="width:100%;background:rgba(245,240,232,0.04);border:1px solid rgba(245,240,232,0.1);color:var(--bone);padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.85rem;outline:none;appearance:none;cursor:pointer;" required>
-            <option value="" disabled selected style="background:#1a1410;">Seleccioná el tamaño</option>
-            <option value="xs" style="background:#1a1410;">XS — menos de 5 cm</option>
-            <option value="s" style="background:#1a1410;">S — 5 a 10 cm</option>
-            <option value="m" style="background:#1a1410;">M — 10 a 20 cm</option>
-            <option value="l" style="background:#1a1410;">L — 20 a 30 cm</option>
-            <option value="xl" style="background:#1a1410;">XL — más de 30 cm</option>
-          </select>
+          <label>Tamaño en centímetros</label>
+          <input type="number" name="tamaño" placeholder="" min="1" required />
         </div>
 
         <div class="form-group">
-          <label>Nivel de detalle</label>
-          <select name="detalle" style="width:100%;background:rgba(245,240,232,0.04);border:1px solid rgba(245,240,232,0.1);color:var(--bone);padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.85rem;outline:none;appearance:none;cursor:pointer;" required>
-            <option value="" disabled selected style="background:#1a1410;">Seleccioná el nivel</option>
-            <option value="simple" style="background:#1a1410;">Simple — líneas limpias, minimalista</option>
-            <option value="medio" style="background:#1a1410;">Medio — algo de detalle y textura</option>
-            <option value="alto" style="background:#1a1410;">Alto — mucho detalle, sombreado</option>
-            <option value="realismo" style="background:#1a1410;">Realismo — máximo detalle fotográfico</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label>Descripción de la idea</label>
+          <label>Descripción del tatuaje</label>
           <textarea name="idea" placeholder="Contame qué querés tatuar, estilo, referencias, colores o blanco y negro..." rows="4" style="width:100%;background:rgba(245,240,232,0.04);border:1px solid rgba(245,240,232,0.1);color:var(--bone);padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.85rem;outline:none;resize:none;" required></textarea>
         </div>
 
         <div class="form-group">
           <label>Imágenes de referencia <span class="optional">(opcional)</span></label>
           <input type="file" name="referencias" accept="image/*" multiple style="width:100%;background:rgba(245,240,232,0.04);border:1px solid rgba(245,240,232,0.1);color:var(--bone);padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.85rem;outline:none;cursor:pointer;" />
+        </div>
+
+        <div class="form-group">
+          <label>¿Dónde querés recibir el presupuesto?</label>
+          <select name="canal_contacto" id="canalContacto" onchange="toggleContactoField()" style="width:100%;background:rgba(245,240,232,0.04);border:1px solid rgba(245,240,232,0.1);color:var(--bone);padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.85rem;outline:none;appearance:none;cursor:pointer;" required>
+            <option value="" disabled selected style="background:#1a1410;">Seleccioná una opción</option>
+            <option value="mail" style="background:#1a1410;">Mail</option>
+            <option value="instagram" style="background:#1a1410;">Instagram</option>
+          </select>
+        </div>
+
+        <div class="form-group" id="contactoMailGroup" style="display:none;">
+          <label>Tu mail</label>
+          <input type="email" name="email" id="contactoMail" placeholder="tu@mail.com" />
+        </div>
+
+        <div class="form-group" id="contactoIgGroup" style="display:none;">
+          <label>Tu Instagram</label>
+          <input type="text" name="instagram" id="contactoIg" placeholder="@tuusuario" />
         </div>
 
         <button type="submit" class="btn-waitlist" style="margin-top:0.5rem;">Enviar consulta</button>
@@ -1904,8 +2926,7 @@
     <div id="presupuestoSuccess" style="display:none;text-align:center;padding:3rem 1rem;">
       <div class="success-icon">✦</div>
       <h3 style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;margin-bottom:1rem;">¡Consulta recibida!</h3>
-      <p style="font-size:0.85rem;opacity:0.6;line-height:1.8;">Te respondo a la brevedad. Seguime en Instagram para ver mi trabajo y novedades.</p>
-      <a href="https://instagram.com/ataca.ink" target="_blank" class="btn-primary" style="margin-top:1.5rem;display:inline-block;">@ataca.ink</a>
+      <p style="font-size:0.85rem;opacity:0.6;line-height:1.8;">Te respondo a la brevedad.</p>
     </div>
   </div>
 </div>
@@ -2012,6 +3033,15 @@
   document.getElementById('bitacoraModal').addEventListener('click', function(e) {
     if (e.target === this) closeBitacora();
   });
+
+  // Drag-to-scroll horizontal timeline
+  const mtScroll = document.getElementById('mtScroll');
+  if (mtScroll) {
+    let isDown = false, startX, scrollLeft;
+    mtScroll.addEventListener('mousedown', e => { isDown = true; mtScroll.style.cursor='grabbing'; startX = e.pageX - mtScroll.offsetLeft; scrollLeft = mtScroll.scrollLeft; });
+    document.addEventListener('mouseup', () => { isDown = false; if(mtScroll) mtScroll.style.cursor='grab'; });
+    mtScroll.addEventListener('mousemove', e => { if (!isDown) return; e.preventDefault(); const x = e.pageX - mtScroll.offsetLeft; mtScroll.scrollLeft = scrollLeft - (x - startX); });
+  }
 </script>
 
 </body>
