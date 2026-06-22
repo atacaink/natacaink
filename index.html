@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ATACA INK — Natha Cadenas</title>
+<title>NATACA INK — Natha Cadenas</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Owners+Narrow:wght@400;700&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:ital,wght@0,300;0,400;1,300&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -47,6 +47,11 @@
     align-items: center;
     padding: 1.5rem 3rem;
     background: linear-gradient(to bottom, rgba(13,11,9,0.85) 0%, transparent 100%);
+  }
+
+  /* Compensa el nav fijo al saltar por anchor (#travels, #proximas-paradas, #wishlist, #waitlist, #booking, #contact) */
+  section[id], #proximas-paradas, #wishlist, #waitlist, #booking, #contact {
+    scroll-margin-top: 100px;
   }
 
   .nav-logo {
@@ -186,13 +191,23 @@
     overflow: hidden;
   }
 
+  /* Overlay izquierdo: fundido suave entre columna de texto y foto */
+  .hero-img-placeholder::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(13,11,9,0.45) 0%, transparent 35%);
+    z-index: 1;
+    pointer-events: none;
+  }
+
   .hero-photo {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center top;
+    object-position: 40% top;
     display: block;
-    filter: brightness(0.92) contrast(1.05);
+    filter: brightness(0.88) contrast(1.08) saturate(0.95);
   }
 
   /* Pride gradient line at bottom of hero */
@@ -444,6 +459,49 @@
     line-height: 1.6;
   }
 
+  /* Precio pill en filtros de venta */
+  .filter-btn .filter-price {
+    display: inline-block;
+    font-size: 0.5rem; letter-spacing: 0.1em;
+    opacity: 0.55; margin-left: 0.4rem;
+    vertical-align: middle;
+  }
+  .filter-btn.active .filter-price,
+  .filter-btn:hover .filter-price { opacity: 0.8; }
+
+  /* CTA fallback después del grid en modo venta */
+  .portfolio-sale-cta {
+    display: none;
+    flex-direction: column; align-items: center; gap: 0.75rem;
+    margin-top: 3rem; text-align: center;
+  }
+  .portfolio-sale-cta.visible { display: flex; }
+  .portfolio-sale-cta p {
+    font-size: 0.75rem; opacity: 0.4; letter-spacing: 0.05em;
+  }
+  .portfolio-sale-cta a {
+    font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--bone); border-bottom: 1px solid rgba(245,240,232,0.25);
+    text-decoration: none; transition: border-color 0.2s, opacity 0.2s;
+    opacity: 0.7;
+  }
+  .portfolio-sale-cta a:hover { opacity: 1; border-color: var(--bone); }
+
+  /* Línea Redbubble contextual — aparece bajo el grid en modo venta */
+  .portfolio-rb-line {
+    display: none;
+    text-align: center; margin-top: 1.5rem;
+    font-size: 0.68rem; letter-spacing: 0.1em;
+    color: rgba(245,240,232,0.28);
+  }
+  .portfolio-rb-line.visible { display: block; }
+  .portfolio-rb-line a {
+    color: rgba(245,240,232,0.45);
+    border-bottom: 1px solid rgba(245,240,232,0.15);
+    text-decoration: none; transition: color 0.2s, border-color 0.2s;
+  }
+  .portfolio-rb-line a:hover { color: var(--bone); border-color: rgba(245,240,232,0.4); }
+
   .portfolio-filters {
     display: flex;
     flex-wrap: wrap;
@@ -546,6 +604,72 @@
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
   }
+
+  /* Flash / Mini — sale hover (visible solo cuando filtro activo es flash o mini) */
+  .portfolio-item.sale-mode .portfolio-hover { justify-content: space-between; padding: 1rem 1.2rem; }
+  .portfolio-sale-top { display: flex; flex-direction: column; gap: 0.2rem; }
+  .portfolio-sale-name { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 400; color: var(--bone); line-height: 1.2; }
+  .portfolio-sale-price { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--rust); }
+  .portfolio-sale-price.disponible { color: #7ecf9a; }
+  .portfolio-sale-price.reservado  { color: rgba(245,240,232,0.3); text-decoration: line-through; }
+  .btn-reservar {
+    display: inline-block; width: 100%; text-align: center;
+    padding: 0.55rem 1rem; font-size: 0.65rem; letter-spacing: 0.18em;
+    text-transform: uppercase; background: transparent;
+    border: 1px solid rgba(245,240,232,0.35); color: var(--bone);
+    cursor: pointer; transition: background 0.2s, border-color 0.2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .btn-reservar:hover { background: rgba(245,240,232,0.08); border-color: var(--bone); }
+  .btn-reservar:disabled { opacity: 0.3; cursor: default; }
+
+  /* Flash modal */
+  .flash-modal-overlay {
+    position: fixed; inset: 0; background: rgba(13,11,9,0.85);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 1100; opacity: 0; pointer-events: none;
+    transition: opacity 0.25s;
+  }
+  .flash-modal-overlay.open { opacity: 1; pointer-events: all; }
+  .flash-modal {
+    background: #141210; border: 1px solid rgba(245,240,232,0.1);
+    padding: 2.5rem; width: 90%; max-width: 420px;
+    position: relative;
+  }
+  .flash-modal-close {
+    position: absolute; top: 1.2rem; right: 1.2rem;
+    background: none; border: none; color: var(--bone);
+    font-size: 1.1rem; cursor: pointer; opacity: 0.4;
+    transition: opacity 0.2s; line-height: 1;
+  }
+  .flash-modal-close:hover { opacity: 1; }
+  .flash-modal-eyebrow { font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--rust); margin-bottom: 0.5rem; }
+  .flash-modal-title { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300; margin-bottom: 0.3rem; line-height: 1.1; }
+  .flash-modal-price { font-size: 0.75rem; opacity: 0.5; margin-bottom: 2rem; letter-spacing: 0.05em; }
+  .flash-modal .form-group { margin-bottom: 1.1rem; }
+  .flash-modal .form-group label { display: block; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.5; margin-bottom: 0.4rem; }
+  .flash-modal .form-group input,
+  .flash-modal .form-group select {
+    width: 100%; background: rgba(245,240,232,0.04);
+    border: 1px solid rgba(245,240,232,0.1); color: var(--bone);
+    padding: 0.7rem 1rem; font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem; outline: none; appearance: none;
+  }
+  .flash-modal .form-group input:focus,
+  .flash-modal .form-group select:focus { border-color: rgba(245,240,232,0.3); }
+  .flash-modal option { background: #141210; }
+  .flash-modal-submit {
+    width: 100%; padding: 0.85rem; margin-top: 0.5rem;
+    background: var(--rust); border: none; color: var(--bone);
+    font-family: 'DM Sans', sans-serif; font-size: 0.7rem;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    cursor: pointer; transition: opacity 0.2s;
+  }
+  .flash-modal-submit:hover { opacity: 0.85; }
+  .flash-modal-success { text-align: center; padding: 1rem 0; }
+  .flash-modal-success .success-icon { font-size: 1.5rem; margin-bottom: 1rem; }
+  .flash-modal-success h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300; margin-bottom: 0.5rem; }
+  .flash-modal-success p { font-size: 0.8rem; opacity: 0.5; line-height: 1.7; }
 
   .portfolio-cta {
     display: flex;
@@ -948,7 +1072,7 @@
   }
 
   .contact::before {
-    content: 'ATACA';
+    content: 'NATACA';
     position: absolute;
     font-family: 'Cormorant Garamond', serif;
     font-size: 20rem;
@@ -1082,6 +1206,37 @@
     transition: opacity 0.3s;
   }
   .social-link:hover { opacity: 1; }
+
+  .footer-redbubble {
+    border-top: 1px solid rgba(245,240,232,0.06);
+    padding: 1.25rem 2rem;
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: center; gap: 0.75rem;
+  }
+  .footer-redbubble p {
+    font-size: 0.72rem; letter-spacing: 0.1em;
+    color: rgba(245,240,232,0.35); margin: 0;
+  }
+  .footer-redbubble a {
+    font-size: 0.72rem; letter-spacing: 0.12em;
+    color: rgba(245,240,232,0.55);
+    border-bottom: 1px solid rgba(245,240,232,0.15);
+    text-decoration: none; white-space: nowrap;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .footer-redbubble a:hover { color: var(--bone); border-color: rgba(245,240,232,0.4); }
+  .footer-redbubble-sep { color: rgba(245,240,232,0.15); font-size: 0.65rem; }
+
+  /* Badge "también en prints" — aparece solo si la card tiene data-redbubble */
+  .rb-badge {
+    position: absolute; top: 0.6rem; right: 0.6rem;
+    font-size: 0.55rem; letter-spacing: 0.15em; text-transform: uppercase;
+    background: rgba(13,11,9,0.75); color: rgba(245,240,232,0.55);
+    padding: 0.25rem 0.5rem; border: 1px solid rgba(245,240,232,0.12);
+    text-decoration: none; white-space: nowrap;
+    transition: color 0.2s, border-color 0.2s; z-index: 2;
+  }
+  .rb-badge:hover { color: var(--bone); border-color: rgba(245,240,232,0.35); }
 
   .footer-bottom {
     display: flex;
@@ -1486,8 +1641,22 @@
   .modal-box .modal-sub {
     font-size: 0.8rem;
     opacity: 0.5;
-    margin-bottom: 2rem;
+    margin-bottom: 0.9rem;
     letter-spacing: 0.05em;
+  }
+
+  .modal-box .modal-pricing {
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    opacity: 0.75;
+    margin-bottom: 2rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid rgba(245,240,232,0.08);
+  }
+  .modal-box .modal-pricing strong {
+    color: var(--rust);
+    opacity: 1;
+    font-weight: 600;
   }
 
   .cover-fields { display: none; }
@@ -1869,7 +2038,22 @@
     margin-bottom: 1.5rem;
   }
   .wl-title em { font-style: italic; color: var(--blush); }
-  .wl-desc { font-size: 0.9rem; line-height: 1.9; opacity: 0.65; margin-bottom: 2rem; }
+  .wl-desc { font-size: 0.9rem; line-height: 1.9; opacity: 0.65; margin-bottom: 1.2rem; }
+  .wl-disclaimer {
+    font-size: 0.78rem;
+    line-height: 1.7;
+    opacity: 0.55;
+    margin-bottom: 2rem;
+    padding: 0.9rem 1.1rem;
+    border-left: 2px solid var(--rust);
+    background: rgba(196,96,58,0.05);
+  }
+  .wl-disclaimer a {
+    color: var(--rust);
+    opacity: 1;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
 
   .wl-promises { display: flex; flex-direction: column; gap: 0.7rem; margin-bottom: 2rem; }
   .wl-promise-item { display: flex; align-items: flex-start; gap: 0.7rem; font-size: 0.78rem; opacity: 0.5; }
@@ -1936,14 +2120,24 @@
   .reviews-count { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--bone); }
   .reviews-link { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rust); text-decoration: none; opacity: 0.8; transition: opacity 0.2s; }
   .reviews-link:hover { opacity: 1; }
-  .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 2.5rem; }
+  .testimonials-scroll-wrap { overflow-x: auto; margin: 0 -2rem 2.5rem; padding: 0 2rem; cursor: grab; scrollbar-width: none; -ms-overflow-style: none; }
+  .testimonials-scroll-wrap::-webkit-scrollbar { display: none; }
+  .testimonials-scroll-wrap.dragging { cursor: grabbing; user-select: none; }
+  .testimonials-grid { display: flex; gap: 1rem; width: max-content; padding-bottom: 0.5rem; }
   .testimonial-card { background: rgba(245,240,232,0.03); border: 1px solid rgba(245,240,232,0.07); padding: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; }
   .t-stars { color: #f4b942; font-size: 0.85rem; letter-spacing: 0.12em; }
   .t-text { font-size: 0.82rem; line-height: 1.7; color: rgba(245,240,232,0.7); font-style: italic; flex: 1; }
   .t-author { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--rust); opacity: 0.8; }
+  .capture-card { flex: 0 0 220px; border-radius: 4px; overflow: hidden; border: 1px solid rgba(245,240,232,0.07); }
+  .capture-card img { width: 100%; height: auto; display: block; }
+  .capture-placeholder { width: 220px; aspect-ratio: 4/5; background: rgba(245,240,232,0.03); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; }
+  .capture-icon { font-size: 1.5rem; opacity: 0.3; }
+  .capture-hint { font-size: 0.7rem; opacity: 0.25; letter-spacing: 0.08em; text-transform: uppercase; }
+  .reviews-cta-label { font-size: 0.8rem; opacity: 0.5; letter-spacing: 0.08em; margin-bottom: 0.75rem; text-align: center; }
   .reviews-social { display: flex; gap: 1rem; flex-wrap: wrap; }
   @media (max-width: 768px) {
-    .testimonials-grid { grid-template-columns: 1fr; }
+    .capture-placeholder { width: 180px; }
+    .capture-card { flex: 0 0 180px; }
     .reviews-header { gap: 1.5rem; }
   }
   /* ── CÓMO FUNCIONA ── */
@@ -2013,6 +2207,7 @@
 
     footer { padding: 3rem 1.5rem 2rem; }
     .footer-top { flex-direction: column; gap: 2.5rem; }
+    .footer-redbubble { padding: 1rem 1.5rem; }
     .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
   }
 </style>
@@ -2021,7 +2216,7 @@
 
 <!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo">ATACA INK</a>
+  <a href="#" class="nav-logo">NATACA INK</a>
   <ul class="nav-links">
     <li><a href="#portfolio">Portfolio</a></li>
     <li><a href="#about">Sobre mí</a></li>
@@ -2030,7 +2225,7 @@
     <li><a href="#contact">Contacto</a></li>
     <li><a href="https://www.redbubble.com" target="_blank" style="color:var(--rust);opacity:1;font-weight:400;">Shop ↗</a></li>
   </ul>
-  <a href="#" onclick="openPresupuesto(event)" class="nav-cta">Empezá tu proyecto</a>
+  <a href="#" onclick="openPresupuesto(event)" class="nav-cta">Presupuesto →</a>
 </nav>
 
 <!-- HERO -->
@@ -2038,25 +2233,19 @@
   <div class="hero-left">
     
     <h1 class="hero-title fade-up">
-      ATACA
+      NATACA
       <span>.INK</span>
     </h1>
     <p class="hero-sub fade-up">Blackwork botánico y proyectos personalizados para personas que habitan el mundo distinto.</p>
     <div class="hero-cta fade-up">
-      <a href="#" onclick="openPresupuesto(event)" class="btn-primary">Empezá tu proyecto</a>
+      <a href="#" onclick="openPresupuesto(event)" class="btn-primary">Consultar presupuesto</a>
+      <a href="#portfolio" class="btn-ghost" style="margin-top:0.5rem;display:block;font-size:0.65rem;letter-spacing:0.15em;opacity:0.5;">o mirá el portfolio primero ↓</a>
     </div>
     <div class="pride-bar"></div>
   </div>
   <div class="hero-right">
     <div class="hero-img-placeholder">
-      <svg width="100%" height="100%" viewBox="0 0 600 800" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;opacity:0.12;">
-        <circle cx="300" cy="400" r="200" stroke="rgba(196,96,58,0.5)" stroke-width="0.5"/>
-        <circle cx="300" cy="400" r="160" stroke="rgba(196,96,58,0.3)" stroke-width="0.5"/>
-        <circle cx="300" cy="400" r="280" stroke="rgba(196,96,58,0.2)" stroke-width="0.5"/>
-        <line x1="300" y1="120" x2="300" y2="680" stroke="rgba(196,96,58,0.2)" stroke-width="0.5"/>
-        <line x1="20" y1="400" x2="580" y2="400" stroke="rgba(196,96,58,0.2)" stroke-width="0.5"/>
-        <path d="M300 340 L330 370 L300 400 L270 370 Z" stroke="rgba(196,96,58,0.5)" stroke-width="0.8" fill="none"/>
-      </svg>
+      <img class="hero-photo" src="assets/hero_web_777.png" alt="Natha Cadenas — tatuadora itinerante" />
     </div>
   </div>
 </section>
@@ -2090,7 +2279,14 @@
       <p class="section-label">Portfolio</p>
       <h2>Cada piel,<br>una <em>historia</em></h2>
     </div>
-    <p class="portfolio-note">Trabajos realizados en Argentina, Brasil y en cada ciudad del recorrido.</p>
+    <div style="text-align:right;">
+      <p class="portfolio-note">Trabajos realizados en Argentina, Brasil y en cada ciudad del recorrido.</p>
+      <p style="margin-top:0.75rem;font-size:0.72rem;line-height:1.8;opacity:0.65;">
+        Mini tattoos <span style="color:var(--rust);opacity:1;">desde USD 40</span><br>
+        Flash designs <span style="color:var(--rust);opacity:1;">desde USD 60</span><br>
+        Custom <span style="color:var(--rust);opacity:1;">presupuesto personalizado</span>
+      </p>
+    </div>
   </div>
 
   <!-- FILTERS -->
@@ -2098,8 +2294,8 @@
     <button class="filter-btn active" data-filter="all">All</button>
     <button class="filter-btn" data-filter="botanica">Botánica</button>
     <button class="filter-btn" data-filter="custom">Custom</button>
-    <button class="filter-btn" data-filter="mini">Mini Tattoos</button>
-    <button class="filter-btn" data-filter="flash">Flashes</button>
+    <button class="filter-btn" data-filter="mini">Mini Tattoos<span class="filter-price">desde $40</span></button>
+    <button class="filter-btn" data-filter="flash">Flashes<span class="filter-price">desde $60</span></button>
     <button class="filter-btn" data-filter="healed">Healed Tattoos</button>
   </div>
 
@@ -2124,7 +2320,7 @@
         </div>
       </div>
     </div>
-    <div class="portfolio-item" data-cat="mini">
+    <div class="portfolio-item" data-cat="mini" data-name="Mini 01" data-price="USD 40">
       <div class="portfolio-img-wrap">
         <div class="portfolio-placeholder"></div>
         <div class="portfolio-hover">
@@ -2134,7 +2330,7 @@
       </div>
     </div>
     <!-- Row 2 -->
-    <div class="portfolio-item" data-cat="flash">
+    <div class="portfolio-item" data-cat="flash" data-name="Flash 01" data-price="USD 60">
       <div class="portfolio-img-wrap">
         <div class="portfolio-placeholder"></div>
         <div class="portfolio-hover">
@@ -2171,7 +2367,7 @@
         </div>
       </div>
     </div>
-    <div class="portfolio-item" data-cat="mini">
+    <div class="portfolio-item" data-cat="mini" data-name="Mini 01" data-price="USD 40">
       <div class="portfolio-img-wrap">
         <div class="portfolio-placeholder"></div>
         <div class="portfolio-hover">
@@ -2180,7 +2376,7 @@
         </div>
       </div>
     </div>
-    <div class="portfolio-item" data-cat="flash">
+    <div class="portfolio-item" data-cat="flash" data-name="Flash 02" data-price="USD 60">
       <div class="portfolio-img-wrap">
         <div class="portfolio-placeholder"></div>
         <div class="portfolio-hover">
@@ -2191,9 +2387,20 @@
     </div>
   </div>
 
-  <div class="portfolio-cta fade-up">
-    <a href="#" onclick="openPresupuesto(event)" class="btn-primary">Empezá tu proyecto</a>
+  <div class="portfolio-cta fade-up" id="portfolioCta">
+    <a href="#" onclick="openPresupuesto(event)" class="btn-primary">Quiero algo así — consultá</a>
+    <a href="#como-funciona" class="btn-ghost">¿Cómo funciona? →</a>
   </div>
+
+  <div class="portfolio-sale-cta" id="portfolioSaleCta">
+    <p>¿Ninguno te cerró del todo?</p>
+    <a href="#" onclick="openPresupuesto(event)">Pedí un flash custom — lo diseño para vos →</a>
+  </div>
+
+  <div class="portfolio-rb-line" id="portfolioRbLine">
+    ¿Preferís llevarte el diseño en otro formato? &nbsp;<a href="https://www.redbubble.com/people/natacaink" target="_blank" rel="noopener">Ver en Redbubble ↗</a>
+  </div>
+
 </section>
 
 
@@ -2202,36 +2409,43 @@
   <div class="reviews-inner">
     <div class="reviews-header fade-up">
       <div class="reviews-score">
-        <span class="score-num">5.0</span>
-        <div class="score-stars">★★★★★</div>
-        <span class="score-label">en Google</span>
+        <span class="score-num">700+</span>
+        <span class="score-label">tatuajes realizados</span>
       </div>
       <div class="reviews-divider"></div>
       <div class="reviews-count-wrap">
-        <span class="reviews-count">+40 reseñas</span>
-        <a href="https://maps.app.goo.gl/e8oEhJbgJcxxuYpAA" target="_blank" class="reviews-link">Ver todas en Google ↗</a>
+        <span class="reviews-count">desde 2019</span>
+        <a href="https://maps.app.goo.gl/e8oEhJbgJcxxuYpAA" target="_blank" class="reviews-link">Ver reseñas en Google ↗</a>
       </div>
     </div>
-    <div class="testimonials-grid fade-up">
-      <div class="testimonial-card">
-        <div class="t-stars">★★★★★</div>
-        <p class="t-text">"Natha es increíble. Me hizo un tatuaje botánico en el antebrazo que superó todas mis expectativas. El proceso fue súper cómodo y el resultado es exactamente lo que soñaba."</p>
-        <span class="t-author">— Valentina G.</span>
+
+    <!-- grilla de capturas — reemplazar src con tus screenshots reales -->
+    <div class="testimonials-scroll-wrap fade-up" id="capturesScroll">
+    <div class="testimonials-grid testimonials-captures">
+      <div class="capture-card">
+        <div class="capture-placeholder">
+          <span class="capture-icon">📸</span>
+          <span class="capture-hint">captura de DM o story</span>
+        </div>
       </div>
-      <div class="testimonial-card">
-        <div class="t-stars">★★★★★</div>
-        <p class="t-text">"Me encantó la experiencia de principio a fin. El espacio es seguro, acogedor y Natha entiende exactamente lo que querés antes de que termines de explicarlo."</p>
-        <span class="t-author">— Sofía M.</span>
+      <div class="capture-card">
+        <div class="capture-placeholder">
+          <span class="capture-icon">📸</span>
+          <span class="capture-hint">captura de DM o story</span>
+        </div>
       </div>
-      <div class="testimonial-card">
-        <div class="t-stars">★★★★★</div>
-        <p class="t-text">"Un trabajo detallado, limpio y con una energía única. Ya tengo turno para el próximo. 100% recomendable para quien busca algo personal y con alma."</p>
-        <span class="t-author">— Camila R.</span>
+      <div class="capture-card">
+        <div class="capture-placeholder">
+          <span class="capture-icon">📸</span>
+          <span class="capture-hint">captura de DM o story</span>
+        </div>
       </div>
     </div>
+    </div>
+
     <div class="reviews-social fade-up">
+      <p class="reviews-cta-label">¿Ya pasaste por el estudio?</p>
       <a href="https://maps.app.goo.gl/e8oEhJbgJcxxuYpAA" target="_blank" class="btn-outline" style="border-color:rgba(245,240,232,0.2);">⭐ Dejá tu reseña en Google</a>
-      <a href="https://instagram.com/atacaink" target="_blank" class="btn-outline" style="border-color:rgba(245,240,232,0.2);">📷 Seguinos en Instagram</a>
     </div>
   </div>
 </section>
@@ -2240,15 +2454,15 @@
 <section class="about" id="about">
   <div class="about-visual">
     <div class="about-visual-inner">
-      <img src="https://ataca-ink.netlify.app/natha_hero.jpeg" alt="Natha Cadenas" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.88) contrast(1.05);" />
+      <img src="assets/about.jpg" alt="Natha Cadenas — el mundo como taller" style="width:100%;height:100%;object-fit:cover;object-position:center 20%;filter:brightness(0.88) contrast(1.05);" />
     </div>
   </div>
     <div class="about-content">
     <p class="section-label fade-up">Sobre mí</p>
     <h2 class="fade-up">Arte en movimiento. <em>Historias</em> que viajan en la piel.</h2>
-    <p class="fade-up">Soy Natha Cadenas, artista y tatuadora itinerante. Hace un año cerré mi estudio físico para hacer lo que siempre quise: tatuar mientras recorro el mundo.</p>
-    <p class="fade-up">Así nació ATACA INK, un proyecto que une libertad, comunidad y expresión personal mientras recorre distintas ciudades y culturas.</p>
-    <p class="fade-up">Cada tatuaje cuenta una historia. Algunas se llevan en la memoria. Otras se llevan en la piel.</p>
+    <p class="fade-up">Tatuadora, artista y nómade. Hace un año dejé las paredes fijas para hacer lo que siempre quise: tatuar en cada ciudad que pise.</p>
+    <p class="fade-up">NATACA INK nació de esa decisión — un estudio ambulante, con el mundo como taller.</p>
+    <p class="fade-up">Trabajo con personas que quieren algo más que una imagen en la piel. Que quieren una historia, una marca de dónde vienen o hacia dónde van.</p>
     <p class="fade-up">La próxima puede ser la tuya.</p>
   </div>
 </section>
@@ -2257,7 +2471,7 @@
 <section class="queer-banner">
   <p class="queer-label fade-up">Espacio seguro · Safe space</p>
   <h2 class="queer-title fade-up">Un estudio para <span class="rainbow">todas las identidades</span></h2>
-  <p class="queer-desc fade-up">ATACA INK es un espacio queer-friendly creado para que cada persona pueda expresarse con libertad. Personas LGBTQIA+, aliadas y cualquier persona que valore el respeto y la diversidad son bienvenidas. Acá la diversidad es parte de la cultura que construimos día a día entre todxs.</p>
+  <p class="queer-desc fade-up">LGBTQIA+, aliades, o simplemente alguien que quiere un espacio donde nadie juzga: este es tu lugar. La diversidad es parte de la cultura que construimos día a día entre todxs.</p>
   <div class="identity-pills fade-up">
     <span class="pill pill-1">Lesbianas</span>
     <span class="pill pill-2">Gays</span>
@@ -2309,7 +2523,8 @@
       </div>
     </div>
     <div class="hiw-cta fade-up">
-      <a href="#" onclick="openPresupuesto(event)" class="btn-primary">Empezá tu proyecto</a>
+      <a href="#" onclick="openPresupuesto(event)" class="btn-primary">Completar el formulario — paso 1 →</a>
+      <p style="margin-top:1rem;font-size:0.72rem;opacity:0.4;letter-spacing:0.05em;">Te respondo en 24–48hs.</p>
     </div>
   </div>
 </section>
@@ -2324,7 +2539,7 @@
     <div class="journey-intro-text">
       <p class="section-label">Viajes · Comunidad · Lista de espera</p>
       <h2 class="travel-title">Un estudio que<br><em>se mueve contigo</em></h2>
-      <p class="travel-narrative">ATACA INK no tiene paredes fijas. Cada ciudad es un capítulo. Seguí el recorrido, votá los próximos destinos y sumate a la lista para que te avisemos cuando lleguemos cerca tuyo.</p>
+      <p class="travel-narrative">NATACA INK no tiene paredes fijas. Cada ciudad es un capítulo. Seguí el recorrido, votá los próximos destinos y sumate a la lista para que te avisemos cuando lleguemos cerca tuyo.</p>
     </div>
     <div class="journey-steps-strip">
       <div class="jstep" data-n="1">
@@ -2403,7 +2618,7 @@
                 <strong class="mt-city">Mar del Plata</strong>
                 <span class="mt-meta">Argentina · 2026</span>
                 <p class="mt-note">De regreso al origen antes del salto a Brasil.</p>
-                <a href="#" onclick="openPresupuesto(event);return false;" class="mt-cta-link">Empezá tu proyecto →</a>
+                <a href="#" onclick="openPresupuesto(event);return false;" class="mt-cta-link">Tatuar en Mar del Plata →</a>
               </div>
             </div>
 
@@ -2414,6 +2629,7 @@
                 <strong class="mt-city">São Paulo</strong>
                 <span class="mt-meta">Brasil · Jul 2026</span>
                 <p class="mt-note">La siguiente etapa. Cupos limitados.</p>
+                <a href="#" onclick="openPresupuesto(event);return false;" class="mt-cta-link">Reservar en São Paulo →</a>
               </div>
             </div>
 
@@ -2432,6 +2648,41 @@
     </div>
   </div>
 
+  <!-- ── BLOQUE 3: PRÓXIMAS PARADAS CONFIRMADAS ── -->
+  <div class="journey-chapter fade-up" id="proximas-paradas">
+    <div class="chapter-eyebrow">
+      <span class="chapter-num">02</span>
+      <span class="chapter-rule"></span>
+      <span class="chapter-label">Próximas paradas</span>
+    </div>
+    <div class="chapter-body">
+      <div class="confirmed-grid">
+        <div class="conf-card conf-hot">
+          <div class="conf-top">
+            <span class="conf-flag">🇧🇷</span>
+            <span class="conf-badge conf-badge-confirmed">✦ Confirmado</span>
+          </div>
+          <strong class="conf-city">São Paulo</strong>
+          <span class="conf-country">Brasil</span>
+          <span class="conf-date">Julio 2026</span>
+          <div class="conf-meter"><div class="conf-meter-fill" style="width:78%"></div></div>
+          <span class="conf-spots">Cupos limitados</span>
+          <a href="#" onclick="openPresupuesto(event);return false;" class="conf-cta">Reservar →</a>
+        </div>
+        <div class="conf-card conf-tbd">
+          <div class="conf-top">
+            <span class="conf-flag">🌍</span>
+            <span class="conf-badge conf-badge-tbd">+ Por confirmar</span>
+          </div>
+          <strong class="conf-city">¿Tu ciudad?</strong>
+          <span class="conf-country">Definido por votación</span>
+          <span class="conf-date">Sin fecha aún</span>
+          <a href="#wishlist" class="conf-cta">Votá tu ciudad ↓</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- ── BLOQUE 4: WISHLIST / VOTACIÓN ── -->
   <div class="journey-chapter fade-up" id="wishlist">
     <div class="chapter-eyebrow">
@@ -2441,7 +2692,7 @@
     </div>
     <div class="chapter-body">
       <div class="vote-intro">
-        <h3 class="vote-title">La comunidad decide<br><em>a dónde viaja ATACA</em></h3>
+        <h3 class="vote-title">La comunidad decide<br><em>a dónde viaja NATACA</em></h3>
         <p class="vote-sub">Cada voto cuenta. Los destinos más votados se priorizan en la agenda. Votá ahora y después sumate a la lista para que te avisemos.</p>
       </div>
       <p class="wishlist-scroll-hint">deslizá →</p>
@@ -2452,25 +2703,111 @@
       </div>
       <!-- Transición hacia el formulario -->
       <div class="vote-bridge">
-        <p class="vote-bridge-text">¿Votaste tu ciudad? El siguiente paso es asegurarte el cupo.</p>
+        <p class="vote-bridge-text">¿Pusiste tu ciudad en el mapa? Ahora asegurate el cupo.</p>
         <div class="vote-bridge-arrow">↓</div>
       </div>
     </div>
   </div>
 
+  <!-- ── BLOQUE 5: LISTA DE ESPERA ── -->
+  <div class="journey-chapter-waitlist fade-up" id="waitlist">
+    <div class="chapter-eyebrow" style="max-width:1200px;margin:0 auto 2.5rem;">
+      <span class="chapter-num">04</span>
+      <span class="chapter-rule"></span>
+      <span class="chapter-label">Lista de espera</span>
+    </div>
+    <div class="chapter-body">
+      <div class="wl-unified">
+        <div class="wl-left">
+          <h2 class="wl-title">Anotate.<br>Te avisamos <em>primero.</em></h2>
+          <p class="wl-desc">Si querés asegurarte un cupo antes de que abramos agenda pública, dejá tus datos acá. Cuando confirmemos fecha en tu ciudad, sos el primero en saberlo.</p>
+          <p class="wl-disclaimer">¿Tu ciudad ya tiene fecha confirmada (Mar del Plata o São Paulo)? Mejor <a href="#" onclick="openPresupuesto(event);return false;">pedí tu presupuesto directo</a> — vas más rápido que por acá.</p>
+          <div class="wl-promises">
+            <div class="wl-promise-item"><span class="wl-promise-icon">✦</span><span>Prioridad de cupo antes de la agenda pública</span></div>
+            <div class="wl-promise-item"><span class="wl-promise-icon">✦</span><span>Te contactamos nosotros, sin que tengas que estar pendiente</span></div>
+            <div class="wl-promise-item"><span class="wl-promise-icon">✦</span><span>Sin compromiso — si cuando lleguemos no podés, no pasa nada</span></div>
+          </div>
+        </div>
+        <div class="wl-right">
+          <div id="waitlistForm">
+            <form name="waitlist" method="POST" data-netlify="true" netlify-honeypot="bot-campo-wl" onsubmit="handleWaitlist(event)">
+              <input type="hidden" name="form-name" value="waitlist" />
+              <p style="display:none"><input name="bot-campo-wl" /></p>
+
+              <div class="form-group">
+                <label>Nombre o apodo</label>
+                <input type="text" id="wl-name" name="nombre" placeholder="Cómo te llamás" required />
+              </div>
+
+              <div class="form-group">
+                <label>Contacto</label>
+                <input type="text" id="wl-instagram" name="contacto" placeholder="mail o @instagram" required />
+              </div>
+
+              <div class="form-group">
+                <label>Ciudad</label>
+                <select name="ciudad" id="wl-ciudad" style="width:100%;background:rgba(245,240,232,0.04);border:1px solid rgba(245,240,232,0.1);color:var(--bone);padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.85rem;outline:none;appearance:none;cursor:pointer;" required>
+                  <option value="" disabled selected style="background:#1a1410;">¿Desde dónde nos seguís?</option>
+                  <optgroup label="Activo ahora / confirmado" style="background:#1a1410;">
+                    <option value="mar-del-plata" style="background:#1a1410;">🇦🇷 Mar del Plata — ahora</option>
+                    <option value="sao-paulo" style="background:#1a1410;">🇧🇷 São Paulo — jul 2026</option>
+                  </optgroup>
+                  <optgroup label="Wishlist — votá tu ciudad" style="background:#1a1410;">
+                    <option value="madrid" style="background:#1a1410;">🇪🇸 Madrid</option>
+                    <option value="barcelona" style="background:#1a1410;">🇪🇸 Barcelona</option>
+                    <option value="ciudad-de-mexico" style="background:#1a1410;">🇲🇽 Ciudad de México</option>
+                    <option value="berlin" style="background:#1a1410;">🇩🇪 Berlín</option>
+                    <option value="paris" style="background:#1a1410;">🇫🇷 París</option>
+                    <option value="londres" style="background:#1a1410;">🇬🇧 Londres</option>
+                    <option value="roma" style="background:#1a1410;">🇮🇹 Roma</option>
+                    <option value="atenas" style="background:#1a1410;">🇬🇷 Atenas</option>
+                    <option value="melbourne" style="background:#1a1410;">🇦🇺 Melbourne</option>
+                    <option value="estocolmo" style="background:#1a1410;">🇸🇪 Estocolmo</option>
+                    <option value="tokio" style="background:#1a1410;">🇯🇵 Tokio</option>
+                    <option value="nueva-york" style="background:#1a1410;">🇺🇸 Nueva York</option>
+                  </optgroup>
+                  <option value="donde-sea" style="background:#1a1410;">🌍 Donde sea que vayas</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>¿Qué tenés en mente? <span class="optional">(opcional)</span></label>
+                <textarea name="idea" id="wl-idea" placeholder="Una idea, un estilo, una zona del cuerpo... lo que sea que ya estés pensando." rows="3" style="width:100%;background:rgba(245,240,232,0.04);border:1px solid rgba(245,240,232,0.1);color:var(--bone);padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.85rem;outline:none;resize:none;"></textarea>
+              </div>
+
+              <div class="form-check">
+                <input type="checkbox" name="comunidad" id="wl-comunidad" value="si" />
+                <label for="wl-comunidad">Soy parte de la comunidad LGBTQIA+</label>
+              </div>
+
+              <button type="submit" class="btn-waitlist">Anotarme →</button>
+              <p class="form-privacy">Tu información es privada y nunca será compartida.</p>
+            </form>
+          </div>
+          <div id="waitlistSuccess" style="display:none;text-align:center;padding:3rem 1rem;">
+            <div class="success-icon">✦</div>
+            <h3 style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;margin-bottom:1rem;">¡Estás en la lista!</h3>
+            <p style="font-size:0.85rem;opacity:0.6;line-height:1.8;">Cuando confirmemos fecha en tu ciudad, te avisamos primero.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </section>
 
-<!-- UNIFIED COMMUNITY SECTION — ID anchor for waitlist links -->
-<div id="waitlist"></div>
+<!-- UNIFIED COMMUNITY SECTION — ID anchor for booking links (waitlist ahora vive en el bloque 5, arriba) -->
 <div id="booking"></div>
 
 <!-- CONTACT -->
 <section class="contact" id="contact">
   <h2 class="fade-up" style="font-size:clamp(1.8rem,4vw,3rem);max-width:620px;margin:0 auto 1.25rem;">¿Tenés una idea <em>dando vueltas</em>?<br>Es el momento de darle forma.</h2>
-  <p class="fade-up" style="opacity:0.5;font-size:0.85rem;max-width:400px;margin:0 auto 2.5rem;line-height:1.7;">Completá el formulario y te respondo con el presupuesto en 24–48hs.</p>
+  <p class="fade-up" style="opacity:0.5;font-size:0.85rem;max-width:440px;margin:0 auto 2.5rem;line-height:1.7;">
+    Completá el formulario — te respondo con el presupuesto en 24–48hs.<br>
+    <span style="opacity:0.7;">Flash desde <strong style="color:var(--rust);opacity:1;">USD 40</strong> · Custom desde <strong style="color:var(--rust);opacity:1;">USD 60</strong> · Diseños personalizados sin límite.</span>
+  </p>
   <div class="fade-up">
-    <a href="#" onclick="openPresupuesto(event)" class="btn-primary" style="font-size:0.8rem;padding:1.1rem 3rem;letter-spacing:0.22em;">Empezá tu proyecto</a>
+    <a href="#" onclick="openPresupuesto(event)" class="btn-primary" style="font-size:0.8rem;padding:1.1rem 3rem;letter-spacing:0.22em;">Mandá tu consulta →</a>
   </div>
 </section>
 
@@ -2478,7 +2815,7 @@
 <footer>
   <div class="footer-top">
     <div class="footer-brand">
-      <h3>ATACA INK</h3>
+      <h3>NATACA INK</h3>
       <p>Viajar · Crear · Inspirar</p>
     </div>
     <div class="footer-links">
@@ -2494,21 +2831,21 @@
       <h5>Contacto</h5>
       <div class="footer-contact-icons">
         <!-- Mail -->
-        <a href="mailto:ataca.studio.ar@gmail.com" class="footer-icon-link" title="ataca.studio.ar@gmail.com">
+        <a href="mailto:nataca.studio.ar@gmail.com" class="footer-icon-link" title="nataca.studio.ar@gmail.com">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <rect x="2" y="4" width="20" height="16" rx="2"/>
             <polyline points="2,4 12,13 22,4"/>
           </svg>
-          <span>ataca.studio.ar@gmail.com</span>
+          <span>nataca.studio.ar@gmail.com</span>
         </a>
         <!-- Instagram -->
-        <a href="https://instagram.com/ataca.ink" target="_blank" class="footer-icon-link" title="@ataca.ink">
+        <a href="https://instagram.com/nataca.ink" target="_blank" class="footer-icon-link" title="@nataca.ink">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <rect x="2" y="2" width="20" height="20" rx="5"/>
             <circle cx="12" cy="12" r="4"/>
             <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
           </svg>
-          <span>@ataca.ink</span>
+          <span>@nataca.ink</span>
         </a>
         <!-- Maps -->
         <a href="https://maps.app.goo.gl/e8oEhJbgJcxxuYpAA" target="_blank" class="footer-icon-link" title="Ver en Maps">
@@ -2521,8 +2858,13 @@
       </div>
     </div>
   </div>
+  <div class="footer-redbubble">
+    <p>Los diseños también viajan</p>
+    <span class="footer-redbubble-sep">→</span>
+    <a href="https://www.redbubble.com/people/natacaink" target="_blank" rel="noopener">Redbubble ↗</a>
+  </div>
   <div class="footer-bottom">
-    <p>© 2025 ATACA INK · Natha Cadenas · Todos los derechos reservados</p>
+    <p>© 2025 NATACA INK · Natha Cadenas · Todos los derechos reservados</p>
     <div class="pride-strip">
       <div class="pride-dot" style="background:var(--pride-1)"></div>
       <div class="pride-dot" style="background:var(--pride-2)"></div>
@@ -2546,51 +2888,155 @@
     });
   }, { threshold: 0.1 });
 
-  function submitWaitlist() {
+  // handleWaitlist — valida y envía a Netlify, muestra success
+  function handleWaitlist(e) {
+    e.preventDefault();
+    const form = e.target;
     const name = document.getElementById('wl-name');
     const contact = document.getElementById('wl-instagram');
     let valid = true;
 
-    document.querySelectorAll('.error-msg').forEach(e => e.remove());
-    [name, contact].forEach(f => f.classList.remove('form-error'));
+    document.querySelectorAll('#waitlistForm .error-msg').forEach(el => el.remove());
+    [name, contact].forEach(f => f && f.classList.remove('form-error'));
 
-    if (!name.value.trim()) {
+    if (name && !name.value.trim()) {
       name.classList.add('form-error');
-      name.insertAdjacentHTML('afterend', '<span class="error-msg">Por favor ingresá tu nombre</span>');
+      name.insertAdjacentHTML('afterend', '<span class="error-msg">Por favor ingresá tu nombre o apodo</span>');
       valid = false;
     }
-    if (!contact.value.trim()) {
+    if (contact && !contact.value.trim()) {
       contact.classList.add('form-error');
       contact.insertAdjacentHTML('afterend', '<span class="error-msg">Ingresá tu Instagram o mail</span>');
       valid = false;
     }
-
     if (!valid) return;
 
-    document.getElementById('waitlistForm').style.display = 'none';
-    document.getElementById('waitlistSuccess').style.display = 'block';
+    const formData = new FormData(form);
+    fetch('/', { method: 'POST', body: formData })
+      .finally(() => {
+        document.getElementById('waitlistForm').style.display = 'none';
+        document.getElementById('waitlistSuccess').style.display = 'block';
+      });
+  }
+  const SALE_CATS = ['flash', 'mini'];
+
+  function applySaleMode(filter) {
+    const saleActive = SALE_CATS.includes(filter);
+    document.querySelectorAll('.portfolio-item').forEach(item => {
+      const cat = item.dataset.cat;
+      const isSale = SALE_CATS.includes(cat);
+      // visibility
+      if (filter === 'all' || cat === filter) {
+        item.style.display = '';
+        item.style.opacity = '1';
+      } else {
+        item.style.display = 'none';
+        return;
+      }
+      // sale mode: inject sale hover when this item is sale AND filter is sale
+      if (isSale && saleActive) {
+        item.classList.add('sale-mode');
+        const hover = item.querySelector('.portfolio-hover');
+        if (hover && !hover.dataset.saleInjected) {
+          hover.dataset.saleInjected = '1';
+          const name  = item.dataset.name  || 'Diseño';
+          const price = item.dataset.price || '';
+          hover.innerHTML = `
+            <div class="portfolio-sale-top">
+              <span class="portfolio-sale-name">${name}</span>
+              <span class="portfolio-sale-price disponible">${price} · disponible</span>
+            </div>
+            <button class="btn-reservar" onclick="openFlashModal(event, '${name}', '${price}')">Reservar este diseño →</button>`;
+        }
+      } else {
+        item.classList.remove('sale-mode');
+        // restore generic hover if it was replaced
+        const hover = item.querySelector('.portfolio-hover');
+        if (hover && hover.dataset.saleInjected && !isSale) {
+          delete hover.dataset.saleInjected;
+          // generic hovers are restored by re-reading original data attrs
+          const tag = item.dataset.tag || cat;
+          const loc = item.dataset.loc || '';
+          hover.innerHTML = `<span class="portfolio-tag">${tag}</span>${loc ? `<p class="portfolio-loc">${loc}</p>` : ''}`;
+        }
+      }
+    });
+    // toggle CTAs según modo
+    const mainCta   = document.getElementById('portfolioCta');
+    const saleCta   = document.getElementById('portfolioSaleCta');
+    const rbLine    = document.getElementById('portfolioRbLine');
+    if (mainCta)  mainCta.style.display  = saleActive ? 'none' : '';
+    if (saleCta)  saleCta.classList.toggle('visible', saleActive);
+    if (rbLine)   rbLine.classList.toggle('visible', saleActive);
   }
 
-  // handleWaitlist is called from the form's onsubmit
-  function handleWaitlist(e) {
-    e.preventDefault();
-    submitWaitlist();
-  }
   document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', function() {
       document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
       this.classList.add('active');
-      const filter = this.dataset.filter;
-      document.querySelectorAll('.portfolio-item').forEach(item => {
-        if (filter === 'all' || item.dataset.cat === filter) {
-          item.style.display = '';
-          item.style.opacity = '1';
-        } else {
-          item.style.display = 'none';
-        }
-      });
+      applySaleMode(this.dataset.filter);
     });
   });
+
+  // Redbubble badge — inyectar en cards con data-redbubble
+  document.querySelectorAll('.portfolio-item[data-redbubble]').forEach(item => {
+    const url = item.dataset.redbubble;
+    const wrap = item.querySelector('.portfolio-img-wrap');
+    if (wrap && url) {
+      const badge = document.createElement('a');
+      badge.href = url;
+      badge.target = '_blank';
+      badge.rel = 'noopener';
+      badge.className = 'rb-badge';
+      badge.textContent = 'también en prints';
+      wrap.appendChild(badge);
+    }
+  });
+
+  // cache original tag+loc on each item before any mutation
+  document.querySelectorAll('.portfolio-item').forEach(item => {
+    const tagEl = item.querySelector('.portfolio-tag');
+    const locEl = item.querySelector('.portfolio-loc');
+    if (tagEl) item.dataset.tag = tagEl.textContent;
+    if (locEl) item.dataset.loc = locEl.textContent;
+  });
+
+  function openFlashModal(e, name, price) {
+    e.stopPropagation();
+    document.getElementById('flashModalTitle').textContent = name;
+    document.getElementById('flashModalPrice').textContent = price;
+    document.getElementById('flashModalDiseno').value = name;
+    document.getElementById('flashModalBody').style.display = '';
+    document.getElementById('flashModalSuccess').style.display = 'none';
+    // reset fields
+    ['flashContacto','flashZona','flashFecha'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.value = el.tagName === 'SELECT' ? '' : '';
+    });
+    document.getElementById('flashModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeFlashModal(e) {
+    if (e && e.target !== document.getElementById('flashModal')) return;
+    document.getElementById('flashModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function handleFlashReserva(e) {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    fetch('/', { method: 'POST', body: formData })
+      .finally(() => {
+        document.getElementById('flashModalBody').style.display = 'none';
+        document.getElementById('flashModalSuccess').style.display = 'block';
+        setTimeout(() => {
+          document.getElementById('flashModal').classList.remove('open');
+          document.body.style.overflow = '';
+        }, 3000);
+      });
+  }
 
   // Wishlist — destinos base con votos iniciales y porcentaje de barra
   const destinosBase = [
@@ -2609,8 +3055,8 @@
   ];
 
   // Storage keys
-  const STORAGE_KEY = 'ataca-waitlist-counts';
-  const JOINED_KEY  = 'ataca-waitlist-joined';
+  const STORAGE_KEY = 'nataca-waitlist-counts';
+  const JOINED_KEY  = 'nataca-waitlist-joined';
 
   async function loadWaitlistData() {
     try {
@@ -2647,6 +3093,7 @@
       const joinedLabel = isJoined
         ? `<span class="wish-joined-label">✓ En lista de espera</span>`
         : `<input class="wish-waitlist-input" placeholder="mail o @instagram" />
+           <input class="wish-waitlist-input" placeholder="¿qué tenés en mente? (opcional)" style="margin-top:4px;" />
            <button class="wish-waitlist-submit" onclick="submitWishlistContact(this, '${d.city}')">Avisame →</button>`;
       return `<div class="wish-item${isJoined ? ' voted' : ''}" onclick="voteAndReveal(this, '${d.city}')" data-city="${d.city}">
           <span class="wish-country">${d.flag}</span>
@@ -2696,21 +3143,25 @@
   }
 
   async function submitWishlistContact(btn, city) {
-    const input = btn.previousElementSibling;
-    const val = input ? input.value.trim() : '';
-    if (!val) { input.style.borderColor='var(--rust)'; setTimeout(()=>input.style.borderColor='',1000); return; }
+    const ideaInput = btn.previousElementSibling;
+    const contactInput = ideaInput ? ideaInput.previousElementSibling : null;
+    const val = contactInput ? contactInput.value.trim() : '';
+    if (!val) { if(contactInput) { contactInput.style.borderColor='var(--rust)'; setTimeout(()=>contactInput.style.borderColor='',1000); } return; }
 
     btn.textContent = '…';
     btn.disabled = true;
-    input.disabled = true;
+    if (contactInput) contactInput.disabled = true;
+    if (ideaInput) ideaInput.disabled = true;
 
     // --- Envío a Netlify Forms ---
     try {
       const fecha = new Date().toLocaleString('es-AR', { timeZone: 'America/Argentina/Buenos_Aires' });
+      const idea = ideaInput ? ideaInput.value.trim() : '';
       const body = new URLSearchParams({
         'form-name': 'wishlist-votos',
         'ciudad': city,
         'contacto': val,
+        'idea': idea,
         'fecha': fecha
       }).toString();
 
@@ -2733,6 +3184,20 @@
     const voteCta = btn.closest('.wish-item').querySelector('.wish-vote-cta');
     if (voteCta) voteCta.textContent = '✓ En lista';
   }
+
+  // drag-to-scroll captures
+  (function() {
+    const cs = document.getElementById('capturesScroll');
+    if (!cs) return;
+    let isDown = false, startX, scrollLeft;
+    cs.addEventListener('mousedown', e => { isDown=true; cs.classList.add('dragging'); startX=e.pageX-cs.offsetLeft; scrollLeft=cs.scrollLeft; });
+    document.addEventListener('mouseup', () => { isDown=false; cs.classList.remove('dragging'); });
+    cs.addEventListener('mousemove', e => { if(!isDown) return; e.preventDefault(); cs.scrollLeft = scrollLeft-(e.pageX-cs.offsetLeft-startX); });
+    // touch support
+    let touchStartX, touchScrollLeft;
+    cs.addEventListener('touchstart', e => { touchStartX=e.touches[0].pageX; touchScrollLeft=cs.scrollLeft; }, {passive:true});
+    cs.addEventListener('touchmove', e => { cs.scrollLeft = touchScrollLeft-(e.touches[0].pageX-touchStartX); }, {passive:true});
+  })();
 
   // Init wishlist on load
   renderWishlist();
@@ -2857,6 +3322,7 @@
     <button class="modal-close" onclick="closePresupuesto()">✕</button>
     <h3>Pedí tu <em>presupuesto</em></h3>
     <p class="modal-sub">Completá los datos y te respondo a la brevedad.</p>
+    <p class="modal-pricing">Flash desde <strong>USD 40</strong> · Custom desde <strong>USD 60</strong> · Diseños personalizados sin límite</p>
 
     <div id="presupuestoForm">
       <form name="presupuesto" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="handlePresupuesto(event)">
@@ -2951,13 +3417,65 @@
 </div>
 
 
-<!-- NETLIFY FORM OCULTO — necesario para que Netlify detecte el formulario en el build -->
+<!-- FLASH RESERVATION MODAL -->
+<div class="flash-modal-overlay" id="flashModal" onclick="closeFlashModal(event)">
+  <div class="flash-modal">
+    <button class="flash-modal-close" onclick="document.getElementById('flashModal').classList.remove('open')">✕</button>
+    <div id="flashModalBody">
+      <p class="flash-modal-eyebrow">Reserva de diseño</p>
+      <h2 class="flash-modal-title" id="flashModalTitle">Flash 01</h2>
+      <p class="flash-modal-price" id="flashModalPrice">USD 60</p>
+      <form name="flash-reserva" method="POST" data-netlify="true" netlify-honeypot="bot-flash" onsubmit="handleFlashReserva(event)">
+        <input type="hidden" name="form-name" value="flash-reserva" />
+        <input type="hidden" name="diseno" id="flashModalDiseno" value="" />
+        <p style="display:none"><input name="bot-flash" /></p>
+        <div class="form-group">
+          <label>Contacto</label>
+          <input type="text" name="contacto" id="flashContacto" placeholder="mail o @instagram" required />
+        </div>
+        <div class="form-group">
+          <label>¿En qué zona del cuerpo?</label>
+          <input type="text" name="zona" id="flashZona" placeholder="antebrazo, tobillo, costilla..." required />
+        </div>
+        <div class="form-group">
+          <label>Fecha aproximada</label>
+          <select name="fecha" id="flashFecha" required>
+            <option value="" disabled selected>Seleccioná una opción</option>
+            <option value="lo-antes-posible">Lo antes posible</option>
+            <option value="este-mes">Este mes</option>
+            <option value="proximo-mes">El mes que viene</option>
+            <option value="2-3-meses">En 2–3 meses</option>
+            <option value="sin-fecha">Sin fecha definida</option>
+          </select>
+        </div>
+        <button type="submit" class="flash-modal-submit">Reservar este diseño →</button>
+      </form>
+    </div>
+    <div id="flashModalSuccess" style="display:none" class="flash-modal-success">
+      <div class="success-icon">✦</div>
+      <h3>¡Reserva recibida!</h3>
+      <p>Te contactamos para confirmar los detalles.<br>El diseño queda apartado para vos.</p>
+    </div>
+  </div>
+</div>
+
+<!-- NETLIFY FORMS OCULTOS — necesarios para que Netlify detecte los formularios en el build -->
 <form name="wishlist-votos" data-netlify="true" netlify-honeypot="bot-campo" hidden>
   <input type="hidden" name="form-name" value="wishlist-votos" />
   <input name="bot-campo" />
   <input type="text" name="ciudad" />
   <input type="text" name="contacto" />
+  <input type="text" name="idea" />
   <input type="text" name="fecha" />
+</form>
+<form name="waitlist" data-netlify="true" netlify-honeypot="bot-campo-wl" hidden>
+  <input type="hidden" name="form-name" value="waitlist" />
+  <input name="bot-campo-wl" />
+  <input type="text" name="nombre" />
+  <input type="text" name="contacto" />
+  <input type="text" name="ciudad" />
+  <input type="text" name="idea" />
+  <input type="text" name="comunidad" />
 </form>
 
 <!-- MODAL BITÁCORA -->
