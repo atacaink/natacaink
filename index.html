@@ -191,12 +191,12 @@
     overflow: hidden;
   }
 
-  /* Overlay izquierdo: fundido suave entre columna de texto y foto */
+  /* Overlay: fundido suave entre columna de texto y foto */
   .hero-img-placeholder::after {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(to right, rgba(13,11,9,0.45) 0%, transparent 35%);
+    background: linear-gradient(to right, rgba(13,11,9,0.5) 0%, transparent 35%);
     z-index: 1;
     pointer-events: none;
   }
@@ -258,7 +258,17 @@
     background: #121009;
     position: relative;
     overflow: hidden;
-    min-height: 500px;
+    min-height: 600px;
+  }
+
+  /* Overlay derecho: suaviza transición hacia el contenido de texto */
+  .about-visual::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to left, rgba(13,11,9,0.35) 0%, transparent 40%);
+    z-index: 1;
+    pointer-events: none;
   }
 
   .about-visual-inner {
@@ -2245,7 +2255,7 @@
   </div>
   <div class="hero-right">
     <div class="hero-img-placeholder">
-      <img class="hero-photo" src="assets/hero_web_777.png" alt="Natha Cadenas — tatuadora itinerante" />
+      <img class="hero-photo" src="assets/HERO.png" alt="Natha Cadenas — tatuadora itinerante" />
     </div>
   </div>
 </section>
@@ -2454,7 +2464,7 @@
 <section class="about" id="about">
   <div class="about-visual">
     <div class="about-visual-inner">
-      <img src="assets/about.jpg" alt="Natha Cadenas — el mundo como taller" style="width:100%;height:100%;object-fit:cover;object-position:center 20%;filter:brightness(0.88) contrast(1.05);" />
+      <img src="assets/ABOUT.png" alt="Natha Cadenas — el mundo como taller" style="width:100%;height:100%;object-fit:cover;object-position:center 30%;filter:brightness(0.85) contrast(1.08);" />
     </div>
   </div>
     <div class="about-content">
