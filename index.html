@@ -1829,13 +1829,16 @@
   .testimonials-scroll-wrap { overflow-x: auto; margin: 0 -2rem 2.5rem; padding: 0 2rem; cursor: grab; scrollbar-width: none; -ms-overflow-style: none; }
   .testimonials-scroll-wrap::-webkit-scrollbar { display: none; }
   .testimonials-scroll-wrap.dragging { cursor: grabbing; user-select: none; }
-  .testimonials-grid { display: flex; gap: 1rem; width: max-content; padding-bottom: 0.5rem; }
-  .capture-card { flex: 0 0 220px; border-radius: 4px; overflow: hidden; border: 1px solid rgba(245,240,232,0.07); }
-  .capture-card img { width: 100%; height: auto; display: block; }
+  .testimonials-grid { display: flex; gap: 1rem; width: 100%; padding-bottom: 0.5rem; }
+  .capture-card { flex: 0 0 calc((100% - 2rem) / 3); flex-shrink: 0; aspect-ratio: 1 / 1; border-radius: 4px; overflow: hidden; border: 1px solid rgba(245,240,232,0.07); }
+  .capture-card img { width: 100%; height: 100%; display: block; object-fit: cover; }
   .reviews-social { display: flex; gap: 1rem; flex-wrap: wrap; }
   @media (max-width: 768px) {
-    .capture-card { flex: 0 0 180px; }
+    .capture-card { flex: 0 0 calc((100% - 1rem) / 2); }
     .reviews-header { gap: 1.5rem; }
+  }
+  @media (max-width: 480px) {
+    .capture-card { flex: 0 0 78%; }
   }
   /* ── CÓMO FUNCIONA (colapsado, un solo desplegable) ── */
   .how-it-works { padding: 0 2rem; border-top: 1px solid rgba(245,240,232,0.06); }
@@ -2400,19 +2403,22 @@
     <div class="testimonials-scroll-wrap fade-up" id="capturesScroll">
     <div class="testimonials-grid testimonials-captures">
       <div class="capture-card">
-        <img src="reviews-img/review-1.png" alt="Reseña de cliente en Google" loading="lazy" />
+        <img src="reviews-img/review-1.jpg" alt="Reseña de cliente en Google" loading="lazy" />
       </div>
       <div class="capture-card">
-        <img src="reviews-img/review-2.png" alt="Reseña de cliente en Google" loading="lazy" />
+        <img src="reviews-img/review-2.jpg" alt="Reseña de cliente en Google" loading="lazy" />
       </div>
       <div class="capture-card">
-        <img src="reviews-img/review-3.png" alt="Reseña de cliente en Google" loading="lazy" />
+        <img src="reviews-img/review-3.jpg" alt="Reseña de cliente en Google" loading="lazy" />
       </div>
       <div class="capture-card">
-        <img src="reviews-img/review-4.png" alt="Reseña de cliente en Google" loading="lazy" />
+        <img src="reviews-img/review-4.jpg" alt="Reseña de cliente en Google" loading="lazy" />
       </div>
       <div class="capture-card">
-        <img src="reviews-img/review-5.png" alt="Reseña de cliente en Google" loading="lazy" />
+        <img src="reviews-img/review-5.jpg" alt="Reseña de cliente en Google" loading="lazy" />
+      </div>
+      <div class="capture-card">
+        <img src="reviews-img/review-6.jpg" alt="Reseña de cliente en Google" loading="lazy" />
       </div>
     </div>
     </div>
