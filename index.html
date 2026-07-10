@@ -4,8 +4,30 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NATACA INK — Natha Cadenas</title>
+
+<!-- SEO -->
+<meta name="description" content="Blackwork botánico y proyectos personalizados en cada ciudad que pisa Natha Cadenas. Estudio de tatuaje ambulante, sin paredes fijas — el mundo como taller.">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="NATACA INK">
+<meta property="og:title" content="NATACA INK — Natha Cadenas">
+<meta property="og:description" content="Blackwork botánico y proyectos personalizados en cada ciudad que pisa Natha Cadenas. Estudio de tatuaje ambulante, sin paredes fijas — el mundo como taller.">
+<meta property="og:image" content="https://nataca-ink.netlify.app/HERO.png">
+<meta property="og:url" content="https://nataca-ink.netlify.app/">
+<meta property="og:locale" content="es_AR">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="NATACA INK — Natha Cadenas">
+<meta name="twitter:description" content="Blackwork botánico y proyectos personalizados en cada ciudad que pisa Natha Cadenas. Estudio de tatuaje ambulante, sin paredes fijas — el mundo como taller.">
+<meta name="twitter:image" content="https://nataca-ink.netlify.app/HERO.png">
+
+<!-- Favicon: "N" en los colores de marca (--rust / --bone), sin depender de ningún archivo nuevo -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%23c4603a'/><text x='32' y='45' font-family='Georgia, Times New Roman, serif' font-size='38' font-style='italic' fill='%23f5f0e8' text-anchor='middle'>N</text></svg>">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Owners+Narrow:wght@400;700&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:ital,wght@0,300;0,400;1,300&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -49,8 +71,8 @@
     background: linear-gradient(to bottom, rgba(13,11,9,0.85) 0%, transparent 100%);
   }
 
-  /* Compensa el nav fijo al saltar por anchor (#travels, #proximas-paradas, #wishlist, #waitlist, #booking, #contact) */
-  section[id], #proximas-paradas, #wishlist, #waitlist, #booking, #contact {
+  /* Compensa el nav fijo al saltar por anchor (#travels, #proximas-paradas, #wishlist, #contact) */
+  section[id], #proximas-paradas, #wishlist, #contact {
     scroll-margin-top: 100px;
   }
 
@@ -79,20 +101,6 @@
     transition: opacity 0.3s;
   }
   .nav-links a:hover { opacity: 1; }
-
-  .nav-cta {
-    background: var(--rust);
-    color: var(--bone);
-    padding: 0.55rem 1.3rem;
-    font-size: 0.65rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    text-decoration: none;
-    transition: background 0.3s;
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-  .nav-cta:hover { background: var(--blush); }
 
   /* === HERO === */
   .hero {
@@ -468,93 +476,159 @@
     line-height: 1.6;
   }
 
-  /* Precio pill en filtros de venta */
-  .filter-btn .filter-price {
-    display: inline-block;
-    font-size: 0.5rem; letter-spacing: 0.1em;
-    opacity: 0.55; margin-left: 0.4rem;
-    vertical-align: middle;
-  }
-  .filter-btn.active .filter-price,
-  .filter-btn:hover .filter-price { opacity: 0.8; }
-
-  /* CTA fallback después del grid en modo venta */
-  .portfolio-sale-cta {
-    display: none;
-    flex-direction: column; align-items: center; gap: 0.75rem;
-    margin-top: 3rem; text-align: center;
-  }
-  .portfolio-sale-cta.visible { display: flex; }
-  .portfolio-sale-cta p {
-    font-size: 0.75rem; opacity: 0.4; letter-spacing: 0.05em;
-  }
-  .portfolio-sale-cta a {
-    font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--bone); border-bottom: 1px solid rgba(245,240,232,0.25);
-    text-decoration: none; transition: border-color 0.2s, opacity 0.2s;
-    opacity: 0.7;
-  }
-  .portfolio-sale-cta a:hover { opacity: 1; border-color: var(--bone); }
-
-  /* Línea Redbubble contextual — aparece bajo el grid en modo venta */
-  .portfolio-rb-line {
-    display: none;
-    text-align: center; margin-top: 1.5rem;
-    font-size: 0.68rem; letter-spacing: 0.1em;
-    color: rgba(245,240,232,0.28);
-  }
-  .portfolio-rb-line.visible { display: block; }
-  .portfolio-rb-line a {
-    color: rgba(245,240,232,0.45);
-    border-bottom: 1px solid rgba(245,240,232,0.15);
-    text-decoration: none; transition: color 0.2s, border-color 0.2s;
-  }
-  .portfolio-rb-line a:hover { color: var(--bone); border-color: rgba(245,240,232,0.4); }
-
-  .portfolio-filters {
+  /* Tabs de Portfolio: Portfolio / Healed / Disponibles */
+  .portfolio-tabs {
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
+    justify-content: center;
+    gap: 2.5rem;
     max-width: 1200px;
-    margin: 0 auto 2.5rem;
+    margin: 0 auto 3rem;
+    border-bottom: 1px solid rgba(245,240,232,0.08);
   }
-
-  .filter-btn {
-    background: transparent;
-    border: 1px solid rgba(245,240,232,0.15);
-    color: var(--bone);
-    padding: 0.45rem 1.2rem;
+  .portfolio-tab {
+    background: none;
+    border: none;
     font-family: 'DM Sans', sans-serif;
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.25s;
-    opacity: 0.5;
-    border-radius: 999px;
-  }
-  .filter-btn:hover, .filter-btn.active {
-    background: var(--rust);
-    border-color: var(--rust);
     color: var(--bone);
-    opacity: 1;
+    opacity: 0.5;
+    padding: 0 0 1rem;
+    cursor: pointer;
+    position: relative;
+    transition: opacity 0.3s;
+  }
+  .portfolio-tab span {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    opacity: 0.5;
+    margin-left: 0.35rem;
+  }
+  .portfolio-tab:hover { opacity: 0.8; }
+  .portfolio-tab.is-active { opacity: 1; }
+  .portfolio-tab.is-active::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: -1px;
+    height: 1px;
+    background: var(--rust);
+  }
+  .portfolio-panel { display: none; }
+  .portfolio-panel.is-active { display: block; }
+  /* .portfolio-grid--1row ya no aplica: con el sistema de filas (.pf-row),
+     Healed simplemente tiene una sola fila en el HTML — no necesita modificador. */
+
+  /* Precio fijo visible al pie de cada imagen — solo tab Disponibles */
+  .portfolio-price-tag {
+    position: absolute;
+    inset: auto 0 0 0;
+    background: linear-gradient(to top, rgba(13,11,9,0.88) 0%, transparent 100%);
+    padding: 0.9rem 1rem 0.65rem;
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.85);
   }
 
-  .portfolio-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.75rem;
+  .portfolio-carousel-wrap {
+    position: relative;
     max-width: 1200px;
     margin: 0 auto;
   }
 
+  .portfolio-grid {
+    --pf-row-h: 392px;
+    --pf-gap: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--pf-gap);
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    cursor: grab;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .portfolio-grid::-webkit-scrollbar { display: none; }
+  .portfolio-grid.dragging { cursor: grabbing; scroll-behavior: auto; user-select: none; }
+
+  /* Cada fila: alto fijo (var(--pf-row-h)) → borde superior e inferior siempre rectos.
+     El ancho de cada item lo define su propio aspect-ratio (ver .portfolio-item). */
+  .pf-row {
+    display: flex;
+    flex-direction: row;
+    gap: var(--pf-gap);
+  }
+
+  /* Grilla FIJA (Healed): 3 columnas, sin scroll — a diferencia de .portfolio-grid
+     (Portfolio / Disponibles) que es un carrusel deslizable. */
+  .portfolio-grid-fixed {
+    --pf-row-h: 300px;
+    --pf-gap: 0.75rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: var(--pf-row-h);
+    gap: var(--pf-gap);
+  }
+  .portfolio-grid-fixed .portfolio-item {
+    width: 100%;
+    height: 100%;
+  }
+  @media (max-width: 1024px) {
+    .portfolio-grid-fixed { grid-template-columns: repeat(2, 1fr); --pf-row-h: 260px; }
+  }
+  @media (max-width: 640px) {
+    .portfolio-grid-fixed { grid-template-columns: repeat(1, 1fr); --pf-row-h: 320px; }
+  }
+
+  .portfolio-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 5;
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 50%;
+    border: 1px solid rgba(245,240,232,0.15);
+    background: rgba(13,11,9,0.7);
+    color: var(--bone);
+    font-size: 1.2rem;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.7;
+    transition: opacity 0.2s, background 0.2s;
+  }
+  .portfolio-arrow:hover { opacity: 1; background: rgba(13,11,9,0.9); }
+  .portfolio-arrow-prev { left: -1.2rem; }
+  .portfolio-arrow-next { right: -1.2rem; }
+
+  @media (max-width: 1024px) {
+    .portfolio-grid { --pf-row-h: 288px; }
+  }
+  @media (max-width: 640px) {
+    .portfolio-grid { --pf-row-h: 340px; }
+    .portfolio-arrow { display: none; }
+  }
+
   .portfolio-item {
+    --pf-ratio: 1;
     position: relative;
-    aspect-ratio: 1;
+    height: var(--pf-row-h);
+    width: calc(var(--pf-row-h) * var(--pf-ratio));
+    flex: 0 0 auto;
     overflow: hidden;
     cursor: pointer;
+    scroll-snap-align: start;
     transition: opacity 0.4s, transform 0.4s;
   }
+  /* Marcá una foto vertical (4:5) agregando esta clase al .portfolio-item */
   .portfolio-item.hidden {
     opacity: 0;
     pointer-events: none;
@@ -614,72 +688,6 @@
     font-style: italic;
   }
 
-  /* Flash / Mini — sale hover (visible solo cuando filtro activo es flash o mini) */
-  .portfolio-item.sale-mode .portfolio-hover { justify-content: space-between; padding: 1rem 1.2rem; }
-  .portfolio-sale-top { display: flex; flex-direction: column; gap: 0.2rem; }
-  .portfolio-sale-name { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 400; color: var(--bone); line-height: 1.2; }
-  .portfolio-sale-price { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--rust); }
-  .portfolio-sale-price.disponible { color: #7ecf9a; }
-  .portfolio-sale-price.reservado  { color: rgba(245,240,232,0.3); text-decoration: line-through; }
-  .btn-reservar {
-    display: inline-block; width: 100%; text-align: center;
-    padding: 0.55rem 1rem; font-size: 0.65rem; letter-spacing: 0.18em;
-    text-transform: uppercase; background: transparent;
-    border: 1px solid rgba(245,240,232,0.35); color: var(--bone);
-    cursor: pointer; transition: background 0.2s, border-color 0.2s;
-    font-family: 'DM Sans', sans-serif;
-  }
-  .btn-reservar:hover { background: rgba(245,240,232,0.08); border-color: var(--bone); }
-  .btn-reservar:disabled { opacity: 0.3; cursor: default; }
-
-  /* Flash modal */
-  .flash-modal-overlay {
-    position: fixed; inset: 0; background: rgba(13,11,9,0.85);
-    display: flex; align-items: center; justify-content: center;
-    z-index: 1100; opacity: 0; pointer-events: none;
-    transition: opacity 0.25s;
-  }
-  .flash-modal-overlay.open { opacity: 1; pointer-events: all; }
-  .flash-modal {
-    background: #141210; border: 1px solid rgba(245,240,232,0.1);
-    padding: 2.5rem; width: 90%; max-width: 420px;
-    position: relative;
-  }
-  .flash-modal-close {
-    position: absolute; top: 1.2rem; right: 1.2rem;
-    background: none; border: none; color: var(--bone);
-    font-size: 1.1rem; cursor: pointer; opacity: 0.4;
-    transition: opacity 0.2s; line-height: 1;
-  }
-  .flash-modal-close:hover { opacity: 1; }
-  .flash-modal-eyebrow { font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--rust); margin-bottom: 0.5rem; }
-  .flash-modal-title { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300; margin-bottom: 0.3rem; line-height: 1.1; }
-  .flash-modal-price { font-size: 0.75rem; opacity: 0.5; margin-bottom: 2rem; letter-spacing: 0.05em; }
-  .flash-modal .form-group { margin-bottom: 1.1rem; }
-  .flash-modal .form-group label { display: block; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.5; margin-bottom: 0.4rem; }
-  .flash-modal .form-group input,
-  .flash-modal .form-group select {
-    width: 100%; background: rgba(245,240,232,0.04);
-    border: 1px solid rgba(245,240,232,0.1); color: var(--bone);
-    padding: 0.7rem 1rem; font-family: 'DM Sans', sans-serif;
-    font-size: 0.85rem; outline: none; appearance: none;
-  }
-  .flash-modal .form-group input:focus,
-  .flash-modal .form-group select:focus { border-color: rgba(245,240,232,0.3); }
-  .flash-modal option { background: #141210; }
-  .flash-modal-submit {
-    width: 100%; padding: 0.85rem; margin-top: 0.5rem;
-    background: var(--rust); border: none; color: var(--bone);
-    font-family: 'DM Sans', sans-serif; font-size: 0.7rem;
-    letter-spacing: 0.2em; text-transform: uppercase;
-    cursor: pointer; transition: opacity 0.2s;
-  }
-  .flash-modal-submit:hover { opacity: 0.85; }
-  .flash-modal-success { text-align: center; padding: 1rem 0; }
-  .flash-modal-success .success-icon { font-size: 1.5rem; margin-bottom: 1rem; }
-  .flash-modal-success h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300; margin-bottom: 0.5rem; }
-  .flash-modal-success p { font-size: 0.8rem; opacity: 0.5; line-height: 1.7; }
-
   .portfolio-cta {
     display: flex;
     gap: 1.5rem;
@@ -697,10 +705,6 @@
     background: #0a0907;
   }
 
-  .travel-editorial {
-    max-width: 1200px;
-    margin: 0 auto 5rem;
-  }
 
   .travel-title {
     font-family: 'Cormorant Garamond', serif;
@@ -718,167 +722,11 @@
     max-width: 680px;
   }
 
-  /* Timeline */
-  .travel-timeline {
-    max-width: 1200px;
-    margin: 0 auto 5rem;
-  }
-
-  .timeline-track {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 0;
-  }
-
-  .timeline-stop {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    cursor: pointer;
-    min-width: 130px;
-  }
-
-  .timeline-dot {
-    width: 12px; height: 12px;
-    border-radius: 50%;
-    background: rgba(245,240,232,0.2);
-    border: 1px solid rgba(245,240,232,0.3);
-    transition: transform 0.3s;
-  }
-  .timeline-stop.visited .timeline-dot { background: var(--rust); border-color: var(--rust); }
-  .timeline-stop.active .timeline-dot { background: var(--pride-4); border-color: var(--pride-4); }
-  .timeline-stop.upcoming .timeline-dot { background: transparent; border-color: var(--pride-3); border-style: dashed; }
-  .timeline-stop:hover .timeline-dot { transform: scale(1.4); }
-
-  .pulse-dot {
-    animation: pulseDot 2s infinite;
-    box-shadow: 0 0 0 0 rgba(107, 203, 119, 0.4);
-  }
   @keyframes pulseDot {
     0% { box-shadow: 0 0 0 0 rgba(107,203,119,0.4); }
     70% { box-shadow: 0 0 0 8px rgba(107,203,119,0); }
     100% { box-shadow: 0 0 0 0 rgba(107,203,119,0); }
   }
-
-  .timeline-line {
-    flex: 1;
-    height: 1px;
-    background: rgba(245,240,232,0.15);
-    min-width: 30px;
-    margin-bottom: 2.5rem;
-  }
-  .timeline-line.dashed {
-    background: repeating-linear-gradient(90deg, rgba(245,240,232,0.15) 0, rgba(245,240,232,0.15) 4px, transparent 4px, transparent 10px);
-  }
-
-  .timeline-info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.2rem;
-    text-align: center;
-  }
-  .timeline-info strong { font-size: 0.85rem; font-weight: 400; }
-  .timeline-info span { font-size: 0.6rem; opacity: 0.4; letter-spacing: 0.1em; }
-
-  .timeline-status {
-    font-size: 0.5rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    padding: 0.2rem 0.6rem;
-    border-radius: 999px;
-  }
-  .visited-tag { color: var(--rust); background: rgba(196,96,58,0.1); }
-  .active-tag { color: var(--pride-4); background: rgba(107,203,119,0.1); }
-  .upcoming-tag { color: var(--pride-3); background: rgba(255,217,61,0.1); }
-
-  /* Next destinations grid */
-  .travel-next {
-    max-width: 1200px;
-    margin: 0 auto 5rem;
-  }
-
-  .next-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1px;
-    background: rgba(245,240,232,0.07);
-  }
-
-  .next-card {
-    background: #0d0b09;
-    padding: 2.5rem 2rem;
-    position: relative;
-    transition: background 0.3s;
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-  }
-  .next-card:hover { background: #141210; }
-
-  .next-status-badge {
-    font-size: 0.5rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    padding: 0.25rem 0.7rem;
-    border-radius: 999px;
-    display: inline-block;
-    width: fit-content;
-    margin-bottom: 0.5rem;
-    background: rgba(107,203,119,0.15);
-    color: var(--pride-4);
-  }
-  .waitlist-badge { background: rgba(255,217,61,0.1); color: var(--pride-3); }
-  .tbd-badge { background: rgba(245,240,232,0.06); color: rgba(245,240,232,0.4); }
-
-  .next-city {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.8rem;
-    font-weight: 300;
-    line-height: 1;
-  }
-  .next-country { font-size: 0.65rem; opacity: 0.4; letter-spacing: 0.2em; text-transform: uppercase; margin-top: 0.2rem; }
-  .next-dates { font-size: 0.8rem; opacity: 0.55; margin-top: 0.8rem; }
-  .next-spots { font-size: 0.65rem; opacity: 0.35; letter-spacing: 0.05em; }
-
-  .next-cta {
-    display: inline-block;
-    margin-top: auto;
-    padding-top: 1.2rem;
-    font-size: 0.6rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--rust);
-    text-decoration: none;
-    border-bottom: 1px solid rgba(196,96,58,0.3);
-    padding-bottom: 2px;
-    width: fit-content;
-    transition: border-color 0.3s;
-  }
-  .next-cta:hover { border-color: var(--rust); }
-
-  /* Wishlist / Votación */
-  .travel-wishlist {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding-top: 4rem;
-    border-top: 1px solid rgba(245,240,232,0.06);
-  }
-
-  .wishlist-header {
-    margin-bottom: 2.5rem;
-  }
-  .wishlist-header h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1.8rem, 3vw, 2.8rem);
-    font-weight: 300;
-    line-height: 1.1;
-    margin: 1rem 0 0.8rem;
-  }
-  .wishlist-header h3 em { font-style: italic; color: var(--sage); }
-  .wishlist-sub { font-size: 0.8rem; opacity: 0.5; line-height: 1.7; }
 
   /* ── WISHLIST HORIZONTAL ── */
   .wishlist-scroll-hint {
@@ -926,6 +774,7 @@
   }
   .wish-item:hover { background: #141210; }
   .wish-item.voted { background: rgba(196,96,58,0.06); }
+  .wish-item.selected { background: rgba(196,96,58,0.03); box-shadow: inset 0 0 0 1px rgba(196,96,58,0.3); }
   .wish-item.just-voted { animation: wishPulse 0.35s ease; }
   @keyframes wishPulse { 0%{transform:scale(1)} 50%{transform:scale(1.03)} 100%{transform:scale(1)} }
 
@@ -933,6 +782,7 @@
   .wish-city { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 300; line-height: 1.2; }
   .wish-votes { font-size: 0.55rem; opacity: 0.35; letter-spacing: 0.1em; margin-bottom: 0.4rem; }
   .wish-bar { height: 2px; background: rgba(245,240,232,0.08); border-radius: 1px; overflow: hidden; margin-bottom: 0.6rem; }
+  .wish-item-other .wish-bar { visibility: hidden; }
   .wish-fill { height: 100%; background: var(--rust); border-radius: 1px; transition: width 0.6s ease; }
 
   /* inline waitlist reveal */
@@ -980,6 +830,14 @@
     letter-spacing: 0.1em;
     text-transform: uppercase;
   }
+  .wish-confirm-msg {
+    font-size: 0.6rem;
+    color: var(--rust);
+    opacity: 0.85;
+    letter-spacing: 0.02em;
+    line-height: 1.4;
+    margin-bottom: 0.15rem;
+  }
   .wish-vote-cta {
     font-size: 0.58rem;
     letter-spacing: 0.13em;
@@ -990,86 +848,8 @@
   }
   .wish-item:hover .wish-vote-cta { color: rgba(245,240,232,0.6); }
   .wish-item.voted .wish-vote-cta { color: var(--rust); opacity: 0.7; }
+  .wish-item.selected .wish-vote-cta { color: var(--rust); opacity: 0.9; }
 
-  .wishlist-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    padding-top: 1.5rem;
-  }
-  .wishlist-note { font-size: 0.75rem; opacity: 0.4; }
-
-  /* === BOOKING === */
-  .booking {
-    padding: 8rem 3rem;
-    background: #0d0b09;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6rem;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .booking-left {}
-
-  .booking-left h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.5rem, 4vw, 4rem);
-    font-weight: 300;
-    line-height: 1.1;
-    margin-bottom: 2rem;
-  }
-
-  .booking-left h2 em { font-style: italic; color: var(--rust); }
-
-  .booking-left p {
-    font-size: 0.9rem;
-    line-height: 1.9;
-    opacity: 0.65;
-    margin-bottom: 1rem;
-  }
-
-  .booking-right {
-    display: flex;
-    flex-direction: column;
-    gap: 1px;
-    background: rgba(245,240,232,0.08);
-  }
-
-  .booking-step {
-    background: var(--ink);
-    padding: 2rem;
-    display: flex;
-    gap: 1.5rem;
-    align-items: flex-start;
-    transition: background 0.3s;
-  }
-  .booking-step:hover { background: #161310; }
-
-  .step-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.8rem;
-    color: var(--rust);
-    opacity: 0.5;
-    flex-shrink: 0;
-    line-height: 1;
-    width: 2rem;
-  }
-
-  .step-content h4 {
-    font-size: 0.8rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 0.4rem;
-  }
-
-  .step-content p {
-    font-size: 0.8rem;
-    opacity: 0.55;
-    line-height: 1.7;
-  }
 
   /* === CONTACT === */
   .contact {
@@ -1117,25 +897,7 @@
     line-height: 1.8;
   }
 
-  .contact-btns {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
 
-  .btn-dark {
-    background: var(--ink);
-    color: var(--bone);
-    padding: 1rem 2.5rem;
-    font-size: 0.7rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    text-decoration: none;
-    transition: background 0.3s;
-    display: inline-block;
-  }
-  .btn-dark:hover { background: #1a1410; }
 
   .btn-outline {
     border: 1px solid var(--bone);
@@ -1199,53 +961,7 @@
   }
   .footer-links a:hover { opacity: 1; }
 
-  .footer-social {
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-  }
 
-  .social-link {
-    font-size: 0.7rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--bone);
-    opacity: 0.5;
-    text-decoration: none;
-    transition: opacity 0.3s;
-  }
-  .social-link:hover { opacity: 1; }
-
-  .footer-redbubble {
-    border-top: 1px solid rgba(245,240,232,0.06);
-    padding: 1.25rem 2rem;
-    max-width: 1200px; margin: 0 auto;
-    display: flex; align-items: center; justify-content: center; gap: 0.75rem;
-  }
-  .footer-redbubble p {
-    font-size: 0.72rem; letter-spacing: 0.1em;
-    color: rgba(245,240,232,0.35); margin: 0;
-  }
-  .footer-redbubble a {
-    font-size: 0.72rem; letter-spacing: 0.12em;
-    color: rgba(245,240,232,0.55);
-    border-bottom: 1px solid rgba(245,240,232,0.15);
-    text-decoration: none; white-space: nowrap;
-    transition: color 0.2s, border-color 0.2s;
-  }
-  .footer-redbubble a:hover { color: var(--bone); border-color: rgba(245,240,232,0.4); }
-  .footer-redbubble-sep { color: rgba(245,240,232,0.15); font-size: 0.65rem; }
-
-  /* Badge "también en prints" — aparece solo si la card tiene data-redbubble */
-  .rb-badge {
-    position: absolute; top: 0.6rem; right: 0.6rem;
-    font-size: 0.55rem; letter-spacing: 0.15em; text-transform: uppercase;
-    background: rgba(13,11,9,0.75); color: rgba(245,240,232,0.55);
-    padding: 0.25rem 0.5rem; border: 1px solid rgba(245,240,232,0.12);
-    text-decoration: none; white-space: nowrap;
-    transition: color 0.2s, border-color 0.2s; z-index: 2;
-  }
-  .rb-badge:hover { color: var(--bone); border-color: rgba(245,240,232,0.35); }
 
   .footer-bottom {
     display: flex;
@@ -1275,49 +991,6 @@
     border-top: 1px solid rgba(245,240,232,0.06);
   }
 
-  .waitlist-inner {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6rem;
-    max-width: 1100px;
-    margin: 0 auto;
-    align-items: center;
-  }
-
-  .waitlist-left h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.2rem, 3.5vw, 3.5rem);
-    font-weight: 300;
-    line-height: 1.1;
-    margin-bottom: 1.5rem;
-  }
-
-  .waitlist-left h2 em { font-style: italic; color: var(--blush); }
-
-  .waitlist-left p {
-    font-size: 0.9rem;
-    line-height: 1.9;
-    opacity: 0.65;
-    margin-bottom: 2rem;
-  }
-
-  .waitlist-promise {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .waitlist-promise span {
-    font-size: 0.72rem;
-    opacity: 0.45;
-    letter-spacing: 0.05em;
-  }
-
-  .waitlist-right {
-    background: #161310;
-    padding: 2.5rem;
-  }
-
   .form-group {
     margin-bottom: 1.4rem;
   }
@@ -1339,6 +1012,7 @@
   }
 
   .form-group input,
+  .form-group select,
   .form-group textarea {
     width: 100%;
     background: rgba(245,240,232,0.04);
@@ -1351,6 +1025,15 @@
     outline: none;
     transition: border-color 0.3s;
     resize: none;
+  }
+
+  .form-group select {
+    appearance: none;
+    cursor: pointer;
+  }
+
+  .form-group input[type="file"] {
+    cursor: pointer;
   }
 
   .form-group input:focus,
@@ -1409,10 +1092,6 @@
     margin-top: 1rem;
   }
 
-  .waitlist-success {
-    text-align: center;
-    padding: 3rem 1rem;
-  }
 
   .success-icon {
     font-size: 2.5rem;
@@ -1426,34 +1105,8 @@
     50% { opacity: 0.5; }
   }
 
-  .waitlist-success h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2rem;
-    font-weight: 300;
-    margin-bottom: 1rem;
-  }
-
-  .waitlist-success p {
-    font-size: 0.85rem;
-    opacity: 0.6;
-    line-height: 1.8;
-  }
-
-  .form-error {
-    border-color: #c44a3a !important;
-  }
-
-  .error-msg {
-    font-size: 0.65rem;
-    color: #c44a3a;
-    margin-top: 0.3rem;
-    display: block;
-  }
-
   @media (max-width: 768px) {
     .waitlist { padding: 5rem 1.5rem; }
-    .waitlist-inner { grid-template-columns: 1fr; gap: 3rem; }
-    .waitlist-right { padding: 1.5rem; }
   }
 
 
@@ -1588,19 +1241,103 @@
     border: none;
   }
 
-  .bitacora-coming {
-    text-align: center;
-    padding: 5rem 2rem;
-    opacity: 0.3;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.5rem;
-    font-weight: 300;
-    font-style: italic;
-  }
 
   @media (max-width: 768px) {
     .bitacora-box { padding: 4rem 1.5rem 5rem; }
     .bitacora-photos { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* === LIGHTBOX GALERÍA (reutilizable: Portfolio / Healed / Disponibles) === */
+  .lightbox-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.92);
+    z-index: 10010;
+    align-items: center;
+    justify-content: center;
+  }
+  .lightbox-overlay.active { display: flex; }
+
+  .lightbox-stage {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    touch-action: none;
+  }
+
+  .lightbox-img {
+    max-width: 88vw;
+    max-height: 86vh;
+    object-fit: contain;
+    cursor: zoom-in;
+    transform: translate(0px, 0px) scale(1);
+    transition: transform 0.3s ease;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+  .lightbox-img.is-zoomed { cursor: zoom-out; transition: none; }
+  .lightbox-img.is-panning { transition: none; }
+
+  .lightbox-close {
+    position: absolute;
+    top: 1.5rem; right: 1.5rem;
+    z-index: 2;
+    font-size: 1.6rem;
+    color: var(--bone);
+    opacity: 0.6;
+    cursor: pointer;
+    background: none;
+    border: none;
+    line-height: 1;
+    padding: 0.5rem;
+    transition: opacity 0.2s;
+  }
+  .lightbox-close:hover { opacity: 1; }
+
+  .lightbox-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    border: 1px solid rgba(245,240,232,0.15);
+    background: rgba(13,11,9,0.7);
+    color: var(--bone);
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.7;
+    transition: opacity 0.2s, background 0.2s;
+  }
+  .lightbox-arrow:hover { opacity: 1; background: rgba(13,11,9,0.9); }
+  .lightbox-arrow-prev { left: 1.5rem; }
+  .lightbox-arrow-next { right: 1.5rem; }
+
+  .lightbox-counter {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    color: rgba(245,240,232,0.6);
+  }
+
+  @media (max-width: 640px) {
+    .lightbox-arrow { display: none; }
+    .lightbox-img { max-width: 94vw; max-height: 82vh; }
   }
 
   /* === MODAL PRESUPUESTO === */
@@ -1670,6 +1407,140 @@
 
   .cover-fields { display: none; }
   .cover-fields.visible { display: block; }
+
+  /* === MODAL ELEGÍ EL PRÓXIMO DESTINO === */
+  .destino-box { max-width: 560px; }
+
+  .destino-eyebrow {
+    font-size: 0.6rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 0.9rem;
+  }
+
+  .destino-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 300;
+    margin-bottom: 0.5rem;
+  }
+  .destino-title em { font-style: italic; color: var(--blush); }
+
+  .destino-sub {
+    font-size: 0.8rem;
+    opacity: 0.5;
+    line-height: 1.6;
+    margin-bottom: 1.8rem;
+  }
+
+  .destino-back-btn {
+    background: none;
+    border: none;
+    color: var(--bone);
+    opacity: 0.5;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-bottom: 1.5rem;
+    padding: 0;
+    transition: opacity 0.2s;
+  }
+  .destino-back-btn:hover { opacity: 1; }
+
+  .destino-country-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .destino-country-card {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1rem 1.1rem;
+    background: rgba(245,240,232,0.03);
+    border: 1px solid rgba(245,240,232,0.08);
+    color: var(--bone);
+    cursor: pointer;
+    text-align: left;
+    font-family: 'DM Sans', sans-serif;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .destino-country-card:hover {
+    background: rgba(196,96,58,0.1);
+    border-color: var(--rust);
+  }
+
+  .destino-country-flag { font-size: 1.3rem; line-height: 1; }
+  .destino-country-name { font-size: 0.82rem; letter-spacing: 0.02em; }
+
+  .destino-viewall-btn {
+    width: 100%;
+    text-align: center;
+    background: none;
+    border: 1px solid rgba(245,240,232,0.15);
+    color: var(--bone);
+    padding: 0.85rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    cursor: pointer;
+    opacity: 0.7;
+    font-family: 'DM Sans', sans-serif;
+    transition: opacity 0.2s, border-color 0.2s;
+  }
+  .destino-viewall-btn:hover { opacity: 1; border-color: var(--rust); }
+
+  .destino-city-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .destino-city-row {
+    padding: 0.9rem 1.1rem;
+    background: rgba(245,240,232,0.03);
+    border: 1px solid rgba(245,240,232,0.06);
+    transition: background 0.25s;
+  }
+  .destino-city-row.voted { background: rgba(196,96,58,0.06); }
+  .destino-city-row.just-voted { animation: wishPulse 0.35s ease; }
+
+  .destino-city-row-top {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    cursor: pointer;
+  }
+  .destino-city-row.voted .destino-city-row-top { cursor: default; }
+
+  .destino-city-flag { font-size: 1.2rem; line-height: 1; }
+  .destino-city-name { flex: 1; font-size: 0.85rem; }
+  .destino-city-votes {
+    font-size: 0.65rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--rust);
+    opacity: 0.9;
+    white-space: nowrap;
+  }
+  .destino-city-cta {
+    font-size: 0.58rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.35);
+    white-space: nowrap;
+    transition: color 0.2s;
+  }
+  .destino-city-row:hover .destino-city-cta { color: rgba(245,240,232,0.65); }
+  .destino-city-row.voted .destino-city-cta { color: var(--rust); opacity: 0.85; }
+
+  @media (max-width: 480px) {
+    .destino-country-grid { grid-template-columns: 1fr; }
+  }
 
   @media (max-width: 768px) {
     .modal-box { padding: 2rem 1.5rem; }
@@ -1842,7 +1713,6 @@
   .mt-visited .mt-dot  { background: var(--rust); border: 2px solid var(--rust); box-shadow: 0 0 0 4px rgba(196,96,58,0.12); }
   .mt-active .mt-dot   { background: var(--pride-4); border: 2px solid var(--pride-4); }
   .mt-upcoming .mt-dot { background: transparent; border: 2px dashed var(--pride-3); }
-  .mt-connector { display: none; }
   .mt-pulse { animation: pulseDot 2s infinite; box-shadow: 0 0 0 0 rgba(107,203,119,0.5); }
   .mt-content { text-align: center; width: 100%; }
   .mt-badge {
@@ -1905,77 +1775,6 @@
   }
   .mt-cta-link:hover { opacity: 1; }
 
-  /* ── PRÓXIMOS DESTINOS (bloque 3) ── */
-  .confirmed-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1px;
-    background: rgba(245,240,232,0.07);
-  }
-
-  .conf-card {
-    background: #0d0b09;
-    padding: 2.2rem 1.8rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
-    transition: background 0.3s;
-    position: relative;
-  }
-  .conf-card:hover { background: #141210; }
-  .conf-hot { border-top: 2px solid var(--rust); }
-  .conf-tbd { opacity: 0.65; }
-
-  .conf-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 0.5rem;
-  }
-  .conf-flag { font-size: 1.4rem; line-height: 1; }
-
-  .conf-badge {
-    font-size: 0.48rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    padding: 0.2rem 0.6rem;
-    border-radius: 999px;
-    display: inline-block;
-  }
-  .conf-badge-confirmed { background: rgba(196,96,58,0.15); color: var(--rust); }
-  .conf-badge-waitlist  { background: rgba(255,217,61,0.1);  color: var(--pride-3); }
-  .conf-badge-tbd       { background: rgba(245,240,232,0.06); color: rgba(245,240,232,0.35); }
-
-  .conf-city    { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300; line-height: 1; }
-  .conf-country { font-size: 0.6rem; opacity: 0.4; letter-spacing: 0.15em; text-transform: uppercase; margin-top: 0.2rem; }
-  .conf-date    { font-size: 0.8rem; opacity: 0.55; margin-top: 0.8rem; }
-
-  .conf-meter {
-    height: 2px;
-    background: rgba(245,240,232,0.07);
-    border-radius: 1px;
-    overflow: hidden;
-    margin-top: 0.8rem;
-  }
-  .conf-meter-fill { height: 100%; background: var(--rust); border-radius: 1px; }
-  .conf-meter-vote { background: var(--pride-3); }
-
-  .conf-spots { font-size: 0.6rem; opacity: 0.3; letter-spacing: 0.05em; }
-  .conf-cta {
-    display: inline-block;
-    margin-top: auto;
-    padding-top: 1.2rem;
-    font-size: 0.58rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--rust);
-    text-decoration: none;
-    border-bottom: 1px solid rgba(196,96,58,0.3);
-    padding-bottom: 2px;
-    width: fit-content;
-    transition: border-color 0.3s, color 0.3s;
-  }
-  .conf-cta:hover { border-color: var(--rust); color: var(--blush); }
 
   /* ── VOTACIÓN (bloque 4) ── */
   .vote-intro {
@@ -1991,115 +1790,8 @@
   .vote-title em { font-style: italic; color: var(--sage); }
   .vote-sub { font-size: 0.82rem; opacity: 0.5; line-height: 1.7; max-width: 520px; }
 
-  /* Puente hacia el form */
-  .vote-bridge {
-    text-align: center;
-    padding: 3rem 0 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.8rem;
-  }
-  .vote-bridge-text {
-    font-size: 0.75rem;
-    opacity: 0.4;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-  .vote-bridge-arrow {
-    font-size: 1.5rem;
-    color: var(--rust);
-    opacity: 0.4;
-    animation: bounceDown 2s ease-in-out infinite;
-  }
-  @keyframes bounceDown {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(6px); }
-  }
-
-  /* ── WAITLIST UNIFICADO (bloque 5) ── */
-  .journey-chapter-waitlist {
-    background: #0f0d0b;
-    margin: 0;
-    max-width: 100%;
-    padding: 6rem 3rem;
-    border-top: 1px solid rgba(245,240,232,0.06);
-  }
-  .journey-chapter-waitlist .chapter-eyebrow,
-  .journey-chapter-waitlist .chapter-body {
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .wl-unified {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6rem;
-    align-items: start;
-  }
-
-  .wl-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.2rem, 3.5vw, 3.5rem);
-    font-weight: 300;
-    line-height: 1.1;
-    margin-bottom: 1.5rem;
-  }
-  .wl-title em { font-style: italic; color: var(--blush); }
-  .wl-desc { font-size: 0.9rem; line-height: 1.9; opacity: 0.65; margin-bottom: 1.2rem; }
-  .wl-disclaimer {
-    font-size: 0.78rem;
-    line-height: 1.7;
-    opacity: 0.55;
-    margin-bottom: 2rem;
-    padding: 0.9rem 1.1rem;
-    border-left: 2px solid var(--rust);
-    background: rgba(196,96,58,0.05);
-  }
-  .wl-disclaimer a {
-    color: var(--rust);
-    opacity: 1;
-    text-decoration: underline;
-    text-underline-offset: 2px;
-  }
-
-  .wl-promises { display: flex; flex-direction: column; gap: 0.7rem; margin-bottom: 2rem; }
-  .wl-promise-item { display: flex; align-items: flex-start; gap: 0.7rem; font-size: 0.78rem; opacity: 0.5; }
-  .wl-promise-icon { color: var(--rust); flex-shrink: 0; margin-top: 0.05em; }
-
-  .wl-destinations-summary { margin-top: 2rem; }
-  .wl-dest-label { font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; opacity: 0.3; margin-bottom: 0.8rem; }
-  .wl-dest-chips { display: flex; flex-direction: column; gap: 0.4rem; }
-  .wl-chip {
-    font-size: 0.72rem;
-    padding: 0.4rem 0.8rem;
-    border-radius: 3px;
-    width: fit-content;
-  }
-  .wl-chip-active { background: rgba(107,203,119,0.08); color: var(--pride-4); }
-  .wl-chip-soon   { background: rgba(245,240,232,0.04); color: rgba(245,240,232,0.45); }
-
-  .wl-right {
-    background: #161310;
-    padding: 2.5rem;
-  }
-
-  .wl-success {
-    text-align: center;
-    padding: 3rem 1rem;
-  }
-  .wl-success h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2rem;
-    font-weight: 300;
-    margin-bottom: 1rem;
-  }
-  .wl-success p { font-size: 0.85rem; opacity: 0.6; line-height: 1.8; }
-
   /* Responsive nuevo */
   @media (max-width: 1024px) {
-    .confirmed-grid { grid-template-columns: 1fr 1fr; }
   }
 
   @media (max-width: 768px) {
@@ -2111,9 +1803,6 @@
     .map-timeline { padding-left: 1.2rem; }
     .mt-stop { gap: 1.2rem; }
     .mt-city { font-size: 1.5rem; }
-    .confirmed-grid { grid-template-columns: 1fr 1fr; }
-    .wl-unified { grid-template-columns: 1fr; gap: 3rem; }
-    .journey-chapter-waitlist { padding: 5rem 1.5rem; }
   }
 
   /* ── REVIEWS STRIP ── */
@@ -2133,33 +1822,90 @@
   .testimonials-scroll-wrap::-webkit-scrollbar { display: none; }
   .testimonials-scroll-wrap.dragging { cursor: grabbing; user-select: none; }
   .testimonials-grid { display: flex; gap: 1rem; width: max-content; padding-bottom: 0.5rem; }
-  .testimonial-card { background: rgba(245,240,232,0.03); border: 1px solid rgba(245,240,232,0.07); padding: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; }
-  .t-stars { color: #f4b942; font-size: 0.85rem; letter-spacing: 0.12em; }
-  .t-text { font-size: 0.82rem; line-height: 1.7; color: rgba(245,240,232,0.7); font-style: italic; flex: 1; }
-  .t-author { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--rust); opacity: 0.8; }
   .capture-card { flex: 0 0 220px; border-radius: 4px; overflow: hidden; border: 1px solid rgba(245,240,232,0.07); }
   .capture-card img { width: 100%; height: auto; display: block; }
-  .capture-placeholder { width: 220px; aspect-ratio: 4/5; background: rgba(245,240,232,0.03); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; }
-  .capture-icon { font-size: 1.5rem; opacity: 0.3; }
-  .capture-hint { font-size: 0.7rem; opacity: 0.25; letter-spacing: 0.08em; text-transform: uppercase; }
-  .reviews-cta-label { font-size: 0.8rem; opacity: 0.5; letter-spacing: 0.08em; margin-bottom: 0.75rem; text-align: center; }
   .reviews-social { display: flex; gap: 1rem; flex-wrap: wrap; }
   @media (max-width: 768px) {
-    .capture-placeholder { width: 180px; }
     .capture-card { flex: 0 0 180px; }
     .reviews-header { gap: 1.5rem; }
   }
-  /* ── CÓMO FUNCIONA ── */
-  .how-it-works { padding: 6rem 2rem; border-top: 1px solid rgba(245,240,232,0.06); }
+  /* ── CÓMO FUNCIONA (colapsado, un solo desplegable) ── */
+  .how-it-works { padding: 0 2rem; border-top: 1px solid rgba(245,240,232,0.06); }
   .hiw-inner { max-width: 760px; margin: 0 auto; }
-  .hiw-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3rem); color: var(--bone); margin-bottom: 3rem; }
-  .hiw-steps { display: flex; flex-direction: column; }
-  .hiw-step { display: flex; align-items: flex-start; gap: 1.5rem; padding: 1.5rem 0; }
-  .hiw-num { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--rust); opacity: 0.6; min-width: 2.5rem; line-height: 1; }
-  .hiw-step-body h4 { font-size: 0.85rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--bone); margin-bottom: 0.4rem; font-weight: 400; }
-  .hiw-step-body p { font-size: 0.85rem; line-height: 1.7; color: rgba(245,240,232,0.55); }
-  .hiw-connector { width: 1px; height: 2rem; background: rgba(245,240,232,0.08); margin-left: 1.25rem; }
-  .hiw-cta { margin-top: 3rem; }
+  .accordion-solo { border-top: none; }
+  .accordion-solo .accordion-item { border-bottom: none; }
+  .accordion-solo .accordion-header { padding: 1.75rem 0; }
+  .accordion-solo .accordion-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    text-transform: none;
+    letter-spacing: normal;
+    opacity: 0.9;
+  }
+  .hiw-steps { display: flex; flex-direction: column; gap: 2rem; padding: 0.5rem 0 2.5rem; }
+  .hiw-step { display: flex; gap: 1.25rem; }
+  .hiw-step-index { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--rust); opacity: 0.6; min-width: 2.2rem; line-height: 1; flex-shrink: 0; }
+  .hiw-step-title { display: block; font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--bone); margin-bottom: 0.4rem; }
+  .hiw-step-desc { display: block; font-size: 0.85rem; line-height: 1.7; color: rgba(245,240,232,0.55); }
+  .hiw-cta { margin-top: 0.5rem; padding-bottom: 2.5rem; }
+
+  /* === ACORDEÓN (componente reusable — mismo patrón sirve para un futuro FAQ) === */
+  .accordion { display: flex; flex-direction: column; border-top: 1px solid rgba(245,240,232,0.08); }
+  .accordion-item { border-bottom: 1px solid rgba(245,240,232,0.08); }
+  .accordion-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.5rem 0;
+    background: none;
+    border: none;
+    color: var(--bone);
+    text-align: left;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+  }
+  .accordion-title {
+    flex: 1;
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.85;
+    transition: opacity 0.3s;
+  }
+  .accordion-header:hover .accordion-title { opacity: 1; }
+  .accordion-item.is-open .accordion-title { opacity: 1; }
+  .accordion-icon {
+    position: relative;
+    width: 0.9rem;
+    height: 0.9rem;
+    flex-shrink: 0;
+  }
+  .accordion-icon::before,
+  .accordion-icon::after {
+    content: '';
+    position: absolute;
+    background: var(--bone);
+    opacity: 0.5;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  .accordion-icon::before { top: 50%; left: 0; width: 100%; height: 1px; transform: translateY(-50%); }
+  .accordion-icon::after { left: 50%; top: 0; width: 1px; height: 100%; transform: translateX(-50%); }
+  .accordion-item.is-open .accordion-icon::before { opacity: 1; }
+  .accordion-item.is-open .accordion-icon::after { transform: translateX(-50%) scaleY(0); opacity: 0; }
+  .accordion-panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.35s ease;
+  }
+  .accordion-item.is-open .accordion-panel { grid-template-rows: 1fr; }
+  .accordion-panel-inner { overflow: hidden; }
+  .accordion-panel-inner p {
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: rgba(245,240,232,0.55);
+    padding: 0 0 1.5rem 4rem;
+  }
 
 
   .footer-contact-icons { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 0.25rem; }
@@ -2169,7 +1915,6 @@
   .footer-icon-link:hover svg { opacity: 1; }
 
   @media (max-width: 480px) {
-    .confirmed-grid { grid-template-columns: 1fr; }
   }
 
   /* === ANIMATIONS === */
@@ -2199,26 +1944,63 @@
     .portfolio { padding: 5rem 1.5rem; }
     .portfolio-header { flex-direction: column; gap: 1rem; }
     .portfolio-header .portfolio-note { text-align: left; max-width: 100%; }
-    .portfolio-grid { grid-template-columns: 1fr 1fr; }
+    .portfolio-tabs { gap: 1.5rem; }
+    .portfolio-tab { font-size: 0.68rem; }
+    .portfolio-tab span { display: block; margin-left: 0; font-size: 0.55rem; }
 
     .travel { padding: 5rem 1.5rem; }
-    .timeline-track { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
-    .timeline-line { width: 1px; height: 20px; min-width: 0; }
-    .next-grid { grid-template-columns: 1fr 1fr; }
     .wishlist-grid { grid-template-columns: 1fr 1fr; }
-    .wishlist-footer { flex-direction: column; }
 
-    .booking { grid-template-columns: 1fr; gap: 3rem; padding: 5rem 1.5rem; }
 
     .contact { padding: 5rem 1.5rem; }
     .contact::before { font-size: 8rem; }
-    .contact-btns { flex-direction: column; align-items: center; }
 
     footer { padding: 3rem 1.5rem 2rem; }
     .footer-top { flex-direction: column; gap: 2.5rem; }
-    .footer-redbubble { padding: 1rem 1.5rem; }
     .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
   }
+  /* === BOTÓN FLOTANTE PRESUPUESTO === */
+  .fab-presupuesto {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--rust);
+    color: var(--bone);
+    text-decoration: none;
+    border-radius: 50px;
+    padding: 0.65rem 1.2rem 0.65rem 0.9rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    opacity: 0.18;
+    transform: translateY(4px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    white-space: nowrap;
+  }
+  .fab-presupuesto:hover {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .fab-icon { font-size: 0.7rem; opacity: 0.9; flex-shrink: 0; }
+
+  @media (max-width: 768px) {
+    .fab-presupuesto {
+      opacity: 1;
+      transform: translateY(0);
+      bottom: 1.2rem;
+      right: 1.2rem;
+      font-size: 0.7rem;
+      padding: 0.7rem 1.1rem 0.7rem 0.85rem;
+    }
+  }
+
 </style>
 </head>
 <body>
@@ -2232,9 +2014,7 @@
     <li><a href="#como-funciona">Cómo funciona</a></li>
     <li><a href="#travels">Viajes</a></li>
     <li><a href="#contact">Contacto</a></li>
-    <li><a href="https://www.redbubble.com" target="_blank" style="color:var(--rust);opacity:1;font-weight:400;">Shop ↗</a></li>
   </ul>
-  <a href="#" onclick="openPresupuesto(event)" class="nav-cta">Presupuesto →</a>
 </nav>
 
 <!-- HERO -->
@@ -2290,124 +2070,288 @@
     </div>
     <div style="text-align:right;">
       <p class="portfolio-note">Trabajos realizados en Argentina, Brasil y en cada ciudad del recorrido.</p>
-      <p style="margin-top:0.75rem;font-size:0.72rem;line-height:1.8;opacity:0.65;">
-        Mini tattoos <span style="color:var(--rust);opacity:1;">desde USD 40</span><br>
-        Flash designs <span style="color:var(--rust);opacity:1;">desde USD 60</span><br>
-        Custom <span style="color:var(--rust);opacity:1;">presupuesto personalizado</span>
-      </p>
     </div>
   </div>
 
-  <!-- FILTERS -->
-  <div class="portfolio-filters fade-up">
-    <button class="filter-btn active" data-filter="all">All</button>
-    <button class="filter-btn" data-filter="botanica">Botánica</button>
-    <button class="filter-btn" data-filter="custom">Custom</button>
-    <button class="filter-btn" data-filter="mini">Mini Tattoos<span class="filter-price">desde $40</span></button>
-    <button class="filter-btn" data-filter="flash">Flashes<span class="filter-price">desde $60</span></button>
-    <button class="filter-btn" data-filter="healed">Healed Tattoos</button>
+  <div class="portfolio-tabs" role="tablist">
+    <button class="portfolio-tab is-active" data-tab="portfolio" onclick="switchPortfolioTab(this)" role="tab" aria-selected="true">Portfolio <span>33 piezas</span></button>
+    <button class="portfolio-tab" data-tab="healed" onclick="switchPortfolioTab(this)" role="tab" aria-selected="false">Healed</button>
+    <button class="portfolio-tab" data-tab="disponibles" onclick="switchPortfolioTab(this)" role="tab" aria-selected="false">Disponibles</button>
   </div>
 
-  <!-- GRID 3x3 -->
-  <div class="portfolio-grid fade-up">
-    <!-- Row 1 -->
-    <div class="portfolio-item" data-cat="botanica">
-      <div class="portfolio-img-wrap">
+  <!-- TAB: PORTFOLIO (33 espacios — orden manual) -->
+  <div class="portfolio-panel is-active" data-panel="portfolio" role="tabpanel">
+    <div class="portfolio-carousel-wrap">
+      <button class="portfolio-arrow portfolio-arrow-prev" data-target="portfolioGridMain" aria-label="Anterior">‹</button>
+      <div class="portfolio-grid fade-up" id="portfolioGridMain">
+    <div class="pf-row">
+      <div class="portfolio-item">
+        <div class="portfolio-img-wrap">
         <div class="portfolio-placeholder"></div>
         <div class="portfolio-hover">
-          <span class="portfolio-tag">Botánica</span>
-          <p class="portfolio-loc">Mar del Plata</p>
+        <p class="portfolio-loc">Mar del Plata</p>
         </div>
-      </div>
+        </div>
+        </div>
+      <div class="portfolio-item">
+        <div class="portfolio-img-wrap">
+        <div class="portfolio-placeholder"></div>
+        <div class="portfolio-hover">
+        <p class="portfolio-loc">Río Negro</p>
+        </div>
+        </div>
+        </div>
+      <div class="portfolio-item">
+        <div class="portfolio-img-wrap">
+        <div class="portfolio-placeholder"></div>
+        </div>
+        </div>
+      <div class="portfolio-item">
+        <div class="portfolio-img-wrap">
+        <div class="portfolio-placeholder"></div>
+        </div>
+        </div>
+      <div class="portfolio-item">
+        <div class="portfolio-img-wrap">
+        <div class="portfolio-placeholder"></div>
+        </div>
+        </div>
+      <div class="portfolio-item">
+        <div class="portfolio-img-wrap">
+        <div class="portfolio-placeholder"></div>
+        </div>
+        </div>
+      <div class="portfolio-item">
+        <div class="portfolio-img-wrap">
+        <div class="portfolio-placeholder"></div>
+        </div>
+        </div>
+      <div class="portfolio-item">
+        <div class="portfolio-img-wrap">
+        <div class="portfolio-placeholder"></div>
+        </div>
+        </div>
+      <div class="portfolio-item">
+        <div class="portfolio-img-wrap">
+        <div class="portfolio-placeholder"></div>
+        </div>
+        </div>
+      <div class="portfolio-item">
+        <div class="portfolio-img-wrap">
+        <div class="portfolio-placeholder"></div>
+        </div>
+        </div>
+      <div class="portfolio-item">
+        <div class="portfolio-img-wrap">
+        <div class="portfolio-placeholder"></div>
+        </div>
+        </div>
     </div>
-    <div class="portfolio-item" data-cat="custom">
-      <div class="portfolio-img-wrap">
+    <div class="pf-row">
+      <div class="portfolio-item">
+        <div class="portfolio-img-wrap">
         <div class="portfolio-placeholder"></div>
         <div class="portfolio-hover">
-          <span class="portfolio-tag">Custom</span>
-          <p class="portfolio-loc">Río de Janeiro</p>
+        <p class="portfolio-loc">Río de Janeiro</p>
         </div>
-      </div>
+        </div>
+        </div>
+      <div class="portfolio-item">
+        <div class="portfolio-img-wrap">
+        <div class="portfolio-placeholder"></div>
+        <div class="portfolio-hover">
+        <p class="portfolio-loc">São Paulo</p>
+        </div>
+        </div>
+        </div>
+      <div class="portfolio-item">
+        <div class="portfolio-img-wrap">
+        <div class="portfolio-placeholder"></div>
+        </div>
+        </div>
+      <div class="portfolio-item">
+        <div class="portfolio-img-wrap">
+        <div class="portfolio-placeholder"></div>
+        </div>
+        </div>
+      <div class="portfolio-item">
+        <div class="portfolio-img-wrap">
+        <div class="portfolio-placeholder"></div>
+        </div>
+        </div>
+      <div class="portfolio-item">
+        <div class="portfolio-img-wrap">
+        <div class="portfolio-placeholder"></div>
+        </div>
+        </div>
+      <div class="portfolio-item">
+        <div class="portfolio-img-wrap">
+        <div class="portfolio-placeholder"></div>
+        </div>
+        </div>
+      <div class="portfolio-item">
+        <div class="portfolio-img-wrap">
+        <div class="portfolio-placeholder"></div>
+        </div>
+        </div>
+      <div class="portfolio-item">
+        <div class="portfolio-img-wrap">
+        <div class="portfolio-placeholder"></div>
+        </div>
+        </div>
+      <div class="portfolio-item">
+        <div class="portfolio-img-wrap">
+        <div class="portfolio-placeholder"></div>
+        </div>
+        </div>
+      <div class="portfolio-item">
+        <div class="portfolio-img-wrap">
+        <div class="portfolio-placeholder"></div>
+        </div>
+        </div>
     </div>
-    <div class="portfolio-item" data-cat="mini" data-name="Mini 01" data-price="USD 40">
-      <div class="portfolio-img-wrap">
+    <div class="pf-row">
+      <div class="portfolio-item">
+        <div class="portfolio-img-wrap">
         <div class="portfolio-placeholder"></div>
         <div class="portfolio-hover">
-          <span class="portfolio-tag">Mini Tattoo</span>
-          <p class="portfolio-loc">Copacabana</p>
+        <p class="portfolio-loc">Patagonia</p>
         </div>
-      </div>
+        </div>
+        </div>
+      <div class="portfolio-item">
+        <div class="portfolio-img-wrap">
+        <div class="portfolio-placeholder"></div>
+        </div>
+        </div>
+      <div class="portfolio-item">
+        <div class="portfolio-img-wrap">
+        <div class="portfolio-placeholder"></div>
+        </div>
+        </div>
+      <div class="portfolio-item">
+        <div class="portfolio-img-wrap">
+        <div class="portfolio-placeholder"></div>
+        </div>
+        </div>
+      <div class="portfolio-item">
+        <div class="portfolio-img-wrap">
+        <div class="portfolio-placeholder"></div>
+        </div>
+        </div>
+      <div class="portfolio-item">
+        <div class="portfolio-img-wrap">
+        <div class="portfolio-placeholder"></div>
+        </div>
+        </div>
+      <div class="portfolio-item">
+        <div class="portfolio-img-wrap">
+        <div class="portfolio-placeholder"></div>
+        </div>
+        </div>
+      <div class="portfolio-item">
+        <div class="portfolio-img-wrap">
+        <div class="portfolio-placeholder"></div>
+        </div>
+        </div>
+      <div class="portfolio-item">
+        <div class="portfolio-img-wrap">
+        <div class="portfolio-placeholder"></div>
+        </div>
+        </div>
+      <div class="portfolio-item">
+        <div class="portfolio-img-wrap">
+        <div class="portfolio-placeholder"></div>
+        </div>
+        </div>
+      <div class="portfolio-item">
+        <div class="portfolio-img-wrap">
+        <div class="portfolio-placeholder"></div>
+        </div>
+        </div>
     </div>
-    <!-- Row 2 -->
-    <div class="portfolio-item" data-cat="flash" data-name="Flash 01" data-price="USD 60">
-      <div class="portfolio-img-wrap">
-        <div class="portfolio-placeholder"></div>
-        <div class="portfolio-hover">
-          <span class="portfolio-tag">Flash</span>
-          <p class="portfolio-loc">Santa Teresa</p>
-        </div>
-      </div>
-    </div>
-    <div class="portfolio-item portfolio-featured" data-cat="botanica">
-      <div class="portfolio-img-wrap">
-        <div class="portfolio-placeholder"></div>
-        <div class="portfolio-hover">
-          <span class="portfolio-tag">Botánica</span>
-          <p class="portfolio-loc">Patagonia</p>
-        </div>
-      </div>
-    </div>
-    <div class="portfolio-item" data-cat="healed">
-      <div class="portfolio-img-wrap">
-        <div class="portfolio-placeholder"></div>
-        <div class="portfolio-hover">
-          <span class="portfolio-tag">Healed</span>
-          <p class="portfolio-loc">Mar del Plata</p>
-        </div>
-      </div>
-    </div>
-    <!-- Row 3 -->
-    <div class="portfolio-item" data-cat="custom">
-      <div class="portfolio-img-wrap">
-        <div class="portfolio-placeholder"></div>
-        <div class="portfolio-hover">
-          <span class="portfolio-tag">Custom</span>
-          <p class="portfolio-loc">Río Negro</p>
-        </div>
-      </div>
-    </div>
-    <div class="portfolio-item" data-cat="mini" data-name="Mini 01" data-price="USD 40">
-      <div class="portfolio-img-wrap">
-        <div class="portfolio-placeholder"></div>
-        <div class="portfolio-hover">
-          <span class="portfolio-tag">Mini Tattoo</span>
-          <p class="portfolio-loc">Copacabana</p>
-        </div>
-      </div>
-    </div>
-    <div class="portfolio-item" data-cat="flash" data-name="Flash 02" data-price="USD 60">
-      <div class="portfolio-img-wrap">
-        <div class="portfolio-placeholder"></div>
-        <div class="portfolio-hover">
-          <span class="portfolio-tag">Flash</span>
-          <p class="portfolio-loc">Mar del Plata</p>
-        </div>
-      </div>
+  </div>
+      <button class="portfolio-arrow portfolio-arrow-next" data-target="portfolioGridMain" aria-label="Siguiente">›</button>
     </div>
   </div>
 
-  <div class="portfolio-cta fade-up" id="portfolioCta">
-    <a href="#" onclick="openPresupuesto(event)" class="btn-primary">Quiero algo así — consultá</a>
+  <!-- TAB: HEALED (grilla fija 3x3, sin scroll) -->
+  <div class="portfolio-panel" data-panel="healed" role="tabpanel">
+    <div class="portfolio-carousel-wrap">
+      <div class="portfolio-grid-fixed fade-up" id="portfolioGridHealed">
+      <div class="portfolio-item">
+        <div class="portfolio-img-wrap">
+        <div class="portfolio-placeholder"></div>
+        <div class="portfolio-hover">
+        <span class="portfolio-tag">Healed</span><p class="portfolio-loc">Mar del Plata</p>
+        </div>
+        </div>
+        </div>
+      <div class="portfolio-item">
+        <div class="portfolio-img-wrap">
+        <div class="portfolio-placeholder"></div>
+        <div class="portfolio-hover">
+        <span class="portfolio-tag">Healed</span><p class="portfolio-loc">Río de Janeiro</p>
+        </div>
+        </div>
+        </div>
+      <div class="portfolio-item">
+        <div class="portfolio-img-wrap">
+        <div class="portfolio-placeholder"></div>
+        </div>
+        </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- TAB: DISPONIBLES (galería simple — precio fijo visible, CTA vía botón flotante) -->
+  <div class="portfolio-panel" data-panel="disponibles" role="tabpanel">
+    <div class="portfolio-carousel-wrap">
+      <button class="portfolio-arrow portfolio-arrow-prev" data-target="portfolioGridDisponibles" aria-label="Anterior">‹</button>
+      <div class="portfolio-grid fade-up" id="portfolioGridDisponibles">
+    <div class="pf-row">
+      <div class="portfolio-item">
+        <div class="portfolio-img-wrap">
+        <div class="portfolio-placeholder"></div>
+        <div class="portfolio-price-tag">Desde USD 70</div>
+        </div>
+        </div>
+      <div class="portfolio-item">
+        <div class="portfolio-img-wrap">
+        <div class="portfolio-placeholder"></div>
+        <div class="portfolio-price-tag">Desde USD 70</div>
+        </div>
+        </div>
+    </div>
+    <div class="pf-row">
+      <div class="portfolio-item">
+        <div class="portfolio-img-wrap">
+        <div class="portfolio-placeholder"></div>
+        <div class="portfolio-price-tag">Desde USD 70</div>
+        </div>
+        </div>
+      <div class="portfolio-item">
+        <div class="portfolio-img-wrap">
+        <div class="portfolio-placeholder"></div>
+        <div class="portfolio-price-tag">Desde USD 70</div>
+        </div>
+        </div>
+    </div>
+    <div class="pf-row">
+      <div class="portfolio-item">
+        <div class="portfolio-img-wrap">
+        <div class="portfolio-placeholder"></div>
+        <div class="portfolio-price-tag">Desde USD 70</div>
+        </div>
+        </div>
+    </div>
+  </div>
+      <button class="portfolio-arrow portfolio-arrow-next" data-target="portfolioGridDisponibles" aria-label="Siguiente">›</button>
+    </div>
+  </div>
+
+  <div class="portfolio-cta fade-up">
     <a href="#como-funciona" class="btn-ghost">¿Cómo funciona? →</a>
-  </div>
-
-  <div class="portfolio-sale-cta" id="portfolioSaleCta">
-    <p>¿Ninguno te cerró del todo?</p>
-    <a href="#" onclick="openPresupuesto(event)">Pedí un flash custom — lo diseño para vos →</a>
-  </div>
-
-  <div class="portfolio-rb-line" id="portfolioRbLine">
-    ¿Preferís llevarte el diseño en otro formato? &nbsp;<a href="https://www.redbubble.com/people/natacaink" target="_blank" rel="noopener">Ver en Redbubble ↗</a>
   </div>
 
 </section>
@@ -2418,43 +2362,40 @@
   <div class="reviews-inner">
     <div class="reviews-header fade-up">
       <div class="reviews-score">
+        <span class="score-stars">★★★★★</span>
         <span class="score-num">700+</span>
         <span class="score-label">tatuajes realizados</span>
       </div>
       <div class="reviews-divider"></div>
       <div class="reviews-count-wrap">
-        <span class="reviews-count">desde 2019</span>
-        <a href="https://maps.app.goo.gl/e8oEhJbgJcxxuYpAA" target="_blank" class="reviews-link">Ver reseñas en Google ↗</a>
+        <span class="reviews-count">desde 2022</span>
+        <a href="https://share.google/yLHn731n5T7Ja4rlc" target="_blank" rel="noopener" class="reviews-link">Ver reseñas en Google ↗</a>
       </div>
     </div>
 
-    <!-- grilla de capturas — reemplazar src con tus screenshots reales -->
+    <!-- grilla de capturas — reseñas reales de Google -->
     <div class="testimonials-scroll-wrap fade-up" id="capturesScroll">
     <div class="testimonials-grid testimonials-captures">
       <div class="capture-card">
-        <div class="capture-placeholder">
-          <span class="capture-icon">📸</span>
-          <span class="capture-hint">captura de DM o story</span>
-        </div>
+        <img src="reviews-img/review-1.png" alt="Reseña de cliente en Google" loading="lazy" />
       </div>
       <div class="capture-card">
-        <div class="capture-placeholder">
-          <span class="capture-icon">📸</span>
-          <span class="capture-hint">captura de DM o story</span>
-        </div>
+        <img src="reviews-img/review-2.png" alt="Reseña de cliente en Google" loading="lazy" />
       </div>
       <div class="capture-card">
-        <div class="capture-placeholder">
-          <span class="capture-icon">📸</span>
-          <span class="capture-hint">captura de DM o story</span>
-        </div>
+        <img src="reviews-img/review-3.png" alt="Reseña de cliente en Google" loading="lazy" />
+      </div>
+      <div class="capture-card">
+        <img src="reviews-img/review-4.png" alt="Reseña de cliente en Google" loading="lazy" />
+      </div>
+      <div class="capture-card">
+        <img src="reviews-img/review-5.png" alt="Reseña de cliente en Google" loading="lazy" />
       </div>
     </div>
     </div>
 
     <div class="reviews-social fade-up">
-      <p class="reviews-cta-label">¿Ya pasaste por el estudio?</p>
-      <a href="https://maps.app.goo.gl/e8oEhJbgJcxxuYpAA" target="_blank" class="btn-outline" style="border-color:rgba(245,240,232,0.2);">⭐ Dejá tu reseña en Google</a>
+      <a href="https://share.google/yLHn731n5T7Ja4rlc" target="_blank" rel="noopener" class="btn-outline" style="border-color:rgba(245,240,232,0.2);">Ver todas en Google ↗</a>
     </div>
   </div>
 </section>
@@ -2496,44 +2437,50 @@
 <!-- CÓMO FUNCIONA -->
 <section class="how-it-works" id="como-funciona">
   <div class="hiw-inner">
-    <p class="section-label fade-up">Proceso</p>
-    <h2 class="hiw-title fade-up">¿Cómo <em>funciona</em>?</h2>
-    <div class="hiw-steps">
-      <div class="hiw-step fade-up">
-        <span class="hiw-num">01</span>
-        <div class="hiw-step-body">
-          <h4>Pedís tu presupuesto</h4>
-          <p>Completás el formulario con tu idea, zona y referencias. Sin compromiso.</p>
+    <div class="accordion accordion-solo fade-up">
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordionItem(this)" aria-expanded="false">
+          <span class="accordion-title">¿Cómo funciona?</span>
+          <span class="accordion-icon"></span>
+        </button>
+        <div class="accordion-panel">
+          <div class="accordion-panel-inner">
+            <div class="hiw-steps">
+              <div class="hiw-step">
+                <span class="hiw-step-index">01</span>
+                <div class="hiw-step-text">
+                  <span class="hiw-step-title">Pedís tu presupuesto</span>
+                  <span class="hiw-step-desc">Completás el formulario con tu idea, zona y referencias. Sin compromiso.</span>
+                </div>
+              </div>
+              <div class="hiw-step">
+                <span class="hiw-step-index">02</span>
+                <div class="hiw-step-text">
+                  <span class="hiw-step-title">Coordinamos por mail o Instagram</span>
+                  <span class="hiw-step-desc">Te respondo con el presupuesto y ajustamos los detalles del diseño juntes.</span>
+                </div>
+              </div>
+              <div class="hiw-step">
+                <span class="hiw-step-index">03</span>
+                <div class="hiw-step-text">
+                  <span class="hiw-step-title">Reservás tu turno</span>
+                  <span class="hiw-step-desc">Con una seña acordamos fecha, hora y lugar. El diseño final lo ves el día de la sesión.</span>
+                </div>
+              </div>
+              <div class="hiw-step">
+                <span class="hiw-step-index">04</span>
+                <div class="hiw-step-text">
+                  <span class="hiw-step-title">Nos encontramos y tatuamos</span>
+                  <span class="hiw-step-desc">En un espacio cómodo, seguro y queer-friendly. Llevate tu historia en la piel.</span>
+                </div>
+              </div>
+            </div>
+            <div class="hiw-cta">
+              <a href="#" onclick="openPresupuesto(event)" class="btn-primary">Quiero algo así — Consultá</a>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="hiw-connector"></div>
-      <div class="hiw-step fade-up">
-        <span class="hiw-num">02</span>
-        <div class="hiw-step-body">
-          <h4>Coordinamos por mail o Instagram</h4>
-          <p>Te respondo con el presupuesto y ajustamos los detalles del diseño juntes.</p>
-        </div>
-      </div>
-      <div class="hiw-connector"></div>
-      <div class="hiw-step fade-up">
-        <span class="hiw-num">03</span>
-        <div class="hiw-step-body">
-          <h4>Reservás tu turno</h4>
-          <p>Con una seña acordamos fecha, hora y lugar. El diseño final lo ves el día de la sesión.</p>
-        </div>
-      </div>
-      <div class="hiw-connector"></div>
-      <div class="hiw-step fade-up">
-        <span class="hiw-num">04</span>
-        <div class="hiw-step-body">
-          <h4>Nos encontramos y tatuamos</h4>
-          <p>En un espacio cómodo, seguro y queer-friendly. Llevate tu historia en la piel.</p>
-        </div>
-      </div>
-    </div>
-    <div class="hiw-cta fade-up">
-      <a href="#" onclick="openPresupuesto(event)" class="btn-primary">Completar el formulario — paso 1 →</a>
-      <p style="margin-top:1rem;font-size:0.72rem;opacity:0.4;letter-spacing:0.05em;">Te respondo en 24–48hs.</p>
     </div>
   </div>
 </section>
@@ -2548,7 +2495,7 @@
     <div class="journey-intro-text">
       <p class="section-label">Viajes · Comunidad · Lista de espera</p>
       <h2 class="travel-title">Un estudio que<br><em>se mueve contigo</em></h2>
-      <p class="travel-narrative">NATACA INK no tiene paredes fijas. Cada ciudad es un capítulo. Seguí el recorrido, votá los próximos destinos y sumate a la lista para que te avisemos cuando lleguemos cerca tuyo.</p>
+      <p class="travel-narrative">NATACA INK no tiene paredes fijas. Cada ciudad es un capítulo. Seguí el recorrido y votá tu ciudad: ese voto ya te anota en la lista de espera para que te avisemos cuando lleguemos cerca tuyo.</p>
     </div>
     <div class="journey-steps-strip">
       <div class="jstep" data-n="1">
@@ -2558,17 +2505,7 @@
       </div>
       <div class="jstep" data-n="2">
         <span class="jstep-num">02</span>
-        <span class="jstep-label">Próximas paradas</span>
-        <span class="jstep-arrow">↓</span>
-      </div>
-      <div class="jstep" data-n="3">
-        <span class="jstep-num">03</span>
-        <span class="jstep-label">Votá tu ciudad</span>
-        <span class="jstep-arrow">↓</span>
-      </div>
-      <div class="jstep" data-n="4">
-        <span class="jstep-num">04</span>
-        <span class="jstep-label">Sumate a la lista</span>
+        <span class="jstep-label">Votá tu ciudad — y quedás anotad@</span>
         <span class="jstep-arrow">—</span>
       </div>
     </div>
@@ -2642,12 +2579,13 @@
               </div>
             </div>
 
-            <div class="mt-stop mt-upcoming" style="opacity:0.22;">
+            <div class="mt-stop mt-upcoming" style="opacity:0.22;cursor:pointer;" onclick="openDestinoModal(event)">
               <div class="mt-dot-wrap"><div class="mt-dot" style="border:1px dashed rgba(245,240,232,0.18);background:transparent;"></div></div>
               <div class="mt-content">
                 <span class="mt-badge" style="color:rgba(245,240,232,0.25);background:rgba(245,240,232,0.03);">+ Por confirmar</span>
-                <strong class="mt-city" style="font-size:1rem;">¿Tu ciudad?</strong>
-                <span class="mt-meta">Votá en la wishlist</span>
+                <strong class="mt-city" style="font-size:1rem;">Elegí el próximo destino</strong>
+                <span class="mt-meta">Elegí un país y votá tu ciudad</span>
+                <a href="#" onclick="openDestinoModal(event)" class="mt-cta-link">Elegir destino →</a>
               </div>
             </div>
 
@@ -2657,52 +2595,20 @@
     </div>
   </div>
 
-  <!-- ── BLOQUE 3: PRÓXIMAS PARADAS CONFIRMADAS ── -->
-  <div class="journey-chapter fade-up" id="proximas-paradas">
+  <!-- ── BLOQUE 2: WISHLIST / VOTACIÓN = LISTA DE ESPERA ──
+       El mini-form que aparece al votar ES el mecanismo de lista de espera
+       para esa ciudad: un solo submit, un solo dato, una sola promesa cumplida.
+       El caso "mi ciudad no está" es la última card de la misma grilla. -->
+  <div class="journey-chapter fade-up" id="wishlist">
     <div class="chapter-eyebrow">
       <span class="chapter-num">02</span>
       <span class="chapter-rule"></span>
-      <span class="chapter-label">Próximas paradas</span>
-    </div>
-    <div class="chapter-body">
-      <div class="confirmed-grid">
-        <div class="conf-card conf-hot">
-          <div class="conf-top">
-            <span class="conf-flag">🇧🇷</span>
-            <span class="conf-badge conf-badge-confirmed">✦ Confirmado</span>
-          </div>
-          <strong class="conf-city">São Paulo</strong>
-          <span class="conf-country">Brasil</span>
-          <span class="conf-date">Julio 2026</span>
-          <div class="conf-meter"><div class="conf-meter-fill" style="width:78%"></div></div>
-          <span class="conf-spots">Cupos limitados</span>
-          <a href="#" onclick="openPresupuesto(event);return false;" class="conf-cta">Reservar →</a>
-        </div>
-        <div class="conf-card conf-tbd">
-          <div class="conf-top">
-            <span class="conf-flag">🌍</span>
-            <span class="conf-badge conf-badge-tbd">+ Por confirmar</span>
-          </div>
-          <strong class="conf-city">¿Tu ciudad?</strong>
-          <span class="conf-country">Definido por votación</span>
-          <span class="conf-date">Sin fecha aún</span>
-          <a href="#wishlist" class="conf-cta">Votá tu ciudad ↓</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── BLOQUE 4: WISHLIST / VOTACIÓN ── -->
-  <div class="journey-chapter fade-up" id="wishlist">
-    <div class="chapter-eyebrow">
-      <span class="chapter-num">03</span>
-      <span class="chapter-rule"></span>
-      <span class="chapter-label">Votá el próximo destino</span>
+      <span class="chapter-label">Votá tu ciudad</span>
     </div>
     <div class="chapter-body">
       <div class="vote-intro">
         <h3 class="vote-title">La comunidad decide<br><em>a dónde viaja NATACA</em></h3>
-        <p class="vote-sub">Cada voto cuenta. Los destinos más votados se priorizan en la agenda. Votá ahora y después sumate a la lista para que te avisemos.</p>
+        <p class="vote-sub">Cada voto cuenta para priorizar la agenda, y te anota directo en la lista de espera de esa ciudad: sin compromiso, te contactamos nosotros cuando haya fecha confirmada.</p>
       </div>
       <p class="wishlist-scroll-hint">deslizá →</p>
       <div class="wishlist-scroll-wrapper" id="wishlistScroll">
@@ -2710,103 +2616,10 @@
           <!-- items rendered by JS -->
         </div>
       </div>
-      <!-- Transición hacia el formulario -->
-      <div class="vote-bridge">
-        <p class="vote-bridge-text">¿Pusiste tu ciudad en el mapa? Ahora asegurate el cupo.</p>
-        <div class="vote-bridge-arrow">↓</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── BLOQUE 5: LISTA DE ESPERA ── -->
-  <div class="journey-chapter-waitlist fade-up" id="waitlist">
-    <div class="chapter-eyebrow" style="max-width:1200px;margin:0 auto 2.5rem;">
-      <span class="chapter-num">04</span>
-      <span class="chapter-rule"></span>
-      <span class="chapter-label">Lista de espera</span>
-    </div>
-    <div class="chapter-body">
-      <div class="wl-unified">
-        <div class="wl-left">
-          <h2 class="wl-title">Anotate.<br>Te avisamos <em>primero.</em></h2>
-          <p class="wl-desc">Si querés asegurarte un cupo antes de que abramos agenda pública, dejá tus datos acá. Cuando confirmemos fecha en tu ciudad, sos el primero en saberlo.</p>
-          <p class="wl-disclaimer">¿Tu ciudad ya tiene fecha confirmada (Mar del Plata o São Paulo)? Mejor <a href="#" onclick="openPresupuesto(event);return false;">pedí tu presupuesto directo</a> — vas más rápido que por acá.</p>
-          <div class="wl-promises">
-            <div class="wl-promise-item"><span class="wl-promise-icon">✦</span><span>Prioridad de cupo antes de la agenda pública</span></div>
-            <div class="wl-promise-item"><span class="wl-promise-icon">✦</span><span>Te contactamos nosotros, sin que tengas que estar pendiente</span></div>
-            <div class="wl-promise-item"><span class="wl-promise-icon">✦</span><span>Sin compromiso — si cuando lleguemos no podés, no pasa nada</span></div>
-          </div>
-        </div>
-        <div class="wl-right">
-          <div id="waitlistForm">
-            <form name="waitlist" method="POST" data-netlify="true" netlify-honeypot="bot-campo-wl" onsubmit="handleWaitlist(event)">
-              <input type="hidden" name="form-name" value="waitlist" />
-              <p style="display:none"><input name="bot-campo-wl" /></p>
-
-              <div class="form-group">
-                <label>Nombre o apodo</label>
-                <input type="text" id="wl-name" name="nombre" placeholder="Cómo te llamás" required />
-              </div>
-
-              <div class="form-group">
-                <label>Contacto</label>
-                <input type="text" id="wl-instagram" name="contacto" placeholder="mail o @instagram" required />
-              </div>
-
-              <div class="form-group">
-                <label>Ciudad</label>
-                <select name="ciudad" id="wl-ciudad" style="width:100%;background:rgba(245,240,232,0.04);border:1px solid rgba(245,240,232,0.1);color:var(--bone);padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.85rem;outline:none;appearance:none;cursor:pointer;" required>
-                  <option value="" disabled selected style="background:#1a1410;">¿Desde dónde nos seguís?</option>
-                  <optgroup label="Activo ahora / confirmado" style="background:#1a1410;">
-                    <option value="mar-del-plata" style="background:#1a1410;">🇦🇷 Mar del Plata — ahora</option>
-                    <option value="sao-paulo" style="background:#1a1410;">🇧🇷 São Paulo — jul 2026</option>
-                  </optgroup>
-                  <optgroup label="Wishlist — votá tu ciudad" style="background:#1a1410;">
-                    <option value="madrid" style="background:#1a1410;">🇪🇸 Madrid</option>
-                    <option value="barcelona" style="background:#1a1410;">🇪🇸 Barcelona</option>
-                    <option value="ciudad-de-mexico" style="background:#1a1410;">🇲🇽 Ciudad de México</option>
-                    <option value="berlin" style="background:#1a1410;">🇩🇪 Berlín</option>
-                    <option value="paris" style="background:#1a1410;">🇫🇷 París</option>
-                    <option value="londres" style="background:#1a1410;">🇬🇧 Londres</option>
-                    <option value="roma" style="background:#1a1410;">🇮🇹 Roma</option>
-                    <option value="atenas" style="background:#1a1410;">🇬🇷 Atenas</option>
-                    <option value="melbourne" style="background:#1a1410;">🇦🇺 Melbourne</option>
-                    <option value="estocolmo" style="background:#1a1410;">🇸🇪 Estocolmo</option>
-                    <option value="tokio" style="background:#1a1410;">🇯🇵 Tokio</option>
-                    <option value="nueva-york" style="background:#1a1410;">🇺🇸 Nueva York</option>
-                  </optgroup>
-                  <option value="donde-sea" style="background:#1a1410;">🌍 Donde sea que vayas</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label>¿Qué tenés en mente? <span class="optional">(opcional)</span></label>
-                <textarea name="idea" id="wl-idea" placeholder="Una idea, un estilo, una zona del cuerpo... lo que sea que ya estés pensando." rows="3" style="width:100%;background:rgba(245,240,232,0.04);border:1px solid rgba(245,240,232,0.1);color:var(--bone);padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.85rem;outline:none;resize:none;"></textarea>
-              </div>
-
-              <div class="form-check">
-                <input type="checkbox" name="comunidad" id="wl-comunidad" value="si" />
-                <label for="wl-comunidad">Soy parte de la comunidad LGBTQIA+</label>
-              </div>
-
-              <button type="submit" class="btn-waitlist">Anotarme →</button>
-              <p class="form-privacy">Tu información es privada y nunca será compartida.</p>
-            </form>
-          </div>
-          <div id="waitlistSuccess" style="display:none;text-align:center;padding:3rem 1rem;">
-            <div class="success-icon">✦</div>
-            <h3 style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;margin-bottom:1rem;">¡Estás en la lista!</h3>
-            <p style="font-size:0.85rem;opacity:0.6;line-height:1.8;">Cuando confirmemos fecha en tu ciudad, te avisamos primero.</p>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 
 </section>
-
-<!-- UNIFIED COMMUNITY SECTION — ID anchor for booking links (waitlist ahora vive en el bloque 5, arriba) -->
-<div id="booking"></div>
 
 <!-- CONTACT -->
 <section class="contact" id="contact">
@@ -2848,7 +2661,7 @@
           <span>nataca.studio.ar@gmail.com</span>
         </a>
         <!-- Instagram -->
-        <a href="https://instagram.com/nataca.ink" target="_blank" class="footer-icon-link" title="@nataca.ink">
+        <a href="https://instagram.com/nataca.ink" target="_blank" rel="noopener" class="footer-icon-link" title="@nataca.ink">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <rect x="2" y="2" width="20" height="20" rx="5"/>
             <circle cx="12" cy="12" r="4"/>
@@ -2857,7 +2670,7 @@
           <span>@nataca.ink</span>
         </a>
         <!-- Maps -->
-        <a href="https://maps.app.goo.gl/e8oEhJbgJcxxuYpAA" target="_blank" class="footer-icon-link" title="Ver en Maps">
+        <a href="https://share.google/yLHn731n5T7Ja4rlc" target="_blank" rel="noopener" class="footer-icon-link" title="Ver en Maps">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
             <circle cx="12" cy="9" r="2.5"/>
@@ -2866,11 +2679,6 @@
         </a>
       </div>
     </div>
-  </div>
-  <div class="footer-redbubble">
-    <p>Los diseños también viajan</p>
-    <span class="footer-redbubble-sep">→</span>
-    <a href="https://www.redbubble.com/people/natacaink" target="_blank" rel="noopener">Redbubble ↗</a>
   </div>
   <div class="footer-bottom">
     <p>© 2025 NATACA INK · Natha Cadenas · Todos los derechos reservados</p>
@@ -2896,156 +2704,6 @@
       }
     });
   }, { threshold: 0.1 });
-
-  // handleWaitlist — valida y envía a Netlify, muestra success
-  function handleWaitlist(e) {
-    e.preventDefault();
-    const form = e.target;
-    const name = document.getElementById('wl-name');
-    const contact = document.getElementById('wl-instagram');
-    let valid = true;
-
-    document.querySelectorAll('#waitlistForm .error-msg').forEach(el => el.remove());
-    [name, contact].forEach(f => f && f.classList.remove('form-error'));
-
-    if (name && !name.value.trim()) {
-      name.classList.add('form-error');
-      name.insertAdjacentHTML('afterend', '<span class="error-msg">Por favor ingresá tu nombre o apodo</span>');
-      valid = false;
-    }
-    if (contact && !contact.value.trim()) {
-      contact.classList.add('form-error');
-      contact.insertAdjacentHTML('afterend', '<span class="error-msg">Ingresá tu Instagram o mail</span>');
-      valid = false;
-    }
-    if (!valid) return;
-
-    const formData = new FormData(form);
-    fetch('/', { method: 'POST', body: formData })
-      .finally(() => {
-        document.getElementById('waitlistForm').style.display = 'none';
-        document.getElementById('waitlistSuccess').style.display = 'block';
-      });
-  }
-  const SALE_CATS = ['flash', 'mini'];
-
-  function applySaleMode(filter) {
-    const saleActive = SALE_CATS.includes(filter);
-    document.querySelectorAll('.portfolio-item').forEach(item => {
-      const cat = item.dataset.cat;
-      const isSale = SALE_CATS.includes(cat);
-      // visibility
-      if (filter === 'all' || cat === filter) {
-        item.style.display = '';
-        item.style.opacity = '1';
-      } else {
-        item.style.display = 'none';
-        return;
-      }
-      // sale mode: inject sale hover when this item is sale AND filter is sale
-      if (isSale && saleActive) {
-        item.classList.add('sale-mode');
-        const hover = item.querySelector('.portfolio-hover');
-        if (hover && !hover.dataset.saleInjected) {
-          hover.dataset.saleInjected = '1';
-          const name  = item.dataset.name  || 'Diseño';
-          const price = item.dataset.price || '';
-          hover.innerHTML = `
-            <div class="portfolio-sale-top">
-              <span class="portfolio-sale-name">${name}</span>
-              <span class="portfolio-sale-price disponible">${price} · disponible</span>
-            </div>
-            <button class="btn-reservar" onclick="openFlashModal(event, '${name}', '${price}')">Reservar este diseño →</button>`;
-        }
-      } else {
-        item.classList.remove('sale-mode');
-        // restore generic hover if it was replaced
-        const hover = item.querySelector('.portfolio-hover');
-        if (hover && hover.dataset.saleInjected && !isSale) {
-          delete hover.dataset.saleInjected;
-          // generic hovers are restored by re-reading original data attrs
-          const tag = item.dataset.tag || cat;
-          const loc = item.dataset.loc || '';
-          hover.innerHTML = `<span class="portfolio-tag">${tag}</span>${loc ? `<p class="portfolio-loc">${loc}</p>` : ''}`;
-        }
-      }
-    });
-    // toggle CTAs según modo
-    const mainCta   = document.getElementById('portfolioCta');
-    const saleCta   = document.getElementById('portfolioSaleCta');
-    const rbLine    = document.getElementById('portfolioRbLine');
-    if (mainCta)  mainCta.style.display  = saleActive ? 'none' : '';
-    if (saleCta)  saleCta.classList.toggle('visible', saleActive);
-    if (rbLine)   rbLine.classList.toggle('visible', saleActive);
-  }
-
-  document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      this.classList.add('active');
-      applySaleMode(this.dataset.filter);
-    });
-  });
-
-  // Redbubble badge — inyectar en cards con data-redbubble
-  document.querySelectorAll('.portfolio-item[data-redbubble]').forEach(item => {
-    const url = item.dataset.redbubble;
-    const wrap = item.querySelector('.portfolio-img-wrap');
-    if (wrap && url) {
-      const badge = document.createElement('a');
-      badge.href = url;
-      badge.target = '_blank';
-      badge.rel = 'noopener';
-      badge.className = 'rb-badge';
-      badge.textContent = 'también en prints';
-      wrap.appendChild(badge);
-    }
-  });
-
-  // cache original tag+loc on each item before any mutation
-  document.querySelectorAll('.portfolio-item').forEach(item => {
-    const tagEl = item.querySelector('.portfolio-tag');
-    const locEl = item.querySelector('.portfolio-loc');
-    if (tagEl) item.dataset.tag = tagEl.textContent;
-    if (locEl) item.dataset.loc = locEl.textContent;
-  });
-
-  function openFlashModal(e, name, price) {
-    e.stopPropagation();
-    document.getElementById('flashModalTitle').textContent = name;
-    document.getElementById('flashModalPrice').textContent = price;
-    document.getElementById('flashModalDiseno').value = name;
-    document.getElementById('flashModalBody').style.display = '';
-    document.getElementById('flashModalSuccess').style.display = 'none';
-    // reset fields
-    ['flashContacto','flashZona','flashFecha'].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) el.value = el.tagName === 'SELECT' ? '' : '';
-    });
-    document.getElementById('flashModal').classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeFlashModal(e) {
-    if (e && e.target !== document.getElementById('flashModal')) return;
-    document.getElementById('flashModal').classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
-  function handleFlashReserva(e) {
-    e.preventDefault();
-    const form = e.target;
-    const formData = new FormData(form);
-    fetch('/', { method: 'POST', body: formData })
-      .finally(() => {
-        document.getElementById('flashModalBody').style.display = 'none';
-        document.getElementById('flashModalSuccess').style.display = 'block';
-        setTimeout(() => {
-          document.getElementById('flashModal').classList.remove('open');
-          document.body.style.overflow = '';
-        }, 3000);
-      });
-  }
 
   // Wishlist — destinos base con votos iniciales y porcentaje de barra
   const destinosBase = [
@@ -3093,26 +2751,49 @@
     const [counts, joined] = await Promise.all([loadWaitlistData(), loadJoinedCities()]);
     const grid = document.getElementById('wishlistGrid');
     if (!grid) return;
-    grid.innerHTML = destinosBase.map(d => {
+    const cityCards = destinosBase.map(d => {
       const extra    = counts[d.city] || 0;
       const total    = d.votes + extra;
       const isJoined = joined.includes(d.city);
-      const voteCta  = isJoined ? '✓ En lista' : 'Votar →';
+      const voteCta  = isJoined ? '✓ Anotad@' : 'Votar →';
       const revealOpen = isJoined ? 'open' : '';
       const joinedLabel = isJoined
-        ? `<span class="wish-joined-label">✓ En lista de espera</span>`
-        : `<input class="wish-waitlist-input" placeholder="mail o @instagram" />
+        ? `<span class="wish-joined-label">✓ Anotad@ en la lista</span>`
+        : `<span class="wish-confirm-msg">Dejá tu contacto y quedás en la lista de espera de esta ciudad.</span>
+           <input class="wish-waitlist-input" placeholder="mail o @instagram" />
            <input class="wish-waitlist-input" placeholder="¿qué tenés en mente? (opcional)" style="margin-top:4px;" />
-           <button class="wish-waitlist-submit" onclick="submitWishlistContact(this, '${d.city}')">Avisame →</button>`;
-      return `<div class="wish-item${isJoined ? ' voted' : ''}" onclick="voteAndReveal(this, '${d.city}')" data-city="${d.city}">
+           <button class="wish-waitlist-submit" onclick="submitWishlistContact(this, '${d.city}')">Confirmar voto →</button>`;
+      return `<div class="wish-item${isJoined ? ' voted' : ''}" onclick="selectCity(this, '${d.city}')" data-city="${d.city}">
           <span class="wish-country">${d.flag}</span>
           <span class="wish-city">${d.city}</span>
-          <span class="wish-votes" data-city="${d.city}">${total} en lista</span>
+          <span class="wish-votes" data-city="${d.city}">${total} votos</span>
           <div class="wish-bar"><div class="wish-fill" style="width:${d.bar}%"></div></div>
           <span class="wish-vote-cta">${voteCta}</span>
           <div class="wish-waitlist-reveal ${revealOpen}">${joinedLabel}</div>
         </div>`;
     }).join('');
+
+    // Última card: la ciudad no está en la grilla, o todavía no se sabe cuál es
+    const otherJoined = joined.includes('__otra__');
+    const otherCta = otherJoined ? '✓ Anotad@' : 'Sumar mi ciudad →';
+    const otherReveal = otherJoined ? 'open' : '';
+    const otherContent = otherJoined
+      ? `<span class="wish-joined-label">✓ Anotad@ en la lista</span>`
+      : `<span class="wish-confirm-msg">Dejá tu contacto y, si querés, contanos desde dónde. Te avisamos apenas se arme algo cerca tuyo.</span>
+         <input class="wish-waitlist-input" id="wishOtherCiudad" placeholder="¿Desde dónde nos seguís? (opcional)" />
+         <input class="wish-waitlist-input" placeholder="mail o @instagram" />
+         <input class="wish-waitlist-input" placeholder="¿qué tenés en mente? (opcional)" style="margin-top:4px;" />
+         <button class="wish-waitlist-submit" onclick="submitWishlistOther(this)">Confirmar →</button>`;
+    const otherCard = `<div class="wish-item wish-item-other${otherJoined ? ' voted' : ''}" onclick="selectOtherCity(this)">
+        <span class="wish-country">✦</span>
+        <span class="wish-city">Mi ciudad no está acá</span>
+        <span class="wish-votes">o no sabés todavía</span>
+        <div class="wish-bar"><div class="wish-fill" style="width:0%"></div></div>
+        <span class="wish-vote-cta">${otherCta}</span>
+        <div class="wish-waitlist-reveal ${otherReveal}">${otherContent}</div>
+      </div>`;
+
+    grid.innerHTML = cityCards + otherCard;
 
     // drag-to-scroll wishlist
     const ws = document.getElementById('wishlistScroll');
@@ -3125,7 +2806,7 @@
     }
   }
 
-  async function voteAndReveal(el, city) {
+  async function selectCity(el, city) {
     // don't trigger on input/button clicks inside card
     if (event && event.target.closest('.wish-waitlist-input,.wish-waitlist-submit')) return;
     const reveal = el.querySelector('.wish-waitlist-reveal');
@@ -3135,19 +2816,16 @@
       reveal.classList.toggle('open');
       return;
     }
-    // First vote: update count + reveal form
-    el.classList.add('voted', 'just-voted');
-    setTimeout(() => el.classList.remove('just-voted'), 400);
-    if (voteCta) voteCta.textContent = '✓ Votado';
-
-    const counts = await loadWaitlistData();
-    counts[city] = (counts[city] || 0) + 1;
-    await saveWaitlistData(counts);
-
-    const votesEl = el.querySelector('.wish-votes');
-    if (votesEl) { const cur = parseInt(votesEl.textContent); votesEl.textContent = (cur+1)+' en lista'; }
-
-    // open the waitlist form
+    // Toggle selección — todavía no suma el voto, eso pasa al confirmar en submitWishlistContact
+    const isSelected = el.classList.contains('selected');
+    if (isSelected) {
+      el.classList.remove('selected');
+      reveal.classList.remove('open');
+      if (voteCta) voteCta.textContent = 'Votar →';
+      return;
+    }
+    el.classList.add('selected');
+    if (voteCta) voteCta.textContent = '✓ Seleccionada';
     reveal.classList.add('open');
   }
 
@@ -3171,6 +2849,7 @@
         'ciudad': city,
         'contacto': val,
         'idea': idea,
+        'origen': 'wishlist-grid',
         'fecha': fecha
       }).toString();
 
@@ -3187,11 +2866,83 @@
     const joined = await loadJoinedCities();
     if (!joined.includes(city)) { joined.push(city); await saveJoinedCities(joined); }
 
+    // confirmar el voto recién ahora que se envió el mini-form
+    const counts = await loadWaitlistData();
+    counts[city] = (counts[city] || 0) + 1;
+    await saveWaitlistData(counts);
+
+    const item = btn.closest('.wish-item');
+    const votesEl = item.querySelector('.wish-votes');
+    if (votesEl) { const cur = parseInt(votesEl.textContent); votesEl.textContent = (cur+1)+' votos'; }
+
+    item.classList.remove('selected');
+    item.classList.add('voted', 'just-voted');
+    setTimeout(() => item.classList.remove('just-voted'), 400);
+
     // replace form with label
     const reveal = btn.closest('.wish-waitlist-reveal');
-    reveal.innerHTML = '<span class="wish-joined-label">✓ En lista de espera</span>';
-    const voteCta = btn.closest('.wish-item').querySelector('.wish-vote-cta');
-    if (voteCta) voteCta.textContent = '✓ En lista';
+    reveal.innerHTML = '<span class="wish-joined-label">✓ Anotad@ en la lista</span>';
+    const voteCta = item.querySelector('.wish-vote-cta');
+    if (voteCta) voteCta.textContent = '✓ Anotad@';
+  }
+
+  async function selectOtherCity(el) {
+    if (event && event.target.closest('.wish-waitlist-input,.wish-waitlist-submit')) return;
+    const reveal = el.querySelector('.wish-waitlist-reveal');
+    if (el.classList.contains('voted')) {
+      reveal.classList.toggle('open');
+      return;
+    }
+    reveal.classList.toggle('open');
+  }
+
+  async function submitWishlistOther(btn) {
+    const ideaInput = btn.previousElementSibling;
+    const contactInput = ideaInput ? ideaInput.previousElementSibling : null;
+    const cityInput = contactInput ? contactInput.previousElementSibling : null;
+    const val = contactInput ? contactInput.value.trim() : '';
+    if (!val) { if(contactInput) { contactInput.style.borderColor='var(--rust)'; setTimeout(()=>contactInput.style.borderColor='',1000); } return; }
+
+    btn.textContent = '…';
+    btn.disabled = true;
+    if (contactInput) contactInput.disabled = true;
+    if (ideaInput) ideaInput.disabled = true;
+    if (cityInput) cityInput.disabled = true;
+
+    const city = (cityInput && cityInput.value.trim()) ? cityInput.value.trim() : 'No especificada';
+
+    try {
+      const fecha = new Date().toLocaleString('es-AR', { timeZone: 'America/Argentina/Buenos_Aires' });
+      const idea = ideaInput ? ideaInput.value.trim() : '';
+      const body = new URLSearchParams({
+        'form-name': 'wishlist-votos',
+        'ciudad': city,
+        'contacto': val,
+        'idea': idea,
+        'origen': 'otra-ciudad',
+        'fecha': fecha
+      }).toString();
+
+      await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: body
+      });
+    } catch(e) {
+      console.warn('Netlify form error:', e);
+    }
+
+    const joined = await loadJoinedCities();
+    if (!joined.includes('__otra__')) { joined.push('__otra__'); await saveJoinedCities(joined); }
+
+    const item = btn.closest('.wish-item');
+    item.classList.add('voted', 'just-voted');
+    setTimeout(() => item.classList.remove('just-voted'), 400);
+
+    const reveal = btn.closest('.wish-waitlist-reveal');
+    reveal.innerHTML = '<span class="wish-joined-label">✓ Anotad@ en la lista</span>';
+    const voteCta = item.querySelector('.wish-vote-cta');
+    if (voteCta) voteCta.textContent = '✓ Anotad@';
   }
 
   // drag-to-scroll captures
@@ -3208,6 +2959,53 @@
     cs.addEventListener('touchmove', e => { cs.scrollLeft = touchScrollLeft-(e.touches[0].pageX-touchStartX); }, {passive:true});
   })();
 
+  // carruseles portfolio (Portfolio / Healed) — drag, rueda vertical → horizontal, y flechas por columna
+  document.querySelectorAll('.portfolio-grid').forEach(pg => {
+    function columnStep() {
+      const first = pg.querySelector('.portfolio-item');
+      if (!first) return pg.clientWidth;
+      const style = getComputedStyle(pg);
+      const gap = parseFloat(style.columnGap || style.gap || 0) || 0;
+      return first.getBoundingClientRect().width + gap;
+    }
+
+    pg.scrollByColumn = function(dir) {
+      pg.scrollBy({ left: dir * columnStep(), behavior: 'smooth' });
+    };
+
+    // drag-to-scroll (mouse)
+    let isDown = false, startX, scrollLeft;
+    pg.addEventListener('mousedown', e => { isDown=true; pg.classList.add('dragging'); startX=e.pageX-pg.offsetLeft; scrollLeft=pg.scrollLeft; });
+    document.addEventListener('mouseup', () => { isDown=false; pg.classList.remove('dragging'); });
+    pg.addEventListener('mousemove', e => { if(!isDown) return; e.preventDefault(); pg.scrollLeft = scrollLeft-(e.pageX-pg.offsetLeft-startX); });
+
+    // touch support (nativo, sólo por si se necesita ajuste fino)
+    let touchStartX, touchScrollLeft;
+    pg.addEventListener('touchstart', e => { touchStartX=e.touches[0].pageX; touchScrollLeft=pg.scrollLeft; }, {passive:true});
+    pg.addEventListener('touchmove', e => { pg.scrollLeft = touchScrollLeft-(e.touches[0].pageX-touchStartX); }, {passive:true});
+
+    // rueda vertical del mouse → desplazamiento horizontal, una columna por vez
+    let wheelLock = false;
+    pg.addEventListener('wheel', e => {
+      if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
+      e.preventDefault();
+      if (wheelLock) return;
+      wheelLock = true;
+      pg.scrollBy({ left: e.deltaY > 0 ? columnStep() : -columnStep(), behavior: 'smooth' });
+      setTimeout(() => { wheelLock = false; }, 350);
+    }, { passive: false });
+  });
+
+  // flechas de cada carrusel apuntan a su grid vía data-target
+  document.querySelectorAll('.portfolio-arrow').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const grid = document.getElementById(btn.dataset.target);
+      if (grid && grid.scrollByColumn) {
+        grid.scrollByColumn(btn.classList.contains('portfolio-arrow-prev') ? -1 : 1);
+      }
+    });
+  });
+
   // Init wishlist on load
   renderWishlist();
 
@@ -3220,43 +3018,219 @@
   });
 
 
-  const subzonas = {
-    cabeza_cuello: ['Cuero cabelludo','Frente','Sien','Oreja','Detrás de la oreja','Mejilla','Mandíbula','Mentón','Cuello frontal','Cuello lateral','Nuca'],
-    'hombros_clavícula': ['Clavícula','Hombro','Omóplato'],
-    brazo_superior: ['Bíceps externo','Bíceps interno','Tríceps'],
-    codo: ['Codo externo','Codo interno'],
-    antebrazo: ['Antebrazo externo','Antebrazo interno','Antebrazo completo'],
-    'muñeca_mano': ['Muñeca','Dorso de mano','Palma','Dedos','Nudillos'],
-    pecho_torso: ['Pecho izquierdo','Pecho derecho','Pecho completo','Esternón','Costillas','Abdomen superior','Abdomen inferior','Ombligo'],
-    espalda: ['Espalda alta','Espalda media','Espalda baja','Columna','Espalda completa','Lumbar'],
-    cadera_gluteos: ['Cadera','Ingle','Glúteo izquierdo','Glúteo derecho'],
-    muslo: ['Muslo frontal','Muslo lateral','Muslo interno','Muslo posterior'],
-    rodilla: ['Rodilla frontal','Detrás de rodilla'],
-    pantorrilla: ['Pantorrilla','Espinilla','Tobillo'],
-    pies: ['Empeine','Planta del pie','Talón','Dedos del pie']
-  };
-
-  function updateSubzona() {
-    const region = document.getElementById('regionSelect').value;
-    const subzonaGroup = document.getElementById('subzonaGroup');
-    const subzonaSelect = document.getElementById('subzonaSelect');
-    const opciones = subzonas[region];
-
-    subzonaSelect.innerHTML = '<option value="" disabled selected style="background:#1a1410;">Seleccioná la subzona</option>';
-
-    if (opciones) {
-      opciones.forEach(op => {
-        const opt = document.createElement('option');
-        opt.value = op.toLowerCase().replace(/ /g, '_');
-        opt.textContent = op;
-        opt.style.background = '#1a1410';
-        subzonaSelect.appendChild(opt);
-      });
-      subzonaGroup.style.display = 'block';
-    } else {
-      subzonaGroup.style.display = 'none';
+  // Acordeón genérico — un solo item abierto a la vez dentro de cada .accordion
+  function toggleAccordionItem(headerEl) {
+    const item = headerEl.closest('.accordion-item');
+    const accordion = headerEl.closest('.accordion');
+    const wasOpen = item.classList.contains('is-open');
+    accordion.querySelectorAll('.accordion-item.is-open').forEach(el => {
+      el.classList.remove('is-open');
+      el.querySelector('.accordion-header').setAttribute('aria-expanded', 'false');
+    });
+    if (!wasOpen) {
+      item.classList.add('is-open');
+      headerEl.setAttribute('aria-expanded', 'true');
     }
   }
+
+  // Tabs de Portfolio — Portfolio / Healed / Disponibles, un solo panel visible a la vez
+  function switchPortfolioTab(btn) {
+    const tabsWrap = btn.closest('.portfolio-tabs');
+    const section = btn.closest('.portfolio');
+    tabsWrap.querySelectorAll('.portfolio-tab').forEach(t => {
+      t.classList.remove('is-active');
+      t.setAttribute('aria-selected', 'false');
+    });
+    section.querySelectorAll('.portfolio-panel').forEach(p => p.classList.remove('is-active'));
+    btn.classList.add('is-active');
+    btn.setAttribute('aria-selected', 'true');
+    const panel = section.querySelector(`.portfolio-panel[data-panel="${btn.dataset.tab}"]`);
+    if (panel) panel.classList.add('is-active');
+  }
+
+  // === LIGHTBOX GALERÍA (reutilizable: Portfolio / Healed / Disponibles) ===
+  // Cada .portfolio-grid es su propia galería — no se mezclan imágenes entre tabs.
+  // Un item solo es "clickeable" si tiene un <img> real dentro de .portfolio-img-wrap
+  // (los placeholders sin foto todavía quedan inertes, igual que ahora).
+  let lightboxItems = [];
+  let lightboxIndex = 0;
+  let lightboxZoomed = false;
+
+  function collectLightboxItems(grid) {
+    return Array.from(grid.querySelectorAll('.portfolio-item')).filter(item =>
+      item.querySelector('.portfolio-img-wrap img')
+    );
+  }
+
+  function openLightbox(grid, clickedItem) {
+    lightboxItems = collectLightboxItems(grid);
+    lightboxIndex = lightboxItems.indexOf(clickedItem);
+    if (lightboxIndex === -1) return;
+    resetLightboxZoom();
+    renderLightboxImage();
+    document.getElementById('lightboxOverlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightboxOverlay').classList.remove('active');
+    document.body.style.overflow = '';
+    resetLightboxZoom();
+  }
+
+  function lightboxNav(dir) {
+    if (lightboxZoomed) return; // con zoom, primero hay que destapear
+    if (!lightboxItems.length) return;
+    lightboxIndex = (lightboxIndex + dir + lightboxItems.length) % lightboxItems.length;
+    resetLightboxZoom();
+    renderLightboxImage();
+  }
+
+  function renderLightboxImage() {
+    const item = lightboxItems[lightboxIndex];
+    if (!item) return;
+    const img = item.querySelector('.portfolio-img-wrap img');
+    const full = img.dataset.full || img.src;
+    const lbImg = document.getElementById('lightboxImg');
+    lbImg.src = full;
+    lbImg.alt = img.alt || '';
+    const counter = document.getElementById('lightboxCounter');
+    counter.textContent = lightboxItems.length > 1 ? `${lightboxIndex + 1} / ${lightboxItems.length}` : '';
+    const prevBtn = document.querySelector('.lightbox-arrow-prev');
+    const nextBtn = document.querySelector('.lightbox-arrow-next');
+    const multi = lightboxItems.length > 1;
+    prevBtn.style.display = multi ? 'flex' : 'none';
+    nextBtn.style.display = multi ? 'flex' : 'none';
+  }
+
+  function resetLightboxZoom() {
+    lightboxZoomed = false;
+    const lbImg = document.getElementById('lightboxImg');
+    lbImg.classList.remove('is-zoomed');
+    lbImg.style.transform = 'translate(0px, 0px) scale(1)';
+    lbImg.dataset.panX = 0;
+    lbImg.dataset.panY = 0;
+  }
+
+  function toggleLightboxZoom(clientX, clientY) {
+    const lbImg = document.getElementById('lightboxImg');
+    if (!lightboxZoomed) {
+      lightboxZoomed = true;
+      lbImg.classList.add('is-zoomed');
+      lbImg.style.transform = 'translate(0px, 0px) scale(2.2)';
+    } else {
+      resetLightboxZoom();
+    }
+  }
+
+  (function initLightboxInteractions() {
+    // Delegación de click por grid — no requiere onclick por item ni tocar el HTML de cada foto
+    document.querySelectorAll('.portfolio-grid, .portfolio-grid-fixed').forEach(grid => {
+      let downX = 0, downY = 0, dragged = false;
+      grid.addEventListener('mousedown', e => { downX = e.clientX; downY = e.clientY; dragged = false; });
+      grid.addEventListener('mousemove', e => {
+        if (Math.abs(e.clientX - downX) > 6 || Math.abs(e.clientY - downY) > 6) dragged = true;
+      });
+      grid.addEventListener('touchstart', e => { const t = e.touches[0]; downX = t.clientX; downY = t.clientY; dragged = false; }, { passive: true });
+      grid.addEventListener('touchmove', e => {
+        const t = e.touches[0];
+        if (Math.abs(t.clientX - downX) > 6 || Math.abs(t.clientY - downY) > 6) dragged = true;
+      }, { passive: true });
+
+      grid.addEventListener('click', e => {
+        if (dragged) return; // fue arrastre del carrusel, no click real
+        const item = e.target.closest('.portfolio-item');
+        if (!item || !grid.contains(item)) return;
+        if (!item.querySelector('.portfolio-img-wrap img')) return; // placeholder sin foto todavía
+        openLightbox(grid, item);
+      });
+    });
+
+    const overlay = document.getElementById('lightboxOverlay');
+    const stage = document.getElementById('lightboxStage');
+    const lbImg = document.getElementById('lightboxImg');
+
+    // Click afuera de la imagen cierra
+    overlay.addEventListener('click', e => {
+      if (e.target === overlay || e.target === stage) closeLightbox();
+    });
+
+    // Click / doble-tap sobre la imagen alterna zoom
+    let lastTap = 0;
+    lbImg.addEventListener('click', e => {
+      e.stopPropagation();
+      const now = Date.now();
+      const isTouch = e.pointerType === 'touch' || 'ontouchstart' in window;
+      if (isTouch) {
+        if (now - lastTap < 320) toggleLightboxZoom();
+        lastTap = now;
+      } else {
+        toggleLightboxZoom();
+      }
+    });
+
+    // ESC para cerrar, flechas de teclado para navegar
+    document.addEventListener('keydown', e => {
+      if (!overlay.classList.contains('active')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') lightboxNav(-1);
+      if (e.key === 'ArrowRight') lightboxNav(1);
+    });
+
+    // Swipe mobile: navega si no está zoomeada, hace pan si lo está
+    let touchStartX = 0, touchStartY = 0, panStartX = 0, panStartY = 0;
+    stage.addEventListener('touchstart', e => {
+      const t = e.touches[0];
+      touchStartX = t.clientX;
+      touchStartY = t.clientY;
+      panStartX = parseFloat(lbImg.dataset.panX) || 0;
+      panStartY = parseFloat(lbImg.dataset.panY) || 0;
+    }, { passive: true });
+
+    stage.addEventListener('touchmove', e => {
+      if (!lightboxZoomed) return;
+      const t = e.touches[0];
+      const dx = t.clientX - touchStartX;
+      const dy = t.clientY - touchStartY;
+      const panX = panStartX + dx;
+      const panY = panStartY + dy;
+      lbImg.dataset.panX = panX;
+      lbImg.dataset.panY = panY;
+      lbImg.classList.add('is-panning');
+      lbImg.style.transform = `translate(${panX}px, ${panY}px) scale(2.2)`;
+    }, { passive: true });
+
+    stage.addEventListener('touchend', e => {
+      lbImg.classList.remove('is-panning');
+      if (lightboxZoomed) return;
+      const dx = (e.changedTouches[0].clientX - touchStartX);
+      const dy = (e.changedTouches[0].clientY - touchStartY);
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+        lightboxNav(dx < 0 ? 1 : -1);
+      }
+    });
+
+    // Pan con mouse cuando está zoomeada (desktop)
+    let isPanning = false, panMouseStartX = 0, panMouseStartY = 0;
+    lbImg.addEventListener('mousedown', e => {
+      if (!lightboxZoomed) return;
+      isPanning = true;
+      panMouseStartX = e.clientX;
+      panMouseStartY = e.clientY;
+      panStartX = parseFloat(lbImg.dataset.panX) || 0;
+      panStartY = parseFloat(lbImg.dataset.panY) || 0;
+    });
+    document.addEventListener('mousemove', e => {
+      if (!isPanning) return;
+      const panX = panStartX + (e.clientX - panMouseStartX);
+      const panY = panStartY + (e.clientY - panMouseStartY);
+      lbImg.dataset.panX = panX;
+      lbImg.dataset.panY = panY;
+      lbImg.classList.add('is-panning');
+      lbImg.style.transform = `translate(${panX}px, ${panY}px) scale(2.2)`;
+    });
+    document.addEventListener('mouseup', () => { isPanning = false; lbImg.classList.remove('is-panning'); });
+  })();
 
   function openPresupuesto(e) {
     if (e) e.preventDefault();
@@ -3348,9 +3322,14 @@
           <input type="number" name="edad" placeholder="Tu edad" min="18" max="99" required />
         </div>
 
+        <div class="form-check">
+          <input type="checkbox" name="comunidad" id="presupuesto-comunidad" value="si" />
+          <label for="presupuesto-comunidad">Soy parte de la comunidad LGBTQIA+</label>
+        </div>
+
         <div class="form-group">
           <label>¿Tatuaje nuevo o cobertura?</label>
-          <select name="tipo" id="tipoTattoo" onchange="toggleCoverField()" style="width:100%;background:rgba(245,240,232,0.04);border:1px solid rgba(245,240,232,0.1);color:var(--bone);padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.85rem;outline:none;appearance:none;cursor:pointer;" required>
+          <select name="tipo" id="tipoTattoo" onchange="toggleCoverField()" required>
             <option value="" disabled selected style="background:#1a1410;">Seleccioná una opción</option>
             <option value="nuevo" style="background:#1a1410;">Tatuaje nuevo</option>
             <option value="cobertura" style="background:#1a1410;">Cobertura de tatuaje existente</option>
@@ -3359,7 +3338,7 @@
 
         <div class="form-group cover-fields" id="coverFields">
           <label>Imagen del tatuaje a cubrir</label>
-          <input type="file" name="foto_cover" accept="image/*" style="width:100%;background:rgba(245,240,232,0.04);border:1px solid rgba(245,240,232,0.1);color:var(--bone);padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.85rem;outline:none;cursor:pointer;" />
+          <input type="file" name="foto_cover" accept="image/*" />
         </div>
 
         <div class="form-group">
@@ -3369,7 +3348,7 @@
 
         <div class="form-group">
           <label>Lado</label>
-          <select name="lado" style="width:100%;background:rgba(245,240,232,0.04);border:1px solid rgba(245,240,232,0.1);color:var(--bone);padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.85rem;outline:none;appearance:none;cursor:pointer;" required>
+          <select name="lado" required>
             <option value="" disabled selected style="background:#1a1410;">Seleccioná el lado</option>
             <option value="izquierdo" style="background:#1a1410;">Izquierdo</option>
             <option value="derecho" style="background:#1a1410;">Derecho</option>
@@ -3385,17 +3364,17 @@
 
         <div class="form-group">
           <label>Descripción del tatuaje</label>
-          <textarea name="idea" placeholder="Contame qué querés tatuar, estilo, referencias, colores o blanco y negro..." rows="4" style="width:100%;background:rgba(245,240,232,0.04);border:1px solid rgba(245,240,232,0.1);color:var(--bone);padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.85rem;outline:none;resize:none;" required></textarea>
+          <textarea name="idea" placeholder="Contame qué querés tatuar, estilo, referencias, colores o blanco y negro..." rows="4" required></textarea>
         </div>
 
         <div class="form-group">
           <label>Imágenes de referencia <span class="optional">(opcional)</span></label>
-          <input type="file" name="referencias" accept="image/*" multiple style="width:100%;background:rgba(245,240,232,0.04);border:1px solid rgba(245,240,232,0.1);color:var(--bone);padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.85rem;outline:none;cursor:pointer;" />
+          <input type="file" name="referencias" accept="image/*" multiple />
         </div>
 
         <div class="form-group">
           <label>¿Dónde querés recibir el presupuesto?</label>
-          <select name="canal_contacto" id="canalContacto" onchange="toggleContactoField()" style="width:100%;background:rgba(245,240,232,0.04);border:1px solid rgba(245,240,232,0.1);color:var(--bone);padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.85rem;outline:none;appearance:none;cursor:pointer;" required>
+          <select name="canal_contacto" id="canalContacto" onchange="toggleContactoField()" required>
             <option value="" disabled selected style="background:#1a1410;">Seleccioná una opción</option>
             <option value="mail" style="background:#1a1410;">Mail</option>
             <option value="instagram" style="background:#1a1410;">Instagram</option>
@@ -3426,47 +3405,6 @@
 </div>
 
 
-<!-- FLASH RESERVATION MODAL -->
-<div class="flash-modal-overlay" id="flashModal" onclick="closeFlashModal(event)">
-  <div class="flash-modal">
-    <button class="flash-modal-close" onclick="document.getElementById('flashModal').classList.remove('open')">✕</button>
-    <div id="flashModalBody">
-      <p class="flash-modal-eyebrow">Reserva de diseño</p>
-      <h2 class="flash-modal-title" id="flashModalTitle">Flash 01</h2>
-      <p class="flash-modal-price" id="flashModalPrice">USD 60</p>
-      <form name="flash-reserva" method="POST" data-netlify="true" netlify-honeypot="bot-flash" onsubmit="handleFlashReserva(event)">
-        <input type="hidden" name="form-name" value="flash-reserva" />
-        <input type="hidden" name="diseno" id="flashModalDiseno" value="" />
-        <p style="display:none"><input name="bot-flash" /></p>
-        <div class="form-group">
-          <label>Contacto</label>
-          <input type="text" name="contacto" id="flashContacto" placeholder="mail o @instagram" required />
-        </div>
-        <div class="form-group">
-          <label>¿En qué zona del cuerpo?</label>
-          <input type="text" name="zona" id="flashZona" placeholder="antebrazo, tobillo, costilla..." required />
-        </div>
-        <div class="form-group">
-          <label>Fecha aproximada</label>
-          <select name="fecha" id="flashFecha" required>
-            <option value="" disabled selected>Seleccioná una opción</option>
-            <option value="lo-antes-posible">Lo antes posible</option>
-            <option value="este-mes">Este mes</option>
-            <option value="proximo-mes">El mes que viene</option>
-            <option value="2-3-meses">En 2–3 meses</option>
-            <option value="sin-fecha">Sin fecha definida</option>
-          </select>
-        </div>
-        <button type="submit" class="flash-modal-submit">Reservar este diseño →</button>
-      </form>
-    </div>
-    <div id="flashModalSuccess" style="display:none" class="flash-modal-success">
-      <div class="success-icon">✦</div>
-      <h3>¡Reserva recibida!</h3>
-      <p>Te contactamos para confirmar los detalles.<br>El diseño queda apartado para vos.</p>
-    </div>
-  </div>
-</div>
 
 <!-- NETLIFY FORMS OCULTOS — necesarios para que Netlify detecte los formularios en el build -->
 <form name="wishlist-votos" data-netlify="true" netlify-honeypot="bot-campo" hidden>
@@ -3475,22 +3413,33 @@
   <input type="text" name="ciudad" />
   <input type="text" name="contacto" />
   <input type="text" name="idea" />
+  <input type="text" name="origen" />
   <input type="text" name="fecha" />
 </form>
-<form name="waitlist" data-netlify="true" netlify-honeypot="bot-campo-wl" hidden>
-  <input type="hidden" name="form-name" value="waitlist" />
-  <input name="bot-campo-wl" />
-  <input type="text" name="nombre" />
-  <input type="text" name="contacto" />
-  <input type="text" name="ciudad" />
-  <input type="text" name="idea" />
-  <input type="text" name="comunidad" />
-</form>
+
+<!-- MODAL ELEGÍ EL PRÓXIMO DESTINO -->
+<div class="modal-overlay" id="destinoModal">
+  <div class="modal-box destino-box">
+    <button class="modal-close" onclick="closeDestinoModal()">✕</button>
+    <div id="destinoContent"></div>
+  </div>
+</div>
 
 <!-- MODAL BITÁCORA -->
 <div class="bitacora-overlay" id="bitacoraModal">
   <button class="bitacora-close" onclick="closeBitacora()">✕</button>
   <div class="bitacora-box" id="bitacoraContent"></div>
+</div>
+
+<!-- LIGHTBOX GALERÍA (reutilizable: Portfolio / Healed / Disponibles) -->
+<div class="lightbox-overlay" id="lightboxOverlay" role="dialog" aria-modal="true" aria-label="Visor de imagen">
+  <button class="lightbox-close" onclick="closeLightbox()" aria-label="Cerrar">✕</button>
+  <button class="lightbox-arrow lightbox-arrow-prev" onclick="lightboxNav(-1)" aria-label="Anterior">‹</button>
+  <div class="lightbox-stage" id="lightboxStage">
+    <img class="lightbox-img" id="lightboxImg" src="" alt="" />
+  </div>
+  <button class="lightbox-arrow lightbox-arrow-next" onclick="lightboxNav(1)" aria-label="Siguiente">›</button>
+  <div class="lightbox-counter" id="lightboxCounter"></div>
 </div>
 
 <script>
@@ -3589,6 +3538,219 @@
     if (e.target === this) closeBitacora();
   });
 
+  // === MODAL ELEGÍ EL PRÓXIMO DESTINO ===
+  const destinoPaises = {
+    argentina:   { flag: '🇦🇷', name: 'Argentina', cities: [
+      { flag: '🇦🇷', name: 'Buenos Aires', votes: 51 },
+      { flag: '🇦🇷', name: 'Córdoba', votes: 33 },
+      { flag: '🇦🇷', name: 'Bariloche', votes: 28 },
+      { flag: '🇦🇷', name: 'Mendoza', votes: 19 },
+    ]},
+    brasil:      { flag: '🇧🇷', name: 'Brasil', cities: [
+      { flag: '🇧🇷', name: 'Florianópolis', votes: 31 },
+      { flag: '🇧🇷', name: 'Salvador', votes: 24 },
+      { flag: '🇧🇷', name: 'Río de Janeiro', votes: 20 },
+    ]},
+    espana:      { flag: '🇪🇸', name: 'España', cities: [
+      { flag: '🇪🇸', name: 'Madrid', votes: 42 },
+      { flag: '🇪🇸', name: 'Barcelona', votes: 38 },
+      { flag: '🇪🇸', name: 'Valencia', votes: 22 },
+      { flag: '🇪🇸', name: 'Sevilla', votes: 17 },
+    ]},
+    italia:      { flag: '🇮🇹', name: 'Italia', cities: [
+      { flag: '🇮🇹', name: 'Roma', votes: 21 },
+      { flag: '🇮🇹', name: 'Milán', votes: 16 },
+      { flag: '🇮🇹', name: 'Florencia', votes: 13 },
+    ]},
+    francia:     { flag: '🇫🇷', name: 'Francia', cities: [
+      { flag: '🇫🇷', name: 'París', votes: 27 },
+      { flag: '🇫🇷', name: 'Marsella', votes: 12 },
+      { flag: '🇫🇷', name: 'Lyon', votes: 9 },
+    ]},
+    mexico:      { flag: '🇲🇽', name: 'México', cities: [
+      { flag: '🇲🇽', name: 'Ciudad de México', votes: 35 },
+      { flag: '🇲🇽', name: 'Guadalajara', votes: 18 },
+      { flag: '🇲🇽', name: 'Monterrey', votes: 11 },
+    ]},
+    alemania:    { flag: '🇩🇪', name: 'Alemania', cities: [
+      { flag: '🇩🇪', name: 'Berlín', votes: 29 },
+    ]},
+    reinoUnido:  { flag: '🇬🇧', name: 'Reino Unido', cities: [
+      { flag: '🇬🇧', name: 'Londres', votes: 24 },
+    ]},
+    grecia:      { flag: '🇬🇷', name: 'Grecia', cities: [
+      { flag: '🇬🇷', name: 'Atenas', votes: 18 },
+    ]},
+    australia:   { flag: '🇦🇺', name: 'Australia', cities: [
+      { flag: '🇦🇺', name: 'Melbourne', votes: 15 },
+    ]},
+    suecia:      { flag: '🇸🇪', name: 'Suecia', cities: [
+      { flag: '🇸🇪', name: 'Estocolmo', votes: 12 },
+    ]},
+    japon:       { flag: '🇯🇵', name: 'Japón', cities: [
+      { flag: '🇯🇵', name: 'Tokio', votes: 11 },
+    ]},
+    eeuu:        { flag: '🇺🇸', name: 'Estados Unidos', cities: [
+      { flag: '🇺🇸', name: 'Nueva York', votes: 9 },
+    ]},
+  };
+
+  const destinoOrderFeatured = ['argentina', 'brasil', 'espana', 'italia', 'francia', 'mexico'];
+  const destinoOrderAll = destinoOrderFeatured.concat(['alemania', 'reinoUnido', 'grecia', 'australia', 'suecia', 'japon', 'eeuu']);
+
+  function openDestinoModal(e) {
+    if (e) e.preventDefault();
+    renderDestinoCountries(false);
+    document.getElementById('destinoModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeDestinoModal() {
+    document.getElementById('destinoModal').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function renderDestinoCountries(showAll) {
+    const keys = showAll ? destinoOrderAll : destinoOrderFeatured;
+    const cardsHTML = keys.map(k => {
+      const c = destinoPaises[k];
+      return `<button class="destino-country-card" onclick="renderDestinoCiudades('${k}')">
+        <span class="destino-country-flag">${c.flag}</span>
+        <span class="destino-country-name">${c.name}</span>
+      </button>`;
+    }).join('');
+
+    const viewAllHTML = !showAll
+      ? `<button class="destino-viewall-btn" onclick="renderDestinoCountries(true)">Ver todos los destinos</button>`
+      : '';
+
+    document.getElementById('destinoContent').innerHTML = `
+      <p class="destino-eyebrow">Próximo destino</p>
+      <h3 class="destino-title">Elegí <em>el próximo</em></h3>
+      <p class="destino-sub">Seleccioná un país, elegí tu ciudad y votá ahí mismo — queda anotada en la lista de espera al toque.</p>
+      <div class="destino-country-grid">${cardsHTML}</div>
+      ${viewAllHTML}
+    `;
+  }
+
+  async function renderDestinoCiudades(key) {
+    const c = destinoPaises[key];
+    if (!c) return;
+
+    // placeholder mientras carga
+    document.getElementById('destinoContent').innerHTML = `
+      <button class="destino-back-btn" onclick="renderDestinoCountries(false)">← Volver a países</button>
+      <p class="destino-eyebrow">${c.flag} ${c.name}</p>
+      <h3 class="destino-title">Elegí <em>la ciudad</em></h3>
+      <div class="destino-city-list"></div>
+    `;
+
+    const [counts, joined] = await Promise.all([loadWaitlistData(), loadJoinedCities()]);
+
+    const citiesSorted = [...c.cities]
+      .map(city => ({ ...city, total: city.votes + (counts[city.name] || 0) }))
+      .sort((a, b) => b.total - a.total);
+
+    const rows = citiesSorted.map(city => {
+      const isJoined = joined.includes(city.name);
+      const cta = isJoined ? '✓ Anotad@' : 'Votar →';
+      const revealOpen = isJoined ? 'open' : '';
+      const revealContent = isJoined
+        ? `<span class="wish-joined-label">✓ Anotad@ en la lista</span>`
+        : `<span class="wish-confirm-msg">Dejá tu contacto y quedás en la lista de espera de esta ciudad.</span>
+           <input class="wish-waitlist-input destino-contact-input" placeholder="mail o @instagram" />
+           <input class="wish-waitlist-input destino-idea-input" placeholder="¿qué tenés en mente? (opcional)" style="margin-top:4px;" />
+           <button class="wish-waitlist-submit" onclick="submitDestinoVote(this, '${city.name}')">Confirmar voto →</button>`;
+      return `
+        <div class="destino-city-row${isJoined ? ' voted' : ''}" data-city="${city.name}">
+          <div class="destino-city-row-top" onclick="toggleDestinoCity(this)">
+            <span class="destino-city-flag">${city.flag}</span>
+            <span class="destino-city-name">${city.name}</span>
+            <span class="destino-city-votes">${city.total} votos</span>
+            <span class="destino-city-cta">${cta}</span>
+          </div>
+          <div class="wish-waitlist-reveal ${revealOpen}">${revealContent}</div>
+        </div>
+      `;
+    }).join('');
+
+    document.getElementById('destinoContent').innerHTML = `
+      <button class="destino-back-btn" onclick="renderDestinoCountries(false)">← Volver a países</button>
+      <p class="destino-eyebrow">${c.flag} ${c.name}</p>
+      <h3 class="destino-title">Elegí <em>la ciudad</em></h3>
+      <div class="destino-city-list">${rows}</div>
+    `;
+  }
+
+  // Abre/cierra el mini-form de voto de una ciudad dentro del modal de destino
+  function toggleDestinoCity(el) {
+    const row = el.closest('.destino-city-row');
+    if (row.classList.contains('voted')) return; // ya votada, nada que hacer
+    const reveal = row.querySelector('.wish-waitlist-reveal');
+    reveal.classList.toggle('open');
+  }
+
+  // Confirma el voto de una ciudad elegida en el modal de destino —
+  // mismo mecanismo (y mismo storage) que el voto desde la wishlist principal.
+  async function submitDestinoVote(btn, city) {
+    const row = btn.closest('.destino-city-row');
+    const reveal = row.querySelector('.wish-waitlist-reveal');
+    const contactInput = reveal.querySelector('.destino-contact-input');
+    const ideaInput = reveal.querySelector('.destino-idea-input');
+    const val = contactInput ? contactInput.value.trim() : '';
+    if (!val) { if (contactInput) { contactInput.style.borderColor = 'var(--rust)'; setTimeout(() => contactInput.style.borderColor = '', 1000); } return; }
+
+    btn.textContent = '…';
+    btn.disabled = true;
+    if (contactInput) contactInput.disabled = true;
+    if (ideaInput) ideaInput.disabled = true;
+
+    try {
+      const fecha = new Date().toLocaleString('es-AR', { timeZone: 'America/Argentina/Buenos_Aires' });
+      const idea = ideaInput ? ideaInput.value.trim() : '';
+      const body = new URLSearchParams({
+        'form-name': 'wishlist-votos',
+        'ciudad': city,
+        'contacto': val,
+        'idea': idea,
+        'origen': 'destino-modal',
+        'fecha': fecha
+      }).toString();
+
+      await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: body
+      });
+    } catch (e) {
+      console.warn('Netlify form error:', e);
+    }
+
+    const joined = await loadJoinedCities();
+    if (!joined.includes(city)) { joined.push(city); await saveJoinedCities(joined); }
+
+    const counts = await loadWaitlistData();
+    counts[city] = (counts[city] || 0) + 1;
+    await saveWaitlistData(counts);
+
+    const votesEl = row.querySelector('.destino-city-votes');
+    if (votesEl) { const cur = parseInt(votesEl.textContent); votesEl.textContent = (cur + 1) + ' votos'; }
+
+    row.classList.add('voted', 'just-voted');
+    setTimeout(() => row.classList.remove('just-voted'), 400);
+
+    reveal.innerHTML = '<span class="wish-joined-label">✓ Anotad@ en la lista</span>';
+    const cta = row.querySelector('.destino-city-cta');
+    if (cta) cta.textContent = '✓ Anotad@';
+
+    // si esa ciudad también vive en la wishlist principal, mantenerla sincronizada
+    if (typeof renderWishlist === 'function') renderWishlist();
+  }
+
+  document.getElementById('destinoModal').addEventListener('click', function(e) {
+    if (e.target === this) closeDestinoModal();
+  });
+
   // Drag-to-scroll horizontal timeline
   const mtScroll = document.getElementById('mtScroll');
   if (mtScroll) {
@@ -3598,6 +3760,12 @@
     mtScroll.addEventListener('mousemove', e => { if (!isDown) return; e.preventDefault(); const x = e.pageX - mtScroll.offsetLeft; mtScroll.scrollLeft = scrollLeft - (x - startX); });
   }
 </script>
+
+<!-- BOTÓN FLOTANTE PRESUPUESTO -->
+<a href="#" onclick="openPresupuesto(event)" class="fab-presupuesto" aria-label="Pedir presupuesto">
+  <span class="fab-icon">✦</span>
+  <span class="fab-text">Pedir presupuesto</span>
+</a>
 
 </body>
 </html>
